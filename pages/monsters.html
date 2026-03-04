@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Database monster Toram Online — boss, mini-boss, mob biasa, drop tabel, dan lokasi spawn." />
+  <meta name="description" content="Toram Online monster database — bosses, mini-bosses, regular mobs, drop tables, and spawn locations." />
   <title>Monsters — ToramCodex</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
@@ -24,7 +24,7 @@
     </ul>
     <div class="nav-search">
       <span class="search-icon">🔍</span>
-      <input type="search" id="navSearchInput" class="search-sync" placeholder="Cari monster…" aria-label="Search" />
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search monsters…" aria-label="Search" />
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -40,13 +40,13 @@
     <a href="quests.html" role="menuitem">📜 Quests</a>
     <div class="mobile-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari monster…" aria-label="Mobile search" />
+      <input type="search" class="search-sync" placeholder="Search monsters…" aria-label="Mobile search" />
     </div>
   </div>
 
   <div class="page-hero">
     <h1>👾 Monsters Database</h1>
-    <p>Boss, mini-boss, mob biasa — drop tabel &amp; lokasi spawn</p>
+    <p>Bosses, mini-bosses, regular mobs — drop table &amp; spawn locations</p>
   </div>
 
   <main>
@@ -58,15 +58,15 @@
       </nav>
 
       <div class="filter-bar" role="search" aria-label="Filter monsters">
-        <input type="search" id="filterInput" class="search-sync" placeholder="🔍 Cari nama monster…" aria-label="Filter by name" />
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search monster name…" aria-label="Filter by name" />
         <select id="filterSelect" aria-label="Filter by type">
-          <option value="">Semua Tipe</option>
+          <option value="">All Types</option>
           <option value="boss">Boss</option>
           <option value="mini-boss">Mini-Boss</option>
           <option value="mob">Mob</option>
         </select>
         <select id="filterSelect2" aria-label="Filter by element">
-          <option value="">Semua Elemen</option>
+          <option value="">All Elements</option>
           <option value="fire">Fire</option>
           <option value="ice">Ice</option>
           <option value="wind">Wind</option>
@@ -82,11 +82,11 @@
             <tr>
               <th>Monster</th>
               <th>Level</th>
-              <th>Tipe</th>
-              <th>Elemen</th>
+              <th>Type</th>
+              <th>Element</th>
               <th>HP</th>
-              <th>Lokasi</th>
-              <th>Drop Utama</th>
+              <th>Location</th>
+              <th>Main Drop</th>
             </tr>
           </thead>
           <tbody id="monstersTable">
@@ -180,7 +180,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">⚔️ ToramCodex</div>
-        <p class="footer-desc">Fan-made database · Tidak berafiliasi dengan Asobimo, Inc.</p>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
       </div>
       <div class="footer-col">
         <h4>Database</h4>
@@ -192,32 +192,33 @@
       </div>
       <div class="footer-col">
         <h4>Info</h4>
-        <a href="#">Tentang Kami</a>
-        <a href="#">Kontribusi</a>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
         <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 ToramCodex · Fan-made</span>
-      <span>Toram Online™ milik Asobimo, Inc.</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
   <script>
-    // Table filter override for row-based filtering
+    // Table filter — queries rows fresh each call so Sheets data is included.
     (function () {
       var filterInput   = document.getElementById('filterInput');
       var filterSelect  = document.getElementById('filterSelect');
       var filterSelect2 = document.getElementById('filterSelect2');
-      var rows = document.querySelectorAll('#monstersTable tr');
+      var tbody         = document.getElementById('monstersTable');
 
-      function applyFilter() {
+      function applyTableFilter() {
         var q    = filterInput   ? filterInput.value.toLowerCase()   : '';
         var type = filterSelect  ? filterSelect.value.toLowerCase()  : '';
         var elem = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
-        rows.forEach(function (row) {
+        tbody.querySelectorAll('tr').forEach(function (row) {
           var text = (row.dataset.filter    || '').toLowerCase();
           var cat1 = (row.dataset.category  || '').toLowerCase();
           var cat2 = (row.dataset.category2 || '').toLowerCase();
@@ -228,10 +229,14 @@
         });
       }
 
-      if (filterInput)   filterInput.addEventListener('input', applyFilter);
-      if (filterSelect)  filterSelect.addEventListener('change', applyFilter);
-      if (filterSelect2) filterSelect2.addEventListener('change', applyFilter);
+      if (filterInput)   filterInput.addEventListener('input',   applyTableFilter);
+      if (filterSelect)  filterSelect.addEventListener('change',  applyTableFilter);
+      if (filterSelect2) filterSelect2.addEventListener('change', applyTableFilter);
+      // Re-apply after Sheets data renders.
+      document.addEventListener('sheetsrendered', applyTableFilter);
     }());
+
+    ToramSheets.load('monsters', 'monstersTable');
   </script>
 </body>
 </html>

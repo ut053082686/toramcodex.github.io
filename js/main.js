@@ -53,14 +53,14 @@
   var filterInput   = document.getElementById('filterInput');
   var filterSelect  = document.getElementById('filterSelect');
   var filterSelect2 = document.getElementById('filterSelect2');
-  var dataCards     = document.querySelectorAll('[data-filter]');
 
   function applyFilter() {
     var query = filterInput   ? filterInput.value.toLowerCase()   : '';
     var cat1  = filterSelect  ? filterSelect.value.toLowerCase()  : '';
     var cat2  = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
 
-    dataCards.forEach(function (card) {
+    // Query fresh each time so dynamically rendered Sheets content is included.
+    document.querySelectorAll('[data-filter]').forEach(function (card) {
       var text  = (card.dataset.filter    || '').toLowerCase();
       var c1    = (card.dataset.category  || '').toLowerCase();
       var c2    = (card.dataset.category2 || '').toLowerCase();
@@ -76,6 +76,9 @@
   if (filterInput)   filterInput.addEventListener('input', applyFilter);
   if (filterSelect)  filterSelect.addEventListener('change', applyFilter);
   if (filterSelect2) filterSelect2.addEventListener('change', applyFilter);
+
+  // Re-apply filters after Google Sheets data has been rendered.
+  document.addEventListener('sheetsrendered', applyFilter);
 
   /* ---------- Pre-fill filter from URL params ---------- */
   var params = new URLSearchParams(window.location.search);

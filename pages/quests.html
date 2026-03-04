@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Database quest Toram Online — main story, side quest, daily, dan event quest." />
+  <meta name="description" content="Toram Online quest database — main story, side quests, daily quests, and special events." />
   <title>Quests — ToramCodex</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
@@ -24,7 +24,7 @@
     </ul>
     <div class="nav-search">
       <span class="search-icon">🔍</span>
-      <input type="search" id="navSearchInput" class="search-sync" placeholder="Cari quest…" aria-label="Search" />
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search quests…" aria-label="Search" />
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -40,13 +40,13 @@
     <a href="quests.html" role="menuitem">📜 Quests</a>
     <div class="mobile-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari quest…" aria-label="Mobile search" />
+      <input type="search" class="search-sync" placeholder="Search quests…" aria-label="Mobile search" />
     </div>
   </div>
 
   <div class="page-hero">
     <h1>📜 Quests Database</h1>
-    <p>Main story, side quest, daily quest, dan event khusus</p>
+    <p>Main story, side quests, daily quests, and special events</p>
   </div>
 
   <main>
@@ -58,9 +58,9 @@
       </nav>
 
       <div class="filter-bar" role="search" aria-label="Filter quests">
-        <input type="search" id="filterInput" class="search-sync" placeholder="🔍 Cari nama quest…" aria-label="Filter by name" />
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search quest name…" aria-label="Filter by name" />
         <select id="filterSelect" aria-label="Filter by type">
-          <option value="">Semua Tipe</option>
+          <option value="">All Types</option>
           <option value="main">Main Story</option>
           <option value="side">Side Quest</option>
           <option value="daily">Daily</option>
@@ -68,7 +68,7 @@
         </select>
       </div>
 
-      <div class="data-grid">
+      <div class="data-grid" id="questsGrid">
 
         <article class="data-card" data-filter="awakening protagonist main story" data-category="main">
           <div class="data-card-header">
@@ -81,7 +81,7 @@
           <div class="data-card-body">
             <span class="tag gold">Main Story</span>
             <span class="tag">Lv.1+</span>
-            <p class="mt-1 text-muted">Quest pertama. Selamatkan desa dari serangan goblin dan temui NPC Mao.</p>
+            <p class="mt-1 text-muted">The first quest. Save the village from a goblin raid and meet NPC Mao.</p>
             <p class="mt-1"><strong>Reward:</strong> 5,000 EXP · 1,000 Spina</p>
           </div>
         </article>
@@ -97,7 +97,7 @@
           <div class="data-card-body">
             <span class="tag gold">Main Story</span>
             <span class="tag">Lv.180+</span>
-            <p class="mt-1 text-muted">Investigasi klan bayangan yang merencanakan invasi ke ibukota.</p>
+            <p class="mt-1 text-muted">Investigate a shadow clan planning to invade the capital city.</p>
             <p class="mt-1"><strong>Reward:</strong> 500,000 EXP · Rare Equipment</p>
           </div>
         </article>
@@ -113,7 +113,7 @@
           <div class="data-card-body">
             <span class="tag">Side Quest</span>
             <span class="tag">Lv.30+</span>
-            <p class="mt-1 text-muted">Bantu warga kota mencari kucingnya yang hilang di Beginner Forest.</p>
+            <p class="mt-1 text-muted">Help a townsperson find their missing cat in Beginner Forest.</p>
             <p class="mt-1"><strong>Reward:</strong> 8,000 EXP · 3,000 Spina</p>
           </div>
         </article>
@@ -129,7 +129,7 @@
           <div class="data-card-body">
             <span class="tag">Side Quest</span>
             <span class="tag">Lv.50+</span>
-            <p class="mt-1 text-muted">Kumpulkan material untuk pandai besi desa. Buka akses resep craft baru.</p>
+            <p class="mt-1 text-muted">Gather materials for the village blacksmith. Unlocks new crafting recipes.</p>
             <p class="mt-1"><strong>Reward:</strong> Crafting Recipe x3 · 20,000 EXP</p>
           </div>
         </article>
@@ -145,7 +145,7 @@
           <div class="data-card-body">
             <span class="tag green">Daily</span>
             <span class="tag">Lv.1+</span>
-            <p class="mt-1 text-muted">Bunuh 20 Goblin Raider di Beginner Forest. Reset setiap hari pukul 00:00.</p>
+            <p class="mt-1 text-muted">Kill 20 Goblin Raiders in Beginner Forest. Resets daily at 00:00.</p>
             <p class="mt-1"><strong>Reward:</strong> 15,000 EXP · Daily Coin x5</p>
           </div>
         </article>
@@ -161,8 +161,8 @@
           <div class="data-card-body">
             <span class="tag red">Event</span>
             <span class="tag">Lv.100+</span>
-            <p class="mt-1 text-muted">Event musiman. Kalahkan dragon khusus dan tukar token untuk item eksklusif.</p>
-            <p class="mt-1"><strong>Reward:</strong> Dragon Token · Costume Eksklusif</p>
+            <p class="mt-1 text-muted">Seasonal event. Defeat special dragons and exchange tokens for exclusive items.</p>
+            <p class="mt-1"><strong>Reward:</strong> Dragon Token · Exclusive Costume</p>
           </div>
         </article>
 
@@ -182,7 +182,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">⚔️ ToramCodex</div>
-        <p class="footer-desc">Fan-made database · Tidak berafiliasi dengan Asobimo, Inc.</p>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
       </div>
       <div class="footer-col">
         <h4>Database</h4>
@@ -194,18 +194,20 @@
       </div>
       <div class="footer-col">
         <h4>Info</h4>
-        <a href="#">Tentang Kami</a>
-        <a href="#">Kontribusi</a>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
         <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 ToramCodex · Fan-made</span>
-      <span>Toram Online™ milik Asobimo, Inc.</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
+  <script>ToramSheets.load('quests', 'questsGrid');</script>
 </body>
 </html>

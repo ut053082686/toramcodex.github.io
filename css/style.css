@@ -220,9 +220,8 @@ ul { list-style: none; }
   overflow: hidden;
   padding: 4rem 1rem 3rem;
   text-align: center;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, #1a2d5a55 0%, transparent 70%),
-    var(--bg-base);
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
 }
 
 .hero::before {
@@ -255,10 +254,7 @@ ul { list-style: none; }
 }
 
 .hero h1 span {
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-cyan);
 }
 
 .hero p {
@@ -472,8 +468,9 @@ ul { list-style: none; }
    FEATURED / SPOTLIGHT
    ============================================================ */
 .spotlight-card {
-  background: linear-gradient(135deg, #161b22, #1a2535);
+  background: var(--bg-card);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-cyan);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: flex;
@@ -727,7 +724,7 @@ footer {
    ============================================================ */
 .page-hero {
   padding: 2rem 1rem 1.5rem;
-  background: linear-gradient(180deg, #0d1b2e 0%, var(--bg-base) 100%);
+  background: var(--bg-card);
   text-align: center;
   border-bottom: 1px solid var(--border);
 }
@@ -738,15 +735,14 @@ footer {
 /* ============================================================
    LOADING SKELETON (for future JS data fetching)
    ============================================================ */
-@keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position: 400px 0; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .45; }
 }
 
 .skeleton {
-  background: linear-gradient(90deg, var(--bg-card) 25%, #1e2530 50%, var(--bg-card) 75%);
-  background-size: 800px 100%;
-  animation: shimmer 1.4s infinite;
+  background: var(--bg-card);
+  animation: pulse 1.4s ease-in-out infinite;
   border-radius: var(--radius-sm);
 }
 

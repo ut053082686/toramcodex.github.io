@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Database map Toram Online — semua area, lokasi monster, dan quest per wilayah." />
+  <meta name="description" content="Toram Online map database — all areas, monster locations, and quests per region." />
   <title>Maps — ToramCodex</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
@@ -24,7 +24,7 @@
     </ul>
     <div class="nav-search">
       <span class="search-icon">🔍</span>
-      <input type="search" id="navSearchInput" class="search-sync" placeholder="Cari map…" aria-label="Search" />
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search maps…" aria-label="Search" />
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -40,13 +40,13 @@
     <a href="quests.html" role="menuitem">📜 Quests</a>
     <div class="mobile-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari map…" aria-label="Mobile search" />
+      <input type="search" class="search-sync" placeholder="Search maps…" aria-label="Mobile search" />
     </div>
   </div>
 
   <div class="page-hero">
     <h1>🗺️ Maps Database</h1>
-    <p>Semua area di Toram Online — monster, boss, dan quest per wilayah</p>
+    <p>All areas in Toram Online — monsters, bosses, and quests per region</p>
   </div>
 
   <main>
@@ -58,16 +58,16 @@
       </nav>
 
       <div class="filter-bar" role="search" aria-label="Filter maps">
-        <input type="search" id="filterInput" class="search-sync" placeholder="🔍 Cari nama area…" aria-label="Filter by name" />
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search area name…" aria-label="Filter by name" />
         <select id="filterSelect" aria-label="Filter by region">
-          <option value="">Semua Region</option>
+          <option value="">All Regions</option>
           <option value="starter">Starter Zone</option>
           <option value="mid">Mid Zone</option>
           <option value="end">End Game</option>
         </select>
       </div>
 
-      <div class="data-grid">
+      <div class="data-grid" id="mapsGrid">
 
         <article class="data-card" data-filter="starter plains beginner" data-category="starter">
           <div class="data-card-header">
@@ -79,7 +79,7 @@
           </div>
           <div class="data-card-body">
             <span class="tag green">Starter</span>
-            <p class="mt-1 text-muted">Area pertama pemain baru. Terdapat Slime, Goblin, dan quest tutorial.</p>
+            <p class="mt-1 text-muted">The starting area for new players. Home to Slimes, Goblins, and tutorial quests.</p>
             <p class="mt-1"><strong>Boss:</strong> Giant Goblin Chief</p>
           </div>
         </article>
@@ -94,7 +94,7 @@
           </div>
           <div class="data-card-body">
             <span class="tag green">Starter</span>
-            <p class="mt-1 text-muted">Hutan rimbun dengan berbagai mob. Ideal untuk grinding level awal.</p>
+            <p class="mt-1 text-muted">Dense forest with various mobs. Ideal for early-level grinding.</p>
             <p class="mt-1"><strong>Boss:</strong> Forest Troll</p>
           </div>
         </article>
@@ -109,7 +109,7 @@
           </div>
           <div class="data-card-body">
             <span class="tag">Mid Game</span>
-            <p class="mt-1 text-muted">Reruntuhan kuno dengan Golem dan Undead. Drop item langka craftable.</p>
+            <p class="mt-1 text-muted">Ancient ruins inhabited by Golems and Undead. Drops rare craftable items.</p>
             <p class="mt-1"><strong>Boss:</strong> Stone Golem</p>
           </div>
         </article>
@@ -124,7 +124,7 @@
           </div>
           <div class="data-card-body">
             <span class="tag">Mid Game</span>
-            <p class="mt-1 text-muted">Gua kristal bawah tanah dengan musuh elemen Ice. Visibility terbatas.</p>
+            <p class="mt-1 text-muted">Underground crystal cave with Ice-element enemies. Limited visibility.</p>
             <p class="mt-1"><strong>Boss:</strong> Crystal Spider Queen</p>
           </div>
         </article>
@@ -140,7 +140,7 @@
           <div class="data-card-body">
             <span class="tag gold">End Game</span>
             <span class="tag red">Fire Zone</span>
-            <p class="mt-1 text-muted">Puncak gunung berapi aktif. Area paling menantang di game.</p>
+            <p class="mt-1 text-muted">The summit of an active volcano. The most challenging end-game area.</p>
             <p class="mt-1"><strong>Boss:</strong> Ifrit Rex</p>
           </div>
         </article>
@@ -156,7 +156,7 @@
           <div class="data-card-body">
             <span class="tag gold">End Game</span>
             <span class="tag">Dark Zone</span>
-            <p class="mt-1 text-muted">Dimensi gelap yang hanya bisa diakses lewat portal khusus.</p>
+            <p class="mt-1 text-muted">A dark dimension accessible only through a special portal.</p>
             <p class="mt-1"><strong>Boss:</strong> Dark Dragon</p>
           </div>
         </article>
@@ -172,7 +172,7 @@
           <div class="data-card-body">
             <span class="tag">Mid Game</span>
             <span class="tag green">Wind Zone</span>
-            <p class="mt-1 text-muted">Dataran tinggi mengambang di atas awan. Musuh tipe wind dan bird.</p>
+            <p class="mt-1 text-muted">A floating highland above the clouds with Wind-type and bird enemies.</p>
             <p class="mt-1"><strong>Boss:</strong> Tempest Eagle</p>
           </div>
         </article>
@@ -188,7 +188,7 @@
           <div class="data-card-body">
             <span class="tag">Mid Game</span>
             <span class="tag">Ice Zone</span>
-            <p class="mt-1 text-muted">Padang es terbuka dengan musim salju permanen. Drop fur dan ice crystal.</p>
+            <p class="mt-1 text-muted">An open ice field with permanent blizzard conditions. Drops fur and ice crystals.</p>
             <p class="mt-1"><strong>Boss:</strong> Fenrir Shadow</p>
           </div>
         </article>
@@ -208,7 +208,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">⚔️ ToramCodex</div>
-        <p class="footer-desc">Fan-made database · Tidak berafiliasi dengan Asobimo, Inc.</p>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
       </div>
       <div class="footer-col">
         <h4>Database</h4>
@@ -220,18 +220,20 @@
       </div>
       <div class="footer-col">
         <h4>Info</h4>
-        <a href="#">Tentang Kami</a>
-        <a href="#">Kontribusi</a>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
         <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 ToramCodex · Fan-made</span>
-      <span>Toram Online™ milik Asobimo, Inc.</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
+  <script>ToramSheets.load('maps', 'mapsGrid');</script>
 </body>
 </html>

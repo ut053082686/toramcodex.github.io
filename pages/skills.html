@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Database skill Toram Online — daftar semua skill, efek, dan cara mendapatkannya." />
+  <meta name="description" content="Toram Online skill database — active, passive, and combo skills with effects and requirements." />
   <title>Skills — ToramCodex</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
@@ -24,7 +24,7 @@
     </ul>
     <div class="nav-search">
       <span class="search-icon">🔍</span>
-      <input type="search" id="navSearchInput" class="search-sync" placeholder="Cari skill…" aria-label="Search" />
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search skills…" aria-label="Search" />
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -40,13 +40,13 @@
     <a href="quests.html" role="menuitem">📜 Quests</a>
     <div class="mobile-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari skill…" aria-label="Mobile search" />
+      <input type="search" class="search-sync" placeholder="Search skills…" aria-label="Mobile search" />
     </div>
   </div>
 
   <div class="page-hero">
     <h1>✨ Skills Database</h1>
-    <p>Skill aktif, pasif, dan combo — semua skill di Toram Online</p>
+    <p>Active, passive, and combo skills in Toram Online</p>
   </div>
 
   <main>
@@ -58,15 +58,15 @@
       </nav>
 
       <div class="filter-bar" role="search" aria-label="Filter skills">
-        <input type="search" id="filterInput" class="search-sync" placeholder="🔍 Cari nama skill…" aria-label="Filter by name" />
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search skill name…" aria-label="Filter by name" />
         <select id="filterSelect" aria-label="Filter by type">
-          <option value="">Semua Tipe</option>
-          <option value="active">Aktif</option>
-          <option value="passive">Pasif</option>
+          <option value="">All Types</option>
+          <option value="active">Active</option>
+          <option value="passive">Passive</option>
           <option value="combo">Combo</option>
         </select>
         <select id="filterSelect2" aria-label="Filter by category">
-          <option value="">Semua Kategori</option>
+          <option value="">All Categories</option>
           <option value="blade">Blade</option>
           <option value="shot">Shot</option>
           <option value="magic">Magic</option>
@@ -75,20 +75,20 @@
         </select>
       </div>
 
-      <div class="data-grid">
+      <div class="data-grid" id="skillsGrid">
 
         <article class="data-card" data-filter="spiral air active blade" data-category="active" data-category2="blade">
           <div class="data-card-header">
             <div class="data-card-icon">🌀</div>
             <div>
               <div class="data-card-title">Spiral Air</div>
-              <div class="data-card-subtitle">Aktif · Blade Skill</div>
+              <div class="data-card-subtitle">Active · Blade Skill</div>
             </div>
           </div>
           <div class="data-card-body">
             <span class="tag">ATK ×350%</span>
             <span class="tag">MP 200</span>
-            <p class="mt-1 text-muted">Serangan spiral yang menembus pertahanan musuh. Combo baik dengan Trigger Slash.</p>
+            <p class="mt-1 text-muted">A spinning spiral attack that pierces enemy defenses. Combos well with Trigger Slash.</p>
           </div>
         </article>
 
@@ -97,13 +97,13 @@
             <div class="data-card-icon">🏹</div>
             <div>
               <div class="data-card-title">Magic Arrows</div>
-              <div class="data-card-subtitle">Aktif · Shot Skill</div>
+              <div class="data-card-subtitle">Active · Shot Skill</div>
             </div>
           </div>
           <div class="data-card-body">
             <span class="tag">ATK ×280%</span>
             <span class="tag">MP 150</span>
-            <p class="mt-1 text-muted">Menembakkan panah berenergi magis ke target. Jarak jauh, cooldown pendek.</p>
+            <p class="mt-1 text-muted">Fires magic-infused arrows at the target. Long range with a short cooldown.</p>
           </div>
         </article>
 
@@ -112,14 +112,14 @@
             <div class="data-card-icon">☄️</div>
             <div>
               <div class="data-card-title">Meteor Strike</div>
-              <div class="data-card-subtitle">Aktif · Magic Skill</div>
+              <div class="data-card-subtitle">Active · Magic Skill</div>
             </div>
           </div>
           <div class="data-card-body">
             <span class="tag">MATK ×500%</span>
             <span class="tag">MP 400</span>
             <span class="tag red">AoE</span>
-            <p class="mt-1 text-muted">Menjatuhkan meteor ke area target. Damage besar, cocok untuk farming.</p>
+            <p class="mt-1 text-muted">Drops a meteor on the target area. Massive damage, ideal for farming.</p>
           </div>
         </article>
 
@@ -128,13 +128,13 @@
             <div class="data-card-icon">🛡️</div>
             <div>
               <div class="data-card-title">Shield Reflex</div>
-              <div class="data-card-subtitle">Pasif · Survival Skill</div>
+              <div class="data-card-subtitle">Passive · Survival Skill</div>
             </div>
           </div>
           <div class="data-card-body">
             <span class="tag green">DEF +15%</span>
             <span class="tag green">Dodge +10%</span>
-            <p class="mt-1 text-muted">Meningkatkan pertahanan dan peluang menghindar secara permanen.</p>
+            <p class="mt-1 text-muted">Permanently increases defense and dodge chance.</p>
           </div>
         </article>
 
@@ -143,14 +143,14 @@
             <div class="data-card-icon">💚</div>
             <div>
               <div class="data-card-title">Sanctuary</div>
-              <div class="data-card-subtitle">Aktif · Support Skill</div>
+              <div class="data-card-subtitle">Active · Support Skill</div>
             </div>
           </div>
           <div class="data-card-body">
             <span class="tag green">Heal ×200%</span>
             <span class="tag">MP 300</span>
             <span class="tag green">AoE Heal</span>
-            <p class="mt-1 text-muted">Menyembuhkan semua anggota party di sekitarnya.</p>
+            <p class="mt-1 text-muted">Heals all nearby party members in an area of effect.</p>
           </div>
         </article>
 
@@ -166,7 +166,7 @@
             <span class="tag">Spiral Air</span>
             <span class="tag">→</span>
             <span class="tag">Magic Arrows</span>
-            <p class="mt-1 text-muted">Kombo 2-skill dengan burst damage tinggi. Populer di PvP.</p>
+            <p class="mt-1 text-muted">2-skill combo with high burst damage. Popular in PvP.</p>
           </div>
         </article>
 
@@ -186,7 +186,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">⚔️ ToramCodex</div>
-        <p class="footer-desc">Fan-made database · Tidak berafiliasi dengan Asobimo, Inc.</p>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
       </div>
       <div class="footer-col">
         <h4>Database</h4>
@@ -198,18 +198,20 @@
       </div>
       <div class="footer-col">
         <h4>Info</h4>
-        <a href="#">Tentang Kami</a>
-        <a href="#">Kontribusi</a>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
         <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 ToramCodex · Fan-made</span>
-      <span>Toram Online™ milik Asobimo, Inc.</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
+  <script>ToramSheets.load('skills', 'skillsGrid');</script>
 </body>
 </html>

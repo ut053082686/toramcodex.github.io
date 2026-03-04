@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Database item lengkap Toram Online — senjata, armor, aksesori, dan material." />
+  <meta name="description" content="Toram Online item database — weapons, armor, accessories, and crafting materials." />
   <title>Items — ToramCodex</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
@@ -24,7 +24,7 @@
     </ul>
     <div class="nav-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari item…" aria-label="Search" id="navSearchInput" />
+      <input type="search" class="search-sync" placeholder="Search items…" aria-label="Search" id="navSearchInput" />
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -40,13 +40,13 @@
     <a href="quests.html" role="menuitem">📜 Quests</a>
     <div class="mobile-search">
       <span class="search-icon">🔍</span>
-      <input type="search" class="search-sync" placeholder="Cari item…" aria-label="Mobile search" />
+      <input type="search" class="search-sync" placeholder="Search items…" aria-label="Mobile search" />
     </div>
   </div>
 
   <div class="page-hero">
     <h1>🗡️ Items Database</h1>
-    <p>Senjata, armor, aksesori, dan material Toram Online</p>
+    <p>Weapons, armor, accessories, and crafting materials</p>
   </div>
 
   <main>
@@ -58,9 +58,9 @@
       </nav>
 
       <div class="filter-bar" role="search" aria-label="Filter items">
-        <input type="search" id="filterInput" class="search-sync" placeholder="🔍 Cari nama item…" aria-label="Filter by name" />
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search item name…" aria-label="Filter by name" />
         <select id="filterSelect" aria-label="Filter by category">
-          <option value="">Semua Kategori</option>
+          <option value="">All Categories</option>
           <option value="sword">Sword</option>
           <option value="bow">Bow</option>
           <option value="staff">Staff</option>
@@ -69,7 +69,7 @@
           <option value="material">Material</option>
         </select>
         <select id="filterSelect2" aria-label="Filter by rarity">
-          <option value="">Semua Rarity</option>
+          <option value="">All Rarities</option>
           <option value="common">Common</option>
           <option value="rare">Rare</option>
           <option value="epic">Epic</option>
@@ -220,7 +220,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">⚔️ ToramCodex</div>
-        <p class="footer-desc">Fan-made database · Tidak berafiliasi dengan Asobimo, Inc.</p>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
       </div>
       <div class="footer-col">
         <h4>Database</h4>
@@ -232,18 +232,20 @@
       </div>
       <div class="footer-col">
         <h4>Info</h4>
-        <a href="#">Tentang Kami</a>
-        <a href="#">Kontribusi</a>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
         <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 ToramCodex · Fan-made</span>
-      <span>Toram Online™ milik Asobimo, Inc.</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
+  <script>ToramSheets.load('items', 'itemsGrid');</script>
 </body>
 </html>
