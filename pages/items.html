@@ -79,7 +79,7 @@
 
       <div class="data-grid" id="itemsGrid">
 
-        <article class="data-card" data-filter="shadow blade sword" data-category="sword" data-category2="rare">
+        <article class="data-card" data-filter="shadow blade sword" data-category="sword" data-category2="rare" data-name="Shadow Blade" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🗡️</div>
             <div>
@@ -95,7 +95,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="windrunner bow" data-category="bow" data-category2="epic">
+        <article class="data-card" data-filter="windrunner bow" data-category="bow" data-category2="epic" data-name="Windrunner Bow" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🏹</div>
             <div>
@@ -111,7 +111,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="arcane staff" data-category="staff" data-category2="rare">
+        <article class="data-card" data-filter="arcane staff" data-category="staff" data-category2="rare" data-name="Arcane Staff" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🔮</div>
             <div>
@@ -127,7 +127,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="eternal flame sword legendary" data-category="sword" data-category2="legendary">
+        <article class="data-card" data-filter="eternal flame sword legendary" data-category="sword" data-category2="legendary" data-name="Sword of Eternal Flame" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🔥</div>
             <div>
@@ -143,7 +143,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="dragon scale armor" data-category="armor" data-category2="epic">
+        <article class="data-card" data-filter="dragon scale armor" data-category="armor" data-category2="epic" data-name="Dragon Scale Armor" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🛡️</div>
             <div>
@@ -159,7 +159,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="moonstone ring accessory" data-category="accessory" data-category2="rare">
+        <article class="data-card" data-filter="moonstone ring accessory" data-category="accessory" data-category2="rare" data-name="Moonstone Ring" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">💍</div>
             <div>
@@ -175,7 +175,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="dragon heart material" data-category="material" data-category2="rare">
+        <article class="data-card" data-filter="dragon heart material" data-category="material" data-category2="rare" data-name="Dragon Heart" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">❤️‍🔥</div>
             <div>
@@ -190,7 +190,7 @@
           </div>
         </article>
 
-        <article class="data-card" data-filter="iron ore material common" data-category="material" data-category2="common">
+        <article class="data-card" data-filter="iron ore material common" data-category="material" data-category2="common" data-name="Iron Ore" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">⛏️</div>
             <div>
@@ -247,5 +247,12 @@
   <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
   <script>ToramSheets.load('items', 'itemsGrid');</script>
+  <script>
+    // Make item cards clickable → detail page
+    document.getElementById('itemsGrid').addEventListener('click', function (e) {
+      var card = e.target.closest('[data-name]');
+      if (card) window.location.href = 'detail.html?name=' + encodeURIComponent(card.dataset.name);
+    });
+  </script>
 </body>
 </html>

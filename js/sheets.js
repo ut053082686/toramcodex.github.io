@@ -12,11 +12,16 @@
 //     Items | Monsters | Skills | Maps | Quests
 //
 // EXPECTED COLUMN HEADERS (row 1 of each sheet):
-//  Items    : Name, Icon, Type, Level, Stats, Rarity, Source
-//  Monsters : Name, Icon, Level, Type, Element, HP, Location, Drop
-//  Skills   : Name, Icon, Type, Category, Damage, MP Cost, Description
-//  Maps     : Name, Icon, Zone, LevelRange, Boss, Description
-//  Quests   : Name, Icon, Type, MinLevel, Reward, Description
+//  Items       : Name, Icon, Type, Level, Stats, Rarity, Source
+//  ItemDetails : Name, Icon, Type, Level, ImageURL, SellSpina, SellOther,
+//                Stats, Obtain, Recipe
+//                (Stats format: "Base DEF:150;Guard Recharge:+18%;...")
+//                (Obtain format: "Drop: Monster Name; Quest: Quest Name")
+//                (Recipe format: "Iron Ore x3; Dragon Heart x1")
+//  Monsters    : Name, Icon, Level, Type, Element, HP, Location, Drop
+//  Skills      : Name, Icon, Type, Category, Damage, MP Cost, Description
+//  Maps        : Name, Icon, Zone, LevelRange, Boss, Description
+//  Quests      : Name, Icon, Type, MinLevel, Reward, Description
 // ============================================================
 
 window.ToramSheets = (function () {
@@ -30,11 +35,12 @@ window.ToramSheets = (function () {
 
     // Sheet tab names (must match the tab names in your Google Sheet).
     SHEETS: {
-      items:    'Items',
-      monsters: 'Monsters',
-      skills:   'Skills',
-      maps:     'Maps',
-      quests:   'Quests'
+      items:       'Items',
+      itemdetails: 'ItemDetails',
+      monsters:    'Monsters',
+      skills:      'Skills',
+      maps:        'Maps',
+      quests:      'Quests'
     }
   };
 
@@ -131,9 +137,11 @@ window.ToramSheets = (function () {
 
       var el       = document.createElement('article');
       el.className = 'data-card';
+      el.style.cursor = 'pointer';
       el.dataset.filter    = (name + ' ' + type + ' ' + rarity).toLowerCase();
       el.dataset.category  = type.toLowerCase();
       el.dataset.category2 = rarity.toLowerCase();
+      el.dataset.name      = row['Name'] || '';
       el.innerHTML =
         '<div class="data-card-header">' +
           '<div class="data-card-icon">' + icon + '</div>' +
@@ -340,7 +348,10 @@ window.ToramSheets = (function () {
   }
 
   return {
-    CONFIG : CONFIG,
-    load   : load
+    CONFIG     : CONFIG,
+    load       : load,
+    fetchSheet : fetchSheet,
+    parseCSV   : parseCSV,
+    esc        : esc
   };
 }());

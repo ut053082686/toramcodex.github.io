@@ -464,6 +464,8 @@ ul { list-style: none; }
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
+.data-card[data-name] { cursor: pointer; }
+
 .data-card:hover {
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
@@ -810,6 +812,215 @@ footer {
 
 .page-hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: .4rem; }
 .page-hero p  { color: var(--text-secondary); font-size: .95rem; }
+
+/* ============================================================
+   DETAIL CARD (Coryn Club-style item/equip detail)
+   ============================================================ */
+.detail-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.25rem 1.25rem .5rem;
+}
+
+.detail-header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.detail-type {
+  display: inline-block;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: .15rem;
+}
+
+.detail-fav {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--border-hover);
+  transition: color var(--transition);
+  padding: 0;
+}
+.detail-fav:hover,
+.detail-fav.active { color: var(--accent); }
+
+.detail-image {
+  margin: .75rem 1.25rem;
+  background: var(--bg-base);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  overflow: hidden;
+}
+
+.detail-image img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+.detail-image .placeholder-icon {
+  font-size: 4rem;
+  opacity: .4;
+}
+
+.detail-prices {
+  display: flex;
+  gap: .5rem;
+  padding: 0 1.25rem .75rem;
+  flex-wrap: wrap;
+}
+
+.price-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3rem .65rem;
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--bg-base);
+  color: var(--text-secondary);
+}
+
+.price-tag.spina { border-color: var(--accent); color: var(--accent); }
+
+/* Detail Tabs */
+.detail-tabs {
+  display: flex;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-tab {
+  flex: 1;
+  padding: .6rem .5rem;
+  text-align: center;
+  font-size: .82rem;
+  font-weight: 600;
+  background: var(--bg-base);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  border-bottom: 2px solid transparent;
+}
+
+.detail-tab:hover { color: var(--text-primary); }
+.detail-tab.active {
+  background: var(--bg-card);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Detail Tab Panels */
+.detail-panel {
+  display: none;
+  padding: 1rem 1.25rem 1.5rem;
+}
+.detail-panel.active { display: block; }
+
+/* Stat rows */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+
+.stat-row:last-child { border-bottom: none; }
+
+.stat-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-value.positive { color: var(--success); }
+.stat-value.negative { color: var(--danger); }
+
+.stat-section-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: .75rem;
+  margin-bottom: .25rem;
+  padding-top: .5rem;
+}
+
+/* Obtain & Recipe content */
+.obtain-item,
+.recipe-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+
+.obtain-item:last-child,
+.recipe-item:last-child { border-bottom: none; }
+
+.obtain-icon,
+.recipe-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Detail: back link */
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .88rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  transition: color var(--transition);
+}
+.detail-back:hover { color: var(--accent); }
+
+/* Detail responsive */
+@media (max-width: 480px) {
+  .detail-wrapper { margin: 0 .5rem; }
+  .detail-header h1 { font-size: 1.1rem; }
+  .detail-tab { font-size: .75rem; padding: .5rem .3rem; }
+}
 
 /* ============================================================
    LOADING SKELETON (for future JS data fetching)
