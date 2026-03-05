@@ -146,6 +146,7 @@ window.ItemModal = (function () {
     var type  = item['Type']      || '';
     var icon  = item['Icon']      || (window.ToramSheets ? window.ToramSheets.resolveIcon(type) : '🗡️');
     var level = item['Level']     || '';
+    var lvl   = level && level !== '0' ? ' Lv.' + level : '';
     var img   = item['ImageURL']  || '';
     var sell  = item['SellSpina'] || '';
     var sell2 = item['SellOther'] || '';
@@ -154,7 +155,7 @@ window.ItemModal = (function () {
     var rec   = item['Recipe']    || '';
 
     document.getElementById('modalName').textContent = name;
-    document.getElementById('modalType').textContent = '[' + type + ']' + (level ? ' Lv.' + level : '');
+    document.getElementById('modalType').textContent = '[' + type + ']' + lvl;
 
     // Image
     var imageEl = document.getElementById('modalImage');

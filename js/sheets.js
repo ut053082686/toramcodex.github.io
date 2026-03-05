@@ -240,6 +240,7 @@ window.ToramSheets = (function () {
       var imgURL = (row['ImageURL']    || '').trim();
       var type   = esc(row['Type']     || '');
       var level  = esc(row['Level']    || '');
+      var lvl    = level && level !== '0' ? ' · Lv.' + level : '';
       var stats  = esc(row['Stats']    || '');
       var rarity = esc(row['Rarity']   || '');
       var source = esc(row['Source']   || '');
@@ -259,7 +260,7 @@ window.ToramSheets = (function () {
           '<div class="data-card-icon">' + iconHTML('', icon, type, name) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
-            '<div class="data-card-subtitle">' + type + (level ? ' · Lv.' + level : '') + '</div>' +
+            '<div class="data-card-subtitle">' + type + lvl + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="data-card-body">' +
