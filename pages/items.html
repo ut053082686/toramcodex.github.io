@@ -244,14 +244,19 @@
   </footer>
 
   <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+  <!-- Item detail modal -->
+  <div id="itemModal"></div>
+
   <script src="../js/sheets.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/modal.js"></script>
   <script>ToramSheets.load('items', 'itemsGrid');</script>
   <script>
-    // Make item cards clickable → detail page
+    // Make item cards clickable → popup modal
     document.getElementById('itemsGrid').addEventListener('click', function (e) {
       var card = e.target.closest('[data-name]');
-      if (card) window.location.href = 'detail.html?name=' + encodeURIComponent(card.dataset.name);
+      if (card) ItemModal.open(card.dataset.name);
     });
   </script>
 </body>

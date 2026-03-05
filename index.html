@@ -190,7 +190,7 @@
       </div>
       <div class="data-grid">
 
-        <article class="data-card">
+        <article class="data-card" data-name="Shadow Blade" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🗡️</div>
             <div>
@@ -204,7 +204,7 @@
           </div>
         </article>
 
-        <article class="data-card">
+        <article class="data-card" data-name="Windrunner Bow" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🏹</div>
             <div>
@@ -218,7 +218,7 @@
           </div>
         </article>
 
-        <article class="data-card">
+        <article class="data-card" data-name="Arcane Staff" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🔮</div>
             <div>
@@ -329,6 +329,19 @@
 
   <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
+  <!-- Item detail modal -->
+  <div id="itemModal"></div>
+
+  <script src="js/sheets.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/modal.js"></script>
+  <script>
+    // Make Latest Items cards clickable → popup modal
+    document.querySelectorAll('.data-card[data-name]').forEach(function (card) {
+      card.addEventListener('click', function () {
+        ItemModal.open(this.dataset.name);
+      });
+    });
+  </script>
 </body>
 </html>

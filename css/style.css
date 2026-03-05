@@ -1023,6 +1023,88 @@ footer {
 }
 
 /* ============================================================
+   MODAL OVERLAY (popup detail)
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-overlay.fade-in { opacity: 1; }
+
+.modal-body {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 40px rgba(0,0,0,.2);
+  animation: modalSlideUp .25s ease;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+/* Modal scrollbar */
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+@media (max-width: 480px) {
+  .modal-overlay { padding: .5rem; align-items: flex-end; }
+  .modal-body {
+    max-height: 90vh;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    animation: modalSlideUpMobile .25s ease;
+  }
+  @keyframes modalSlideUpMobile {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+}
+
+/* ============================================================
    LOADING SKELETON (for future JS data fetching)
    ============================================================ */
 @keyframes pulse {
