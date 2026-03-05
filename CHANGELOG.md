@@ -4,6 +4,25 @@ Semua perubahan penting pada proyek ToramCodex dicatat di sini.
 
 ---
 
+## [0.7.0] — 2026-03-05
+
+### Added
+- **Custom PNG icons** — Default icon per Type sekarang pakai gambar PNG dari `img/icons/` (bukan emoji)
+- 22 icon file: 1h_ico, 2h_ico, bow_ico, bwg_ico, stf_ico, md_ico, knu_ico, hb_ico, ktn_ico, dagger_ico, arrow_ico, shield_ico, armor_ico, scroll_ico, add_ico, special_ico + 6 Crysta icons
+- **6 Crysta types** baru: Additional Crysta, Ring Crysta, Armor Crysta, Weapon Crysta, Special Crysta, Normal Crysta
+- `ICON_BASE` auto-detect — path otomatis menyesuaikan apakah halaman di root atau `pages/`
+- `iconHTML()` mendukung icon gambar (path relatif & URL) selain emoji
+- **SPREADSHEET_GUIDE.md** — Dokumentasi lengkap pengisian 8 tab Google Sheet dengan contoh data
+- Folder `img/icons/` untuk hosting gambar icon di repo
+
+### Changed
+- `TYPE_ICONS` map: emoji diganti PNG path untuk semua equipment/weapon type (Material, Consumable, Quest Item tetap emoji)
+- `resolveIcon()` sekarang resolve path relatif via `ICON_BASE`
+- Fallback default dari emoji 🗡️ ke `img/icons/1h_ico.png`
+- SPREADSHEET_GUIDE.md diupdate: tabel Type→Icon pakai gambar, section Crysta, tips hosting gambar
+
+---
+
 ## [0.6.0] — 2026-03-05
 
 ### Added

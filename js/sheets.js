@@ -119,37 +119,53 @@ window.ToramSheets = (function () {
       .replace(/"/g, '&quot;');
   }
 
+  // ---- ICON BASE PATH -----------------------------------------------
+  // Detect base path: pages are under /pages/, root is /
+  var ICON_BASE = (function () {
+    var path = window.location.pathname;
+    // If we're in /pages/*.html, go up one level
+    if (path.indexOf('/pages/') !== -1) return '../img/icons/';
+    return 'img/icons/';
+  }());
+
   // ---- TYPE → DEFAULT ICON MAP ------------------------------------
-  // Toram Online equipment / category types → emoji fallback.
-  // Used when Google Sheet has no Icon or ImageURL for a row.
+  // Toram Online equipment / category types → icon image or emoji.
+  // Values starting with 'img/' are auto-resolved via ICON_BASE.
   var TYPE_ICONS = {
     // Weapons
-    '1-handed sword': '🗡️',
-    'one-hand sword':  '🗡️',
-    '2-handed sword': '⚔️',
-    'two-hand sword':  '⚔️',
-    'bow':            '🏹',
-    'bowgun':         '🔫',
-    'knuckles':       '🥊',
-    'magic device':   '🔮',
-    'staff':          '🪄',
-    'halberd':        '🔱',
-    'katana':         '⚔️',
-    'dagger':         '🔪',
-    'arrow':          '🎯',
+    '1-handed sword': 'img/icons/1h_ico.png',
+    'one-hand sword':  'img/icons/1h_ico.png',
+    '1 handed sword': 'img/icons/1h_ico.png',
+    '2-handed sword': 'img/icons/2h_ico.png',
+    'two-hand sword':  'img/icons/2h_ico.png',
+    '2 handed sword': 'img/icons/2h_ico.png',
+    'bow':            'img/icons/bow_ico.png',
+    'bowgun':         'img/icons/bwg_ico.png',
+    'knuckles':       'img/icons/knu_ico.png',
+    'magic device':   'img/icons/md_ico.png',
+    'staff':          'img/icons/stf_ico.png',
+    'halberd':        'img/icons/hb_ico.png',
+    'katana':         'img/icons/ktn_ico.png',
+    'dagger':         'img/icons/dagger_ico.png',
+    'arrow':          'img/icons/arrow_ico.png',
     // Defense
-    'shield':         '🛡️',
-    'armor':          '🛡️',
-    'heavy armor':    '🛡️',
-    'light armor':    '🛡️',
+    'shield':         'img/icons/shield_ico.png',
+    'armor':          'img/icons/armor_ico.png',
+    'heavy armor':    'img/icons/armor_ico.png',
+    'light armor':    'img/icons/armor_ico.png',
     // Accessories & other
-    'ninjutsu scroll':'📜',
-    'additional':     '💍',
-    'special':        '⭐',
-    'ring':           '💍',
-    'earring':        '💎',
-    'necklace':       '📿',
-    // Non-equipment
+    'ninjutsu scroll':'img/icons/scroll_ico.png',
+    'additional':     'img/icons/add_ico.png',
+    'special':        'img/icons/special_ico.png',
+    'ring':           'img/icons/special_ico.png',
+    // Crysta
+    'additional crysta': 'img/icons/add_crysta.png',
+    'ring crysta':       'img/icons/add_crysta.png',
+    'armor crysta':      'img/icons/armor_crysta.png',
+    'weapon crysta':     'img/icons/weapon_crysta.png',
+    'special crysta':    'img/icons/special_crysta.png',
+    'normal crysta':     'img/icons/normal_crysta.png',
+    // Non-equipment (emoji)
     'material':       '⛏️',
     'consumable':     '🧪',
     'quest item':     '📦'
@@ -157,18 +173,30 @@ window.ToramSheets = (function () {
 
   // Resolve the best icon: ImageURL > Sheet Icon > type-based > fallback
   function resolveIcon(type) {
-    return TYPE_ICONS[(type || '').toLowerCase()] || '🗡️';
+    var icon = TYPE_ICONS[(type || '').toLowerCase()] || 'img/icons/1h_ico.png';
+    // Convert relative img/ paths using the correct base
+    if (typeof icon === 'string' && icon.indexOf('img/icons/') === 0) {
+      return ICON_BASE + icon.slice('img/icons/'.length);
+    }
+    return icon;
   }
 
   // ---- ICON / IMAGE HELPER ------------------------------------------
   // Returns HTML for the icon area:
   //   - If imageURL is provided → <img> tag
-  //   - Otherwise → emoji icon (from Sheet, or type-based, or default)
+  //   - If icon is provided → emoji/text from Sheet
+  //   - Otherwise → auto-detect from TYPE_ICONS (supports emoji OR image URL)
   function iconHTML(imageURL, icon, type, altText) {
     if (imageURL) {
       return '<img src="' + esc(imageURL) + '" alt="' + esc(altText) + '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
     }
-    return icon || resolveIcon(type);
+    if (icon) { return icon; }
+    var resolved = resolveIcon(type);
+    // If the default icon is an image path or URL, render as <img>
+    if (resolved.indexOf('http') === 0 || resolved.indexOf('../img/') === 0 || resolved.indexOf('img/') === 0) {
+      return '<img src="' + esc(resolved) + '" alt="' + esc(altText || type) + '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
+    }
+    return resolved;
   }
 
   // ---- LOADING STATE ------------------------------------------------
