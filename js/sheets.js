@@ -289,12 +289,29 @@ window.ToramSheets = (function () {
       var elem   = esc(row['Element']  || '');
       var hp     = esc(row['HP']       || '');
       var loc    = esc(row['Location'] || '');
-      var drop   = esc(row['Drop']     || '');
+      var rawDrop = (row['Drop']       || '').trim();
 
       var isBoss = type.toLowerCase() === 'boss';
       var monIcon = imgURL
         ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
         : (icon || (isBoss ? '🐉' : '👾')) + ' ';
+
+      // Split drops by ";" and render each as a separate tag
+      // Show max 3 visible; rest hidden behind "+N more" toggle
+      var dropHTML = '';
+      if (rawDrop) {
+        var drops = rawDrop.split(';').map(function (d) { return d.trim(); }).filter(Boolean);
+        var MAX_VISIBLE = 3;
+        drops.forEach(function (d, i) {
+          var hidden = i >= MAX_VISIBLE ? ' style="display:none" data-drop-extra' : '';
+          dropHTML += '<span class="tag"' + hidden + '>' + esc(d) + '</span> ';
+        });
+        if (drops.length > MAX_VISIBLE) {
+          var extra = drops.length - MAX_VISIBLE;
+          dropHTML += '<span class="tag drop-toggle" style="cursor:pointer;opacity:.7" data-drop-toggle>+' + extra + ' more</span>';
+        }
+      }
+
       var tr   = document.createElement('tr');
       tr.dataset.filter    = (name + ' ' + type + ' ' + elem).toLowerCase();
       tr.dataset.category  = type.toLowerCase().replace(/\s+/g, '-');
@@ -306,8 +323,22 @@ window.ToramSheets = (function () {
         '<td>' + elem + '</td>' +
         '<td>' + hp + '</td>' +
         '<td>' + loc + '</td>' +
-        '<td>' + drop + '</td>';
+        '<td>' + dropHTML + '</td>';
       tbody.appendChild(tr);
+    });
+
+    // Click handler for "+N more" drop toggles
+    tbody.addEventListener('click', function (e) {
+      var toggle = e.target.closest('[data-drop-toggle]');
+      if (!toggle) return;
+      var td = toggle.closest('td');
+      if (!td) return;
+      var extras = td.querySelectorAll('[data-drop-extra]');
+      var showing = toggle.dataset.expanded === '1';
+      extras.forEach(function (el) { el.style.display = showing ? 'none' : ''; });
+      if (!toggle.dataset.label) toggle.dataset.label = toggle.textContent;
+      toggle.dataset.expanded = showing ? '0' : '1';
+      toggle.textContent = showing ? toggle.dataset.label : 'show less';
     });
   }
 
