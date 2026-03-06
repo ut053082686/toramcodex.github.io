@@ -188,19 +188,19 @@
         if (d.petImg) {
           imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px;margin:0 auto" />';
         } else {
-          imgEl.innerHTML = '<span style="font-size:4rem">' + d.petEmoji + '</span>';
+          imgEl.innerHTML = '<span style="font-size:4rem">' + esc(d.petEmoji) + '</span>';
         }
         document.getElementById('pmName').textContent = d.petName;
         document.getElementById('pmSubtitle').textContent = d.petLevel ? 'Lv. ' + d.petLevel + (d.petSpawn ? ' · ' + d.petSpawn : '') : (d.petSpawn || '');
 
         var rows = [
           ['Normal Magic', nMagicHTML(d.petNmagic)],
-          ['Support',      d.petSupport ? '<span style="color:#dc2626;font-weight:600">' + d.petSupport + '</span>' : '<span class="text-muted">\u2014</span>'],
-          ['Act 1', actVal(d.petAct1)],
-          ['Act 2', actVal(d.petAct2)],
-          ['Act 3', actVal(d.petAct3)],
-          ['Act 4', actVal(d.petAct4)],
-          ['Act 5', actVal(d.petAct5)],
+          ['Support',      d.petSupport ? '<span style="color:#dc2626;font-weight:600">' + esc(d.petSupport) + '</span>' : '<span class="text-muted">\u2014</span>'],
+          ['Act 1', actVal(esc(d.petAct1))],
+          ['Act 2', actVal(esc(d.petAct2))],
+          ['Act 3', actVal(esc(d.petAct3))],
+          ['Act 4', actVal(esc(d.petAct4))],
+          ['Act 5', actVal(esc(d.petAct5))],
           ['Color Info', colorHTML(d.petColor)]
         ];
 
@@ -214,12 +214,13 @@
         document.getElementById('pmBody').innerHTML = html;
 
         overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
         requestAnimationFrame(function () { overlay.classList.add('fade-in'); });
       }
 
       function closeModal() {
         overlay.classList.remove('fade-in');
-        setTimeout(function () { overlay.classList.remove('open'); }, 250);
+        setTimeout(function () { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 250);
       }
 
       document.getElementById('petModalClose').addEventListener('click', closeModal);

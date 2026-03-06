@@ -569,16 +569,16 @@ window.ToramSheets = (function () {
       // Store full detail data for modal
       tr.dataset.petName    = name;
       tr.dataset.petImg     = imgURL;
-      tr.dataset.petEmoji   = icon || '\uD83D\uDC3E';
+      tr.dataset.petEmoji   = (row['Icon'] || '').trim() || '\uD83D\uDC3E';
       tr.dataset.petLevel   = level;
       tr.dataset.petSpawn   = spawnAt;
-      tr.dataset.petNmagic  = esc(row['NormalMagic'] || '');
-      tr.dataset.petSupport = esc(row['Support']     || '');
-      tr.dataset.petAct1    = esc(row['Act1'] || '');
-      tr.dataset.petAct2    = esc(row['Act2'] || '');
-      tr.dataset.petAct3    = esc(row['Act3'] || '');
-      tr.dataset.petAct4    = esc(row['Act4'] || '');
-      tr.dataset.petAct5    = esc(row['Act5'] || '');
+      tr.dataset.petNmagic  = (row['NormalMagic'] || '').trim();
+      tr.dataset.petSupport = (row['Support']     || '').trim();
+      tr.dataset.petAct1    = (row['Act1'] || '').trim();
+      tr.dataset.petAct2    = (row['Act2'] || '').trim();
+      tr.dataset.petAct3    = (row['Act3'] || '').trim();
+      tr.dataset.petAct4    = (row['Act4'] || '').trim();
+      tr.dataset.petAct5    = (row['Act5'] || '').trim();
       tr.dataset.petColor   = (row['ColorInfo'] || '').trim();
 
       tr.innerHTML =

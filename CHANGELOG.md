@@ -4,6 +4,19 @@ Semua perubahan penting pada proyek ToramCodex dicatat di sini.
 
 ---
 
+## [0.12.0] — 2026-03-06
+
+### Fixed
+- **XSS vulnerability pada Pet modal** — Data dari Google Sheet (emoji, support, act1–5) sekarang di-escape sebelum dimasukkan ke innerHTML modal. Sebelumnya, data dari Sheet bisa berisi tag HTML/script berbahaya yang langsung dieksekusi.
+- **Double-escaping pada dataset** — Nilai dataset pet sekarang disimpan tanpa pre-escape (`esc()` hanya dilakukan saat render ke innerHTML). Mencegah munculnya `&amp;` atau `&lt;` di tampilan modal.
+- **Pet modal image centering** — Tambah `margin:0 auto` pada gambar pet di modal. Global CSS `img { display: block }` membuat `text-align:center` tidak efektif untuk block element.
+- **Body scroll lock pada Pet modal** — Tambah `body.overflow = 'hidden'` saat modal terbuka, mengembalikan saat modal ditutup (sebelumnya background bisa di-scroll saat modal Pet terbuka).
+
+### Added
+- **Preview label** di atas gambar pet modal — Teks kecil "Preview" dengan spacing atas 1rem agar gambar tidak terlalu mepet ke tombol close.
+
+---
+
 ## [0.11.0] — 2026-03-06
 
 ### Changed

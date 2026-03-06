@@ -46,6 +46,8 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 - ✅ Animated counter stats di hero
 - ✅ Soft gray-white light theme — zero external CSS dependency
 - ✅ **Detail modal untuk Pets** — klik baris pet untuk lihat detail lengkap (Normal Magic, Support, Act 1–5, Color Info)
+- ✅ **Pet modal Preview** — Gambar besar pet (120×120) dengan label "Preview" di atas, centered
+- ✅ **XSS protection** — Semua data dari Google Sheet di-sanitize sebelum render ke HTML
 - ✅ **Monster grouping** — Skema A collapsible: monster sama dikelompokkan, variant di-toggle
 - ✅ **Mobile card layout** — Tabel Monsters & Pets jadi grid card di layar kecil (≤480px)
 - ✅ **Home search category** — Dropdown kategori di hero search
@@ -64,7 +66,7 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 |---|---|
 | **Items** | Name, Icon, ImageURL, Type, Level, Stats, Rarity, Source |
 | **ItemDetails** | Name, Icon, Type, Level, ImageURL, SellSpina, SellOther, Stats, Obtain, Recipe |
-| **Monsters** | Name, Icon, ImageURL, Level, Type, Element, HP, Location, Drop |
+| **Monsters** | Name, Icon, ImageURL, Level, Difficulty, Type, Element, HP, Location, Drop |
 | **Skills** | Name, Icon, ImageURL, Type, Category, Damage, MP Cost, Description |
 | **Maps** | Name, Icon, ImageURL, Zone, LevelRange, Boss, Description |
 | **Quests** | Name, Icon, ImageURL, Type, MinLevel, Reward, Description |
