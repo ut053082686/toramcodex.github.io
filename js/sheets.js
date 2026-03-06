@@ -23,7 +23,7 @@
 //  Skills      : Name, Icon, ImageURL, Type, Category, Damage, MP Cost, Description
 //  Maps        : Name, Icon, ImageURL, Zone, LevelRange, Boss, Description
 //  Quests      : Name, Icon, ImageURL, Type, MinLevel, Reward, Description
-//  Pets        : Name, Icon, ImageURL, Element, Level, SpawnAt
+//  Pets        : Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1, Act2, Act3, Act4, Act5, ColorInfo
 //  Homepage    : Section, Name, Icon, ImageURL, Link, Count, Description,
 //                Type, Level, Rarity, Stats, Source
 //
@@ -537,61 +537,85 @@ window.ToramSheets = (function () {
     tbody.innerHTML = '';
     if (!rows.length) {
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td colspan="4" class="text-muted" style="padding:1rem">No pet data found. Check your Sheet ID and column headers (Name, Icon, ImageURL, Element, Level, SpawnAt).</td>';
+      tr.innerHTML = '<td colspan="11" class="text-muted" style="padding:1rem">No pet data found. Check your Sheet ID and column headers (Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1-Act5, ColorInfo).</td>';
       tbody.appendChild(tr);
       return;
     }
 
-    // Auto-detect: show Element column only if ANY row has Element filled
-    var hasElement = rows.some(function (r) { return (r['Element'] || '').trim() !== ''; });
-
-    // Update thead dynamically
+    // Update thead
     var table = tbody.closest('table');
     if (table) {
       var thead = table.querySelector('thead tr');
       if (thead) {
-        thead.innerHTML = hasElement
-          ? '<th>Pet</th><th>Element</th><th>Level</th><th>Spawn At</th>'
-          : '<th>Pet</th><th>Level</th><th>Spawn At</th>';
+        thead.innerHTML =
+          '<th>Pet</th><th>Level</th><th>Spawn At</th>' +
+          '<th>Normal Magic</th><th>Support (red)</th>' +
+          '<th>Act 1</th><th>Act 2</th><th>Act 3</th><th>Act 4</th><th>Act 5</th>' +
+          '<th>Color Info</th>';
       }
-    }
-
-    // Show/hide element filter dropdown
-    var filterEl = document.getElementById('filterSelect');
-    if (filterEl) {
-      filterEl.style.display = hasElement ? '' : 'none';
     }
 
     rows.forEach(function (row) {
-      var name    = esc(row['Name']     || '');
-      var icon    = esc(row['Icon']     || '');
-      var imgURL  = (row['ImageURL']    || '').trim();
-      var elem    = esc(row['Element']  || '');
-      var level   = esc(row['Level']    || '');
-      var spawnAt = esc(row['SpawnAt']  || '');
+      var name    = esc(row['Name']        || '');
+      var icon    = esc(row['Icon']        || '');
+      var imgURL  = (row['ImageURL']       || '').trim();
+      var level   = esc(row['Level']       || '');
+      var spawnAt = esc(row['SpawnAt']     || '');
+      var nMagic  = esc(row['NormalMagic'] || '');
+      var support = esc(row['Support']     || '');
+      var act1    = esc(row['Act1']        || '');
+      var act2    = esc(row['Act2']        || '');
+      var act3    = esc(row['Act3']        || '');
+      var act4    = esc(row['Act4']        || '');
+      var act5    = esc(row['Act5']        || '');
+      var colorInfo = (row['ColorInfo']    || '').trim();
 
       var petIcon = imgURL
-        ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
-        : (icon || '🐾') + ' ';
-      var elemClass = elem ? ' ' + elem.toLowerCase() : '';
-      var highLv = parseInt(level, 10) >= 240;
+        ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:48px;height:48px;object-fit:contain;border-radius:4px;vertical-align:middle;margin-right:6px" />'
+        : (icon || '\uD83D\uDC3E') + ' ';
+
+      var nMagicHTML = '';
+      if (nMagic) {
+        var isYes = nMagic.toLowerCase() === 'yes' || nMagic === 'O' || nMagic === 'o' || nMagic === '\u25cb';
+        nMagicHTML = isYes
+          ? '<span style="color:#16a34a;font-weight:600">\u25cb Yes</span>'
+          : '<span style="color:#dc2626">\u2715 No</span>';
+      }
+
+      var supportHTML = support
+        ? '<span style="color:#dc2626;font-weight:600">' + support + '</span>'
+        : '<span class="text-muted">\u2014</span>';
+
+      function actCell(val) {
+        return val ? val : '<span class="text-muted">\u2014</span>';
+      }
+
+      var colorHTML = '';
+      if (colorInfo) {
+        if (colorInfo.match(/^https?:\/\//i)) {
+          colorHTML = '<img src="' + esc(colorInfo) + '" alt="Color" style="max-width:80px;height:auto;border-radius:4px" />';
+        } else {
+          colorHTML = esc(colorInfo);
+        }
+      } else {
+        colorHTML = '<span class="text-muted">\u2014</span>';
+      }
 
       var tr = document.createElement('tr');
-      tr.dataset.filter   = (name + ' ' + elem).toLowerCase();
-      tr.dataset.category = elem.toLowerCase();
+      tr.dataset.filter = name.toLowerCase();
 
-      if (hasElement) {
-        tr.innerHTML =
-          '<td>' + petIcon + name + '</td>' +
-          '<td>' + (elem ? '<span class="tag' + elemClass + '">' + elem + '</span>' : '') + '</td>' +
-          '<td><span class="tag' + (highLv ? ' legendary' : '') + '">' + level + '</span></td>' +
-          '<td>' + spawnAt + '</td>';
-      } else {
-        tr.innerHTML =
-          '<td>' + petIcon + name + '</td>' +
-          '<td><span class="tag' + (highLv ? ' legendary' : '') + '">' + level + '</span></td>' +
-          '<td>' + spawnAt + '</td>';
-      }
+      tr.innerHTML =
+        '<td><span class="pet-name">' + petIcon + name + '</span></td>' +
+        '<td data-label="Level"><span class="tag">' + level + '</span></td>' +
+        '<td data-label="Spawn At">' + spawnAt + '</td>' +
+        '<td data-label="Normal Magic">' + nMagicHTML + '</td>' +
+        '<td data-label="Support">' + supportHTML + '</td>' +
+        '<td data-label="Act 1">' + actCell(act1) + '</td>' +
+        '<td data-label="Act 2">' + actCell(act2) + '</td>' +
+        '<td data-label="Act 3">' + actCell(act3) + '</td>' +
+        '<td data-label="Act 4">' + actCell(act4) + '</td>' +
+        '<td data-label="Act 5">' + actCell(act5) + '</td>' +
+        '<td data-label="Color Info">' + colorHTML + '</td>';
       tbody.appendChild(tr);
     });
   }

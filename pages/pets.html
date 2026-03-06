@@ -61,80 +61,27 @@
 
       <div class="filter-bar" role="search" aria-label="Filter pets">
         <input type="search" id="filterInput" class="search-sync" placeholder="Search pet name…" aria-label="Filter by name" />
-        <select id="filterSelect" aria-label="Filter by element" style="display:none">
-          <option value="">All Elements</option>
-          <option value="fire">Fire</option>
-          <option value="ice">Ice</option>
-          <option value="wind">Wind</option>
-          <option value="earth">Earth</option>
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-          <option value="water">Water</option>
-          <option value="neutral">Neutral</option>
-        </select>
       </div>
 
       <!-- Table view for pets -->
-      <div class="table-wrap">
+      <div class="table-wrap" id="petsTableWrapDiv">
         <table id="petsTableWrap">
           <thead>
             <tr>
               <th>Pet</th>
               <th>Level</th>
               <th>Spawn At</th>
+              <th>Normal Magic</th>
+              <th>Support (red)</th>
+              <th>Act 1</th>
+              <th>Act 2</th>
+              <th>Act 3</th>
+              <th>Act 4</th>
+              <th>Act 5</th>
+              <th>Color Info</th>
             </tr>
           </thead>
           <tbody id="petsTable">
-            <tr data-filter="cerberus pup">
-              <td>🐕 Cerberus Pup</td>
-              <td><span class="tag">150</span></td>
-              <td>Volcano Summit</td>
-            </tr>
-            <tr data-filter="frost owl">
-              <td>🦉 Frost Owl</td>
-              <td><span class="tag">130</span></td>
-              <td>Crystal Cave</td>
-            </tr>
-            <tr data-filter="spirit fox">
-              <td>🦊 Spirit Fox</td>
-              <td><span class="tag">120</span></td>
-              <td>Sacred Forest</td>
-            </tr>
-            <tr data-filter="stone golem">
-              <td>🗿 Stone Golem</td>
-              <td><span class="tag">180</span></td>
-              <td>Ancient Ruins</td>
-            </tr>
-            <tr data-filter="shadow bat">
-              <td>🦇 Shadow Bat</td>
-              <td><span class="tag">100</span></td>
-              <td>Shadow Realm</td>
-            </tr>
-            <tr data-filter="wind sprite">
-              <td>🧚 Wind Sprite</td>
-              <td><span class="tag">160</span></td>
-              <td>Sky Plateau</td>
-            </tr>
-            <tr data-filter="crystal turtle">
-              <td>🐢 Crystal Turtle</td>
-              <td><span class="tag">140</span></td>
-              <td>Coral Beach</td>
-            </tr>
-            <tr data-filter="thunder wolf">
-              <td>🐺 Thunder Wolf</td>
-              <td><span class="tag">170</span></td>
-              <td>Frozen Tundra</td>
-            </tr>
-            <tr data-filter="phoenix chick">
-              <td>🐦‍🔥 Phoenix Chick</td>
-              <td><span class="tag">200</span></td>
-              <td>Ember Nest</td>
-            </tr>
-            <tr data-filter="ice dragon">
-              <td>🐲 Ice Dragon</td>
-              <td><span class="tag legendary">250</span></td>
-              <td>Frozen Peak</td>
-            </tr>
           </tbody>
         </table>
       </div>
