@@ -324,9 +324,12 @@ window.ToramSheets = (function () {
         var typeLower = type.toLowerCase();
         var isBoss = typeLower === 'boss';
         var isMiniBoss = typeLower === 'mini boss' || typeLower === 'mini-boss';
+        var defaultIcon = isBoss
+          ? '<img src="' + ICON_BASE + 'boss_ico.png" alt="Boss" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:4px" />'
+          : '👾 ';
         var monIcon = imgURL
           ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
-          : (icon || (isBoss ? '🐉' : '👾')) + ' ';
+          : (icon ? icon + ' ' : defaultIcon);
 
         // Drop tags with collapsible overflow
         var dropHTML = '';
