@@ -922,6 +922,15 @@ footer {
     display: none;
   }
 
+  /* Drop cell: stack vertically on mobile */
+  .table-wrap table tbody td:last-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .table-wrap table tbody td:last-child .tag {
+    font-size: .75rem;
+  }
+
   /* Other tables: keep simple */
   table:not(.table-wrap table) { font-size: .8rem; }
   table:not(.table-wrap table) thead th,
