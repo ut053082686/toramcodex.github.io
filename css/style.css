@@ -655,6 +655,12 @@ tbody tr:hover { background: rgba(184,134,11,.03); }
 tbody td { padding: .65rem 1rem; }
 tbody td:first-child { white-space: nowrap; }
 
+.mon-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 /* ============================================================
    FILTER BAR
    ============================================================ */

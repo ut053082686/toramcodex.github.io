@@ -368,17 +368,16 @@ window.ToramSheets = (function () {
           } else {
             badgesHTML = '+' + (group.length - 1);
           }
-          nameCell = monIcon + name +
+          nameCell = '<span class="mon-name">' + monIcon + name + '</span>' +
             ' <span class="mon-group-toggle" style="cursor:pointer;font-size:.75rem;display:inline-flex;align-items:center;gap:2px" data-group="' + gid + '">▸ ' + badgesHTML + '</span>';
         } else if (hasVariants) {
           // Variant row: indent with marker, hidden by default
-          nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span>' + monIcon + name;
+          nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span><span class="mon-name">' + monIcon + name + '</span>';
           tr.dataset.monGroup = gid;
           tr.style.display = 'none';
           tr.style.background = 'var(--bg-card-hover, rgba(0,0,0,.02))';
         } else {
-          // Single row (no duplicates)
-          nameCell = monIcon + name;
+          nameCell = '<span class="mon-name">' + monIcon + name + '</span>';
         }
 
         tr.innerHTML =
