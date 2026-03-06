@@ -117,12 +117,10 @@
     <div class="modal-body">
       <button class="modal-close" id="petModalClose" aria-label="Close">&times;</button>
       <div class="detail-card">
-        <div class="detail-header" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
-          <span id="pmIcon" style="font-size:2.5rem;line-height:1"></span>
-          <div>
-            <h2 id="pmName" style="font-size:1.3rem;font-weight:700;margin:0"></h2>
-            <span class="text-muted" id="pmSubtitle"></span>
-          </div>
+        <div id="pmImage" style="text-align:center;margin-bottom:.75rem"></div>
+        <div style="text-align:center;margin-bottom:1rem">
+          <h2 id="pmName" style="font-size:1.3rem;font-weight:700;margin:0"></h2>
+          <span class="text-muted" id="pmSubtitle"></span>
         </div>
         <table class="pet-modal-table" style="width:100%;border-collapse:collapse;font-size:.88rem">
           <tbody id="pmBody"></tbody>
@@ -184,7 +182,20 @@
 
       function openModal(tr) {
         var d = tr.dataset;
-        document.getElementById('pmIcon').innerHTML = d.petIcon;
+        // Render large pet image (or emoji fallback)
+        var imgEl = document.getElementById('pmImage');
+        var raw = d.petIcon || '';
+        if (raw.indexOf('<img') !== -1) {
+          // Extract src from the small icon and render larger
+          var m = raw.match(/src="([^"]+)"/);
+          if (m) {
+            imgEl.innerHTML = '<img src="' + m[1] + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px" />';
+          } else {
+            imgEl.innerHTML = '<span style="font-size:4rem">' + raw + '</span>';
+          }
+        } else {
+          imgEl.innerHTML = '<span style="font-size:4rem">' + (raw || '\uD83D\uDC3E') + '</span>';
+        }
         document.getElementById('pmName').textContent = d.petName;
         document.getElementById('pmSubtitle').textContent = d.petLevel ? 'Lv. ' + d.petLevel + (d.petSpawn ? ' · ' + d.petSpawn : '') : (d.petSpawn || '');
 
