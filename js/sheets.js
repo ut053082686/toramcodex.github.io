@@ -568,7 +568,8 @@ window.ToramSheets = (function () {
 
       // Store full detail data for modal
       tr.dataset.petName    = name;
-      tr.dataset.petIcon    = petIcon;
+      tr.dataset.petImg     = imgURL;
+      tr.dataset.petEmoji   = icon || '\uD83D\uDC3E';
       tr.dataset.petLevel   = level;
       tr.dataset.petSpawn   = spawnAt;
       tr.dataset.petNmagic  = esc(row['NormalMagic'] || '');

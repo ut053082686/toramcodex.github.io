@@ -184,17 +184,10 @@
         var d = tr.dataset;
         // Render large pet image (or emoji fallback)
         var imgEl = document.getElementById('pmImage');
-        var raw = d.petIcon || '';
-        if (raw.indexOf('<img') !== -1) {
-          // Extract src from the small icon and render larger
-          var m = raw.match(/src="([^"]+)"/);
-          if (m) {
-            imgEl.innerHTML = '<img src="' + m[1] + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px" />';
-          } else {
-            imgEl.innerHTML = '<span style="font-size:4rem">' + raw + '</span>';
-          }
+        if (d.petImg) {
+          imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px" />';
         } else {
-          imgEl.innerHTML = '<span style="font-size:4rem">' + (raw || '\uD83D\uDC3E') + '</span>';
+          imgEl.innerHTML = '<span style="font-size:4rem">' + d.petEmoji + '</span>';
         }
         document.getElementById('pmName').textContent = d.petName;
         document.getElementById('pmSubtitle').textContent = d.petLevel ? 'Lv. ' + d.petLevel + (d.petSpawn ? ' · ' + d.petSpawn : '') : (d.petSpawn || '');
