@@ -45,6 +45,10 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 - ✅ **Smart icon system** — ImageURL dari Sheet > Icon emoji dari Sheet > auto-detect dari tipe equipment
 - ✅ Animated counter stats di hero
 - ✅ Soft gray-white light theme — zero external CSS dependency
+- ✅ **Detail modal untuk Pets** — klik baris pet untuk lihat detail lengkap (Normal Magic, Support, Act 1–5, Color Info)
+- ✅ **Monster grouping** — Skema A collapsible: monster sama dikelompokkan, variant di-toggle
+- ✅ **Mobile card layout** — Tabel Monsters & Pets jadi grid card di layar kecil (≤480px)
+- ✅ **Home search category** — Dropdown kategori di hero search
 - ✅ Aksesibilitas: ARIA labels, roles, `aria-expanded`, semantic HTML
 
 ## 📊 Google Sheets Setup
@@ -64,7 +68,7 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 | **Skills** | Name, Icon, ImageURL, Type, Category, Damage, MP Cost, Description |
 | **Maps** | Name, Icon, ImageURL, Zone, LevelRange, Boss, Description |
 | **Quests** | Name, Icon, ImageURL, Type, MinLevel, Reward, Description |
-| **Pets** | Name, Icon, ImageURL, Element, Level, SpawnAt |
+| **Pets** | Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1–Act5, ColorInfo |
 | **Homepage** | Section, Name, Icon, ImageURL, Link, Count, Description, Type, Level, Rarity, Stats, Source |
 
 > **Note:** `Icon` dan `ImageURL` opsional di semua sheet. Jika kosong, sistem otomatis memilih emoji berdasarkan tipe equipment.

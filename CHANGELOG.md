@@ -4,6 +4,39 @@ Semua perubahan penting pada proyek ToramCodex dicatat di sini.
 
 ---
 
+## [0.11.0] — 2026-03-06
+
+### Changed
+- **Pets page redesigned** — tabel list disederhanakan jadi 3 kolom ringan: Pet (gambar + nama), Level, Spawn At
+- **Detail modal untuk Pets** — klik baris pet untuk melihat detail lengkap: Normal Magic, Support, Act 1–5, Color Info
+- Data detail disimpan di `data-*` attribute dan ditampilkan dalam popup modal (reuse `.modal-overlay` CSS)
+- Kolom Google Sheet Pets diperluas: Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1–Act5, ColorInfo
+- Row hover highlight pada tabel pets (mengindikasikan bisa diklik)
+
+---
+
+## [0.10.0] — 2026-03-06
+
+### Added
+- **Skema A — Collapsible grouped monsters** — Monster dengan nama sama dikelompokkan, variant tersembunyi bisa dibuka/tutup
+- **Colored difficulty badges** di toggle — Badge warna mini (Easy hijau, Normal biru, Hard kuning, Nightmare merah, Ultimate ungu)
+- **Home search category dropdown** — Pilih kategori (Items/Monsters/Skills/Maps/Quests/Pets) sebelum search di hero
+- **Nav search Enter handler** — Tekan Enter di nav search: filter di halaman list, redirect dari homepage
+- **Missing element filters** — Water, Earth, Neutral ditambahkan ke dropdown filter Monsters
+- **Boss icon PNG** — Boss type pakai `boss_ico.png` dari `img/icons/` (bukan emoji 🐉)
+- **Mobile card layout** — Tabel Monsters & Pets otomatis jadi grid card di layar ≤480px
+
+### Changed
+- Variant monster di-sort berdasarkan difficulty order (Easy → Ultimate)
+- Toggle label berubah dari teks biasa ke colored mini badges, dipindah ke baris baru di bawah nama
+- Monster name column `white-space: nowrap` di desktop
+- Icon dan nama monster sejajar horizontal (`inline-flex`)
+- Filter (`applyTableFilter` & `applyFilter`) sekarang menghormati collapsed variant rows
+- Mobile card: CSS grid `1fr 1fr` — Diff|Type berdampingan, Element|HP berdampingan, Name/Level/Location/Drop full-width
+- Drop tags di mobile ditumpuk vertikal
+
+---
+
 ## [0.9.0] — 2026-03-06
 
 ### Added

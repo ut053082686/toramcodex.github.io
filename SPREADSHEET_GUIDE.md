@@ -303,35 +303,48 @@ Daftar quest yang ditampilkan sebagai card di halaman Quests.
 ## 7️⃣ Tab: Pets
 
 Daftar pet yang ditampilkan sebagai tabel di halaman Pets.
+Tabel list menampilkan 3 kolom utama (Pet, Level, Spawn At).
+Klik baris pet untuk melihat detail lengkap di popup modal.
 
 ### Header Kolom
 
-| Name | Icon | ImageURL | Element | Level | SpawnAt |
-|------|------|----------|---------|-------|---------|
+| Name | Icon | ImageURL | Level | SpawnAt | NormalMagic | Support | Act1 | Act2 | Act3 | Act4 | Act5 | ColorInfo |
+|------|------|----------|-------|---------|-------------|---------|------|------|------|------|------|-----------| 
 
 ### Penjelasan Kolom
 
-| Kolom    | Wajib? | Keterangan                                              |
-|----------|--------|---------------------------------------------------------|
-| Name     | ✅ Ya  | Nama pet                                                 |
-| Icon     | ❌     | Emoji kustom. Kosongkan = 🐾                            |
-| ImageURL | ❌     | URL gambar pet                                           |
-| Element  | ❌     | Elemen pet: Fire, Water, Wind, Earth, Light, Dark. Jika semua kosong, kolom Element disembunyikan otomatis |
-| Level    | ❌     | Level pet (≥240 otomatis gold badge)                    |
-| SpawnAt  | ❌     | Lokasi spawn pet                                         |
+| Kolom       | Wajib? | Keterangan                                              |
+|-------------|--------|---------------------------------------------------------|
+| Name        | ✅ Ya  | Nama pet                                                 |
+| Icon        | ❌     | Emoji kustom. Kosongkan = 🐾                            |
+| ImageURL    | ❌     | URL gambar pet (ditampilkan 48×48 di tabel list)         |
+| Level       | ❌     | Level pet                                                |
+| SpawnAt     | ❌     | Lokasi spawn pet                                         |
+| NormalMagic | ❌     | Apakah pet punya Normal Magic: `Yes` / `No` / `O` / `✕` (tampil ◯ hijau / ✕ merah di modal) |
+| Support     | ❌     | Nilai support pet (ditampilkan warna merah di modal)     |
+| Act1        | ❌     | Action 1 pet                                             |
+| Act2        | ❌     | Action 2 pet                                             |
+| Act3        | ❌     | Action 3 pet                                             |
+| Act4        | ❌     | Action 4 pet                                             |
+| Act5        | ❌     | Action 5 pet                                             |
+| ColorInfo   | ❌     | Info warna pet (teks biasa atau URL gambar)              |
+
+### Tampilan di Website
+
+**Tabel list (3 kolom):**
+| Pet (gambar + nama) | Level | Spawn At |
+
+**Popup modal (klik baris):**
+Normal Magic, Support, Act 1–5, Color Info
 
 ### Contoh Data
 
-| Name           | Icon | ImageURL | Element | Level | SpawnAt               |
-|----------------|------|----------|---------|-------|-----------------------|
-| Baby Pom       |      |          |         | 1     | Sofya City Outskirts  |
-| Flame Puppy    |      |          | Fire    | 80    | Lava Valley           |
-| Aqua Slime     |      |          | Water   | 50    | Ruined Temple         |
-| Wind Hawk      |      |          | Wind    | 150   | Nisel Mountain Peak   |
-| Dark Bat       |      |          | Dark    | 170   | Dark Castle           |
-| Crystal Fox    |      |          | Earth   | 200   | Crystal Cave          |
-| Light Fairy    |      |          | Light   | 220   | Hora Diomedea         |
-| Shadow Wolf    |      |          | Dark    | 245   | Ultimea Palace        |
+| Name           | Icon | ImageURL | Level | SpawnAt               | NormalMagic | Support | Act1       | Act2       | Act3       | Act4       | Act5       | ColorInfo   |
+|----------------|------|----------|-------|-----------------------|-------------|---------|------------|------------|------------|------------|------------|-------------|
+| Baby Pom       |      |          | 1     | Sofya City Outskirts  | Yes         |         | Tackle     |            |            |            |            |             |
+| Flame Puppy    |      |          | 80    | Lava Valley           | No          | 5%      | Fire Bite  | Flame Aura | Heat Claw  |            |            | Red/Orange  |
+| Crystal Fox    |      |          | 200   | Crystal Cave          | Yes         | 12%     | Crystal    | Reflect    | Guard      | Heal       | Shatter    | Blue/White  |
+| Shadow Wolf    |      |          | 245   | Ultimea Palace        | No          | 15%     | Dark Fang  | Shadow Run | Howl       | Pack Call  | Eclipse    | Black/Purple|
 
 ---
 
