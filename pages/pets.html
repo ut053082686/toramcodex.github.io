@@ -185,7 +185,7 @@
         // Render large pet image (or emoji fallback)
         var imgEl = document.getElementById('pmImage');
         if (d.petImg) {
-          imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px" />';
+          imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px;margin:0 auto" />';
         } else {
           imgEl.innerHTML = '<span style="font-size:4rem">' + d.petEmoji + '</span>';
         }
