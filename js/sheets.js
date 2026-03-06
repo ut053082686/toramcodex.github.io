@@ -293,6 +293,17 @@ window.ToramSheets = (function () {
       groupMap[key].push(row);
     });
 
+    // Sort each group by difficulty order: Easy → Normal → Hard → Nightmare → Ultimate
+    var diffOrder = { easy: 0, normal: 1, hard: 2, nightmare: 3, ultimate: 4 };
+    groups.forEach(function (group) {
+      group.sort(function (a, b) {
+        var da = (a['Difficulty'] || '').trim().toLowerCase();
+        var db = (b['Difficulty'] || '').trim().toLowerCase();
+        return (diffOrder[da] !== undefined ? diffOrder[da] : 99) -
+               (diffOrder[db] !== undefined ? diffOrder[db] : 99);
+      });
+    });
+
     var groupId = 0;
     groups.forEach(function (group) {
       var gid = 'mon-grp-' + (groupId++);
@@ -341,9 +352,13 @@ window.ToramSheets = (function () {
         var nameCell;
 
         if (hasVariants && idx === 0) {
-          // First row of group: show name + expand toggle
+          // First row of group: show name + expand toggle with hidden diff labels
+          var hiddenDiffs = group.slice(1).map(function (r) {
+            return (r['Difficulty'] || '').trim();
+          }).filter(Boolean);
+          var toggleLabel = hiddenDiffs.length ? hiddenDiffs.join(', ') : (group.length - 1) + ' variants';
           nameCell = monIcon + name +
-            ' <span class="tag mon-group-toggle" style="cursor:pointer;opacity:.7;font-size:.75rem" data-group="' + gid + '">▸ ' + group.length + ' variants</span>';
+            ' <span class="tag mon-group-toggle" style="cursor:pointer;opacity:.7;font-size:.75rem" data-group="' + gid + '">▸ ' + toggleLabel + '</span>';
         } else if (hasVariants) {
           // Variant row: indent with marker, hidden by default
           nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span>' + monIcon + name;
@@ -391,10 +406,11 @@ window.ToramSheets = (function () {
         var variantRows = tbody.querySelectorAll('[data-mon-group="' + gid + '"]');
         var isOpen = grpToggle.dataset.open === '1';
         variantRows.forEach(function (r) { r.style.display = isOpen ? 'none' : ''; });
+        if (!grpToggle.dataset.label) grpToggle.dataset.label = grpToggle.textContent.replace('▸ ', '');
         grpToggle.dataset.open = isOpen ? '0' : '1';
         grpToggle.textContent = isOpen
-          ? grpToggle.textContent.replace('▾', '▸').replace('hide', 'variants')
-          : grpToggle.textContent.replace('▸', '▾').replace('variants', 'hide');
+          ? '▸ ' + grpToggle.dataset.label
+          : '▾ hide';
       }
     });
   }
