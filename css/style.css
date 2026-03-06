@@ -653,6 +653,7 @@ thead th {
 tbody tr { border-bottom: 1px solid var(--border); }
 tbody tr:hover { background: rgba(184,134,11,.03); }
 tbody td { padding: .65rem 1rem; }
+tbody td:first-child { white-space: nowrap; }
 
 /* ============================================================
    FILTER BAR
