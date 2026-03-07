@@ -397,6 +397,23 @@ Angka statistik hero counter di hero section.
 | Count   | Angka yang ditampilkan (misal: 1500)                    |
 | Icon    | Suffix setelah angka (misal: `+` → ditampilkan `1500+`)|
 
+#### 🔹 Section: `popular_monster`
+Card monster populer yang tampil di homepage. Klik card → popup detail modal.
+
+| Kolom       | Keterangan                                              |
+|-------------|---------------------------------------------------------|
+| Section     | Isi: `popular_monster`                                   |
+| Name        | Nama monster                                             |
+| Icon        | Emoji ikon (fallback jika ImageURL kosong)               |
+| ImageURL    | URL gambar/foto monster (40×40 di card, besar di modal) |
+| Type        | Jenis monster: Boss, Mini-Boss, Normal                  |
+| Level       | Level monster                                            |
+| Stats       | **Element** monster (Fire, Ice, Dark, Wind, Light, Earth)|
+| Source      | **HP** monster (misal: 2.4M, 900K)                      |
+| Description | **Lokasi** spawn (misal: Volcano Summit)                |
+
+> **Catatan:** Drop info diambil otomatis dari tab **Monsters** jika tersedia.
+
 ### Contoh Data Lengkap
 
 | Section  | Name             | Icon | ImageURL | Link               | Count       | Description                        | Type           | Level | Rarity    | Stats   | Source |
@@ -408,6 +425,9 @@ Angka statistik hero counter di hero section.
 | category | Quests           | 📜   |          | pages/quests.html  | 350+ Quests |                                    |                |       |           |         |        |
 | category | Pets             | 🐾   |          | pages/pets.html    | 50+ Pets    |                                    |                |       |           |         |        |
 | featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 0     | Event     | ATK+485 |        |
+| popular_monster | Ifrit Rex | 🐉 | https://... |                |             | Volcano Summit                     | Boss           | 250   |           | Fire    | 2.4M   |
+| popular_monster | Crystal Spider Queen | 🕷️ | https://... |   |             | Crystal Cave                       | Boss           | 235   |           | Ice     | 1.8M   |
+| popular_monster | Fenrir Shadow | 🐺 | https://... |              |             | Frozen Tundra                      | Mini-Boss      | 210   |           | Dark    | 900K   |
 | stat     | Items            | +    |          |                    | 1500        |                                    |                |       |           |         |        |
 | stat     | Monsters         | +    |          |                    | 800         |                                    |                |       |           |         |        |
 | stat     | Skills           | +    |          |                    | 200         |                                    |                |       |           |         |        |

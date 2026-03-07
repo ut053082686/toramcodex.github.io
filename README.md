@@ -84,6 +84,7 @@ Developed by **No! I'm Failing!**
 |---|---|---|
 | `category` | Card kategori di homepage | Name, Icon, ImageURL, Link, Count |
 | `featured` | Spotlight / featured item | Name, Icon, ImageURL, Type, Level, Rarity, Stats, Description, Link |
+| `popular_monster` | Card monster populer + detail popup | Name, Icon, ImageURL, Type, Level, Stats (=Element), Source (=HP), Description (=Location) |
 | `stat` | Counter angka di hero section | Name (label), Count (angka), Icon (suffix, misal "+") |
 
 ### Default Icon per Equipment Type

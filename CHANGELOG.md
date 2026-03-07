@@ -4,6 +4,27 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.16.0] — 2026-03-07
+
+### Added
+- **Monster detail modal** — Klik card Popular Monsters di homepage → popup detail (Info + Drops)
+- File baru `js/monster-modal.js` — modul `MonsterModal` dengan sample data dan integrasi Google Sheets
+- Section `popular_monster` di Homepage Sheet — kelola Popular Monsters dari spreadsheet
+- `<div id="monsterModal">` container di `index.html`
+
+### Changed
+- **Popular Monsters cards** — sekarang clickable (`data-name` + `cursor:pointer`)
+- **Column mapping** — Homepage sheet: Stats=Element, Source=HP, Description=Location
+- **Category grid** — Equipment diganti Pets (Equipment link sebelumnya tidak berfungsi)
+- **Semua referensi "ToramCodex"** diganti "ToramDB" di JS, CSS, README, SPREADSHEET_GUIDE
+
+### Fixed
+- **Mobile menu icon alignment** — icon sejajar dengan teks (`display:flex`)
+- **Page hero icon** — icon centered inline dengan h1 (`inline-flex`)
+- **Footer brand icon** — emoji ⚔️ diganti `brand_ico.png` di semua 9 halaman
+
+---
+
 ## [0.15.0] — 2026-03-07
 
 ### Changed

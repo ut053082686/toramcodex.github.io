@@ -121,17 +121,23 @@ window.MonsterModal = (function () {
     var name    = mon['Name']        || '';
     var type    = mon['Type']        || '';
     var level   = mon['Level']       || '';
-    var element = mon['Element']     || mon['Stats'] || '';
-    var hp      = mon['HP']          || mon['Source'] || '';
-    var loc     = mon['Location']    || mon['Description'] || '';
     var img     = mon['ImageURL']    || '';
     var drop    = mon['Drop']        || '';
-    var desc    = mon['Description'] || '';
 
-    // If Description contains location info (from Homepage sheet), use it
-    // but also check if there's a separate longer description
-    var displayLoc = mon['Location'] || loc;
-    var displayDesc = mon['Location'] ? desc : '';
+    // Column mapping: Monsters sheet vs Homepage sheet
+    // Monsters sheet: Element, HP, Location, Drop (direct columns)
+    // Homepage sheet: Stats=Element, Source=HP, Description=Location (reused columns)
+    var element = mon['Element']  || mon['Stats']       || '';
+    var hp      = mon['HP']       || mon['Source']      || '';
+    var loc     = mon['Location'] || '';
+    var desc    = '';
+
+    // Homepage sheet: Description = Location (no separate Location column)
+    if (!loc && mon['Description']) {
+      loc = mon['Description'];
+    } else if (loc && mon['Description']) {
+      desc = mon['Description'];
+    }
 
     // Header
     document.getElementById('monModalName').textContent = name;
@@ -166,10 +172,10 @@ window.MonsterModal = (function () {
     infoHTML += '<div class="stat-row"><span class="stat-name">HP</span><span class="stat-value">' + (esc(hp) || '—') + '</span></div>';
     infoHTML += '<div class="stat-row"><span class="stat-name">Level</span><span class="stat-value">' + (esc(level) || '—') + '</span></div>';
     infoHTML += '<div class="stat-row"><span class="stat-name">Type</span><span class="stat-value">' + (esc(type) || '—') + '</span></div>';
-    infoHTML += '<div class="stat-row"><span class="stat-name">Location</span><span class="stat-value">' + (esc(displayLoc) || '—') + '</span></div>';
+    infoHTML += '<div class="stat-row"><span class="stat-name">Location</span><span class="stat-value">' + (esc(loc) || '—') + '</span></div>';
 
-    if (displayDesc) {
-      infoHTML += '<div style="margin-top:.75rem;padding:.75rem;background:var(--bg-card);border-radius:8px;font-size:.9rem;color:var(--text-secondary)">' + esc(displayDesc) + '</div>';
+    if (desc) {
+      infoHTML += '<div style="margin-top:.75rem;padding:.75rem;background:var(--bg-card);border-radius:8px;font-size:.9rem;color:var(--text-secondary)">' + esc(desc) + '</div>';
     }
 
     infoEl.innerHTML = infoHTML;
