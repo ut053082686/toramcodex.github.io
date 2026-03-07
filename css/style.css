@@ -112,8 +112,13 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-.nav-brand .brand-icon { font-size: 1.4rem; }
+.nav-brand .brand-icon { font-size: 1.4rem; line-height: 1; }
+.nav-brand .brand-icon img { width: 28px; height: 28px; object-fit: contain; vertical-align: middle; }
 .brand-highlight { color: var(--accent-cyan); }
+
+/* Category card & mobile menu icon images */
+.cat-icon img { width: 48px; height: 48px; object-fit: contain; }
+.menu-icon { width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin-right: 4px; }
 
 .nav-links {
   display: flex;
