@@ -74,14 +74,33 @@ window.ToramSheets = (function () {
     }
   };
 
-  // ---- CSV FETCH ----------------------------------------------------
+  // ---- CSV FETCH (with localStorage cache) --------------------------
+  var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
   function fetchSheet(sheetName) {
+    // Check localStorage cache first
+    var cacheKey = 'tcs_' + sheetName;
+    var tsKey    = cacheKey + '_ts';
+    try {
+      var cached = localStorage.getItem(cacheKey);
+      var ts     = parseInt(localStorage.getItem(tsKey) || '0', 10);
+      if (cached && (Date.now() - ts) < CACHE_TTL) {
+        return Promise.resolve(cached);
+      }
+    } catch (e) { /* localStorage unavailable */ }
+
     var url =
       'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID +
       '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(sheetName);
     return fetch(url).then(function (res) {
       if (!res.ok) { throw new Error('HTTP ' + res.status); }
       return res.text();
+    }).then(function (text) {
+      try {
+        localStorage.setItem(cacheKey, text);
+        localStorage.setItem(tsKey, String(Date.now()));
+      } catch (e) { /* quota exceeded or unavailable */ }
+      return text;
     });
   }
 
@@ -221,11 +240,27 @@ window.ToramSheets = (function () {
       esc(msg) + '</p>';
   }
 
+  // ---- TYPE → CATEGORY NORMALIZATION --------------------------------
+  // Maps full Type names (from Sheet) to short category values
+  // matching the filter dropdown options in items.html.
+  function typeToCategory(type) {
+    var t = (type || '').toLowerCase();
+    if (t.indexOf('sword') !== -1 || t === 'katana' || t === 'dagger') return 'sword';
+    if (t === 'bow' || t === 'bowgun') return 'bow';
+    if (t === 'staff' || t === 'magic device') return 'staff';
+    if (t.indexOf('armor') !== -1 || t === 'shield') return 'armor';
+    if (t === 'ring' || t === 'additional' || t === 'special' || t === 'ninjutsu scroll') return 'accessory';
+    if (t === 'material' || t === 'consumable' || t === 'quest item') return 'material';
+    if (t === 'knuckles' || t === 'halberd' || t === 'arrow') return t;
+    if (t.indexOf('crysta') !== -1) return 'accessory';
+    return t;
+  }
+
   // ---- RENDERERS ----------------------------------------------------
 
   function rarityClass(rarity) {
     var r = (rarity || '').toLowerCase();
-    return r === 'event' ? 'event' : '';
+    return r === 'event' ? 'event' : (r === 'non-event' ? 'non-event' : '');
   }
 
   function renderItems(rows, container) {
@@ -250,7 +285,7 @@ window.ToramSheets = (function () {
       el.className = 'data-card';
       el.style.cursor = 'pointer';
       el.dataset.filter    = (name + ' ' + type + ' ' + rarity).toLowerCase();
-      el.dataset.category  = type.toLowerCase();
+      el.dataset.category  = typeToCategory(type);
       el.dataset.category2 = rarity.toLowerCase();
       el.dataset.name      = row['Name'] || '';
       // Card icon: use Icon column or auto-detect from Type (NOT ImageURL).

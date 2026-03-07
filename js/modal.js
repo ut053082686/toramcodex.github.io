@@ -118,9 +118,13 @@ window.ItemModal = (function () {
     // Bind tabs
     container.querySelectorAll('.detail-tab').forEach(function (tab) {
       tab.addEventListener('click', function () {
-        container.querySelectorAll('.detail-tab').forEach(function (t) { t.classList.remove('active'); });
+        container.querySelectorAll('.detail-tab').forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         container.querySelectorAll('.detail-panel').forEach(function (p) { p.classList.remove('active'); });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
         var panel = document.getElementById('panel-' + tab.dataset.tab);
         if (panel) panel.classList.add('active');
       });

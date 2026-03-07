@@ -19,9 +19,11 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 │   ├── maps.html         # Database map / area
 │   ├── quests.html       # Database quest (main story, side, daily, event)
 │   ├── pets.html         # Database pet (tame, raise, evolve companion pets)
-│   └── detail.html       # Item detail fallback (direct link)
+│   └── detail.html       # Item detail page (legacy — fallback untuk direct link)
 └── CHANGELOG.md          # Catatan perubahan
 ```
+
+> **📋 Panduan pengisian Google Sheet:** Lihat [SPREADSHEET_GUIDE.md](SPREADSHEET_GUIDE.md) untuk dokumentasi lengkap semua tab dan kolom.
 
 ## 🎨 Tema & Desain
 
@@ -85,20 +87,24 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 
 ### Default Icon per Equipment Type
 
-| Type | Icon | | Type | Icon |
-|---|---|---|---|---|
-| 1-Handed Sword | 🗡️ | | Shield | 🛡️ |
-| 2-Handed Sword | ⚔️ | | Armor | 🛡️ |
-| Bow | 🏹 | | Ninjutsu Scroll | 📜 |
-| Bowgun | 🔫 | | Additional | 💍 |
-| Knuckles | 🥊 | | Special | ⭐ |
-| Magic Device | 🔮 | | Ring | 💍 |
-| Staff | 🪄 | | Material | ⛏️ |
-| Halberd | 🔱 | | Monster (Boss) | 🐉 |
-| Katana | ⚔️ | | Monster (Normal) | 👾 |
-| Dagger | 🔪 | | Skill | ✨ |
-| Arrow | 🎯 | | Map | 🗺️ |
-| | | | Pet | 🐾 |
+> **Note:** Sejak v0.7.0, icon weapon dan armor di card menggunakan **file PNG** dari `img/icons/`,
+> bukan emoji. Tabel di bawah menampilkan emoji hanya sebagai referensi visual.
+> Lihat `js/sheets.js` → `TYPE_ICONS` untuk mapping lengkap.
+
+| Type | Icon (visual) | File | | Type | Icon (visual) | File |
+|---|---|---|---|---|---|---|
+| 1-Handed Sword | 🗡️ | `1h_ico.png` | | Shield | 🛡️ | `shield_ico.png` |
+| 2-Handed Sword | ⚔️ | `2h_ico.png` | | Armor | 🛡️ | `armor_ico.png` |
+| Bow | 🏹 | `bow_ico.png` | | Ninjutsu Scroll | 📜 | `scroll_ico.png` |
+| Bowgun | 🔫 | `bwg_ico.png` | | Additional | 💍 | `add_ico.png` |
+| Knuckles | 🥊 | `knu_ico.png` | | Special | ⭐ | `special_ico.png` |
+| Magic Device | 🔮 | `md_ico.png` | | Ring | 💍 | `special_ico.png` |
+| Staff | 🪄 | `stf_ico.png` | | Material | ⛏️ | _(emoji)_ |
+| Halberd | 🔱 | `hb_ico.png` | | Monster (Boss) | 🐉 | `boss_ico.png` |
+| Katana | ⚔️ | `ktn_ico.png` | | Monster (Normal) | 👾 | _(emoji)_ |
+| Dagger | 🔪 | `dagger_ico.png` | | Skill | ✨ | _(emoji)_ |
+| Arrow | 🎯 | `arrow_ico.png` | | Map | 🗺️ | _(emoji)_ |
+| | | | | Pet | 🐾 | _(emoji)_ |
 
 ### Rekomendasi Ukuran Gambar (ImageURL)
 

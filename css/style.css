@@ -542,6 +542,9 @@ ul { list-style: none; }
 .tag.event      { background: rgba(212,122,10,.12); color: var(--tag-event); font-weight: 600; }
 .tag.non-event  { background: rgba(107,114,128,.08); color: var(--tag-non-event); }
 
+/* High-level monster gold badge (Lv ≥240) */
+.tag.gold       { background: rgba(184,134,11,.12); color: var(--accent-gold); font-weight: 600; }
+
 /* Monster type tags */
 .tag.mini-boss  { background: rgba(212,122,10,.12); color: #b45309; white-space: nowrap; }
 

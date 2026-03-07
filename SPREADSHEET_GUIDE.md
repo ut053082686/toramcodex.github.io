@@ -407,7 +407,7 @@ Angka statistik hero counter di hero section.
 | category | Maps             | 🗺️   |          | pages/maps.html    | 100+ Maps   |                                    |                |       |           |         |        |
 | category | Quests           | 📜   |          | pages/quests.html  | 350+ Quests |                                    |                |       |           |         |        |
 | category | Pets             | 🐾   |          | pages/pets.html    | 50+ Pets    |                                    |                |       |           |         |        |
-| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 0     | Common    | ATK+485 |        |
+| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 0     | Event     | ATK+485 |        |
 | stat     | Items            | +    |          |                    | 1500        |                                    |                |       |           |         |        |
 | stat     | Monsters         | +    |          |                    | 800         |                                    |                |       |           |         |        |
 | stat     | Skills           | +    |          |                    | 200         |                                    |                |       |           |         |        |
@@ -419,7 +419,7 @@ Angka statistik hero counter di hero section.
 
 ### Umum
 - **Minimal isi**: Hanya kolom `Name` + `Type` yang wajib. Kolom lain bisa dikosongkan.
-- **Urutan kolom**: Harus sesuai header di atas. Jangan tukar posisi kolom.
+- **Urutan kolom**: Boleh ditukar posisi kolom, asalkan nama header tetap sama persis.
 - **Huruf besar/kecil**: Nama header kolom harus persis (misal: `ImageURL` bukan `imageurl`).
 - **Nama tab**: Harus persis (misal: `Items` bukan `items` atau `Item`).
 
@@ -445,7 +445,8 @@ Angka statistik hero counter di hero section.
 
 ### Hosting Gambar
 - **Repo sendiri** (rekomendasi): simpan gambar di folder `img/icons/`, push ke GitHub.
-  URL: `https://[username].github.io/toramcodex.github.io/img/icons/nama-file.png`
+  URL: `https://toramcodex.github.io/img/icons/nama-file.png`
+  (Untuk repo dengan nama `*.github.io`, GitHub Pages serve dari root tanpa `/repo-name/`)
 - **Hosting gratis lain**: Imgur, Postimages, ImgBB, Cloudinary.
 - Gambar yang di-insert manual via Google Sheet (Insert → Image) **tidak terbaca**.
   Hanya URL teks di kolom ImageURL yang didukung.

@@ -139,6 +139,7 @@
 
   // Re-apply filters after Google Sheets data has been rendered.
   document.addEventListener('sheetsrendered', function () {
+    currentPage = 1;
     applyFilter();
     paginate();
   });
