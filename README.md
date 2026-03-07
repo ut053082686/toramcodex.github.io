@@ -1,6 +1,7 @@
-# ToramCodex — Toram Online Database
+# ToramDB — Toram Online Database
 
 Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
+Developed by **No! I'm Failing!**
 
 ## 🗂️ Struktur Proyek
 
