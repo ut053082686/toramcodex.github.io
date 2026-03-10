@@ -243,7 +243,7 @@ window.MonsterModal = (function () {
   }
 
   // ---------- Open / Close ------------------------------------------
-  function open(monsterName) {
+  function open(monsterName, difficulty) {
     var overlay = document.getElementById('monsterModal');
     if (!overlay) return;
     if (!overlay.querySelector('.modal-body')) buildModalHTML();
@@ -257,14 +257,14 @@ window.MonsterModal = (function () {
     // Try Sheets Monsters tab first, then sample
     if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
       if (sheetsCache) {
-        var found = findInCache(monsterName);
+        var found = findInCache(monsterName, difficulty);
         populate(found || SAMPLE_MONSTERS[monsterName] || null);
       } else {
         var sheetName = window.ToramSheets.CONFIG.SHEETS.monsters || 'Monsters';
         window.ToramSheets.fetchSheet(sheetName)
           .then(function (csv) {
             sheetsCache = window.ToramSheets.parseCSV(csv);
-            var found = findInCache(monsterName);
+            var found = findInCache(monsterName, difficulty);
             populate(found || SAMPLE_MONSTERS[monsterName] || null);
           })
           .catch(function () {
@@ -276,8 +276,20 @@ window.MonsterModal = (function () {
     }
   }
 
-  function findInCache(name) {
+  function findInCache(name, diff) {
     if (!sheetsCache) return null;
+    diff = diff || '';
+
+    // Pass 1: Try to find exact match for both Name and Difficulty
+    for (var i = 0; i < sheetsCache.length; i++) {
+      var cName = (sheetsCache[i]['Name'] || '').toLowerCase();
+      var cDiff = (sheetsCache[i]['Difficulty'] || '').toLowerCase();
+      if (cName === name.toLowerCase() && (!diff || cDiff === diff.toLowerCase())) {
+        return sheetsCache[i];
+      }
+    }
+
+    // Pass 2: Fallback to just Name (e.g. from Drops link without difficulty)
     for (var i = 0; i < sheetsCache.length; i++) {
       if ((sheetsCache[i]['Name'] || '').toLowerCase() === name.toLowerCase()) {
         return sheetsCache[i];

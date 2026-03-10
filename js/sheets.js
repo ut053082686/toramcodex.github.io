@@ -409,6 +409,10 @@ window.ToramSheets = (function () {
         tr.dataset.category2 = elem.toLowerCase();
 
         var diffClass = diff ? ' diff-' + diff.toLowerCase() : '';
+        var modalAttrs = ' data-mon-modal="' + esc(name) + '" data-mon-diff="' + esc(diff || '') + '" ';
+        var linkStyle = 'style="cursor:pointer;text-decoration:none;display:inline-block;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'"';
+        var linkStyleOffset = 'style="cursor:pointer;padding-left:1.5rem;position:relative;text-decoration:none;display:inline-block;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'"';
+
         var nameCell;
 
         if (hasVariants && idx === 0) {
@@ -425,16 +429,16 @@ window.ToramSheets = (function () {
           } else {
             badgesHTML = '+' + (group.length - 1);
           }
-          nameCell = '<span class="mon-name">' + monIcon + name + '</span>' +
+          nameCell = '<span class="mon-name mon-link"' + modalAttrs + linkStyle + '>' + monIcon + name + '</span>' +
             '<br><span class="mon-group-toggle" style="cursor:pointer;font-size:.75rem;display:inline-flex;align-items:center;gap:2px" data-group="' + gid + '">▸ ' + badgesHTML + '</span>';
         } else if (hasVariants) {
           // Variant row: indent with marker, hidden by default
-          nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span><span class="mon-name">' + monIcon + name + '</span>';
+          nameCell = '<span class="mon-name mon-link"' + modalAttrs + linkStyleOffset + '><span style="position:absolute;left:.5rem;opacity:.3;font-size:.8rem;text-decoration:none;">↳</span>' + monIcon + name + '</span>';
           tr.dataset.monGroup = gid;
           tr.style.display = 'none';
           tr.style.background = 'var(--bg-card-hover, rgba(0,0,0,.02))';
         } else {
-          nameCell = '<span class="mon-name">' + monIcon + name + '</span>';
+          nameCell = '<span class="mon-name mon-link"' + modalAttrs + linkStyle + '>' + monIcon + name + '</span>';
         }
 
         tr.innerHTML =
@@ -452,6 +456,17 @@ window.ToramSheets = (function () {
 
     // Click handler for group toggles, drop toggles, and drop item links
     tbody.addEventListener('click', function (e) {
+      // Monster Modal Open
+      var monLink = e.target.closest('[data-mon-modal]');
+      if (monLink) {
+        var mName = monLink.getAttribute('data-mon-modal');
+        var mDiff = monLink.getAttribute('data-mon-diff');
+        if (window.MonsterModal) {
+          e.stopPropagation();
+          window.MonsterModal.open(mName, mDiff);
+        }
+        return;
+      }
       // Drop item click → open ItemModal
       var dropLink = e.target.closest('[data-drop-name]');
       if (dropLink && !e.target.closest('[data-drop-toggle]')) {

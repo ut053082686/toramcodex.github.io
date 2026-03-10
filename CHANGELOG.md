@@ -4,6 +4,15 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.21.0] — 2026-03-10
+
+### Added
+- **Clickable Monster Names (Difficulty Specific)** — Nama Monster di tabel (termasuk varian stat spesifik per tingkat kesulitan `Difficulty`) sekarang bisa diklik.
+  - Mengeklik baris "Nightmare" dari "Minotaur", akan secara otomatis membuka Modal Monster dan merender HP, Element, serta deskripsi spesifik untuk versi Nightmare tersebut.
+  - Sistem UI `MonsterModal` sekarang mendukung `open(name, difficulty)` untuk penarikan data cache yang jauh lebih presisi.
+
+---
+
 ## [0.20.1] — 2026-03-10
 
 ### Fixed
