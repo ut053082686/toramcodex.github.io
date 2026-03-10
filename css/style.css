@@ -178,6 +178,12 @@ ul { list-style: none; }
   padding: .15rem 0; line-height: 1;
 }
 
+/* Clickable drop links in Monster Modal */
+.drop-link { transition: background .15s, color .15s; }
+.drop-link:hover { background: rgba(184,134,11,.06); border-radius: var(--radius-sm); }
+.drop-link:hover span:first-of-type { color: var(--accent); text-decoration: underline; }
+.drop-arrow { margin-left: auto; color: var(--text-secondary); font-size: .85rem; opacity: .4; transition: opacity .15s; }
+.drop-link:hover .drop-arrow { opacity: 1; color: var(--accent); }
 .nav-links {
   display: flex;
   gap: .25rem;

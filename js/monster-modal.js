@@ -187,9 +187,26 @@ window.MonsterModal = (function () {
       drop.split(';').forEach(function (d) {
         d = d.trim();
         if (!d) return;
-        dropHTML += '<div class="obtain-item"><div class="obtain-icon">🎁</div><span>' + esc(d) + '</span></div>';
+        dropHTML += '<div class="obtain-item drop-link" data-drop-name="' + esc(d) + '" style="cursor:pointer">' +
+          '<div class="obtain-icon">🎁</div>' +
+          '<span>' + esc(d) + '</span>' +
+          '<span class="drop-arrow">→</span>' +
+          '</div>';
       });
       dropEl.innerHTML = dropHTML;
+
+      // Bind click on drop items → open ItemModal
+      dropEl.querySelectorAll('[data-drop-name]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var itemName = this.getAttribute('data-drop-name');
+          if (itemName && window.ItemModal) {
+            close();
+            setTimeout(function () {
+              window.ItemModal.open(itemName);
+            }, 250);
+          }
+        });
+      });
     } else {
       dropEl.innerHTML = '<p class="text-muted">No drop info available for this monster.</p>';
     }
