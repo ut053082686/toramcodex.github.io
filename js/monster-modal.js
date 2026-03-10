@@ -183,17 +183,37 @@ window.MonsterModal = (function () {
     // Drops tab
     var dropEl = document.getElementById('monModalDrops');
     if (drop) {
-      var dropHTML = '';
+      dropEl.innerHTML = '';
       drop.split(';').forEach(function (d) {
         d = d.trim();
         if (!d) return;
-        dropHTML += '<div class="obtain-item drop-link" data-drop-name="' + esc(d) + '" style="cursor:pointer">' +
+
+        var dropItemEl = document.createElement('div');
+        dropItemEl.className = 'obtain-item drop-link';
+        dropItemEl.dataset.dropName = d;
+        dropItemEl.style.cursor = 'pointer';
+        dropItemEl.innerHTML = 
           '<div class="obtain-icon">🎁</div>' +
           '<span>' + esc(d) + '</span>' +
-          '<span class="drop-arrow">→</span>' +
-          '</div>';
+          '<span class="drop-arrow">→</span>';
+        
+        dropEl.appendChild(dropItemEl);
+
+        // Asynchronously fetch real icon
+        if (window.ItemModal && window.ItemModal.getItem && window.ToramSheets) {
+          window.ItemModal.getItem(d, function(itemData) {
+            if (itemData) {
+              var iIcon = itemData['Icon'] || '';
+              var iType = itemData['Type'] || '';
+              var realIconHTML = window.ToramSheets.resolveIcon(iIcon, iType, d);
+              if (realIconHTML) {
+                var iconContainer = dropItemEl.querySelector('.obtain-icon');
+                if (iconContainer) iconContainer.innerHTML = realIconHTML;
+              }
+            }
+          });
+        }
       });
-      dropEl.innerHTML = dropHTML;
 
       // Bind click on drop items → open ItemModal
       dropEl.querySelectorAll('[data-drop-name]').forEach(function (el) {

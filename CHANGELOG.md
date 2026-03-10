@@ -4,6 +4,15 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.20.0] — 2026-03-10
+
+### Added
+- **Dynamic Drop Icons (Monster Modal)** — Daftar drop item pada Modal Monster sekarang menampilkan icon asli masing-masing item (menggantikan icon default 🎁).
+  - Mengambil data secara *asynchronous* (di belakang layar) memanfaatkan cache `ItemModal`.
+  - Icon akan menyesuaikan dengan Type item secara otomatis, termasuk support penuh untuk material spesifik (Beast, Cloth, dsb).
+
+---
+
 ## [0.19.1] — 2026-03-10
 
 ### Added

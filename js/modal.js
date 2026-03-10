@@ -426,10 +426,30 @@ window.ItemModal = (function () {
     if (e.key === 'Escape') close();
   }
 
+  function getItem(name, cb) {
+    if (!window.ToramSheets || window.ToramSheets.CONFIG.SHEET_ID === 'YOUR_GOOGLE_SHEET_ID') {
+      cb(SAMPLE_ITEMS[name] || null);
+      return;
+    }
+    if (sheetsCache) {
+      cb(findInCache(name));
+    } else {
+      var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
+      window.ToramSheets.fetchSheet(sheetName)
+        .then(function (csv) {
+          sheetsCache = window.ToramSheets.parseCSV(csv);
+          cb(findInCache(name));
+        })
+        .catch(function () {
+          cb(SAMPLE_ITEMS[name] || null);
+        });
+    }
+  }
+
   // ---------- Init: build on DOMContentLoaded -----------------------
   if (document.getElementById('itemModal')) {
     buildModalHTML();
   }
 
-  return { open: open, close: close };
+  return { open: open, close: close, getItem: getItem };
 }());
