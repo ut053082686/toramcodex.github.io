@@ -4,6 +4,15 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.18.0] — 2026-03-10
+
+### Added
+- **Favicon** — Ditambahkan `favicon.ico` ke semua halaman HTML pengganti placeholder base64 SVG
+- **Material Icons** — Ikon PNG spesial untuk material/item khusus (`beast_ico`, `cloth_ico`, `mana_ico`, `wood_ico`, `metal_ico`, `medicine_ico`, `tele_ico`)
+- *Auto-detect mapping* di `TYPE_ICONS` (`sheets.js`) sekarang mendukung tipe Beast, Cloth, Mana, Wood, Metal, Medicine, dan Teleport.
+
+---
+
 ## [0.17.0] — 2026-03-10
 
 ### Added

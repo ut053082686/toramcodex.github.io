@@ -193,6 +193,14 @@ window.ToramSheets = (function () {
     'weapon crysta':     'img/icons/weapon_crysta.png',
     'special crysta':    'img/icons/special_crysta.png',
     'normal crysta':     'img/icons/normal_crysta.png',
+    // Materials & other
+    'beast':             'img/icons/beast_ico.png',
+    'cloth':             'img/icons/cloth_ico.png',
+    'mana':              'img/icons/mana_ico.png',
+    'wood':              'img/icons/wood_ico.png',
+    'metal':             'img/icons/metal_ico.png',
+    'medicine':          'img/icons/medicine_ico.png',
+    'teleport':          'img/icons/tele_ico.png',
     // Non-equipment (emoji)
     'material':       '⛏️',
     'consumable':     '🧪',

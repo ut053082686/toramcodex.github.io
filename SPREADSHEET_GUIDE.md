@@ -69,6 +69,15 @@ Daftar semua item/equipment yang ditampilkan sebagai card di halaman Items.
 | Dagger            | ![](img/icons/dagger_ico.png) | Consumable        | 🧪                    |
 | Arrow             | ![](img/icons/arrow_ico.png)  | Quest Item        | 📦                    |
 
+#### Special Material / Item Types
+
+| Type              | Icon                  | Type              | Icon                  |
+|-------------------|-----------------------|-------------------|-----------------------|
+| Beast             | ![](img/icons/beast_ico.png)    | Metal             | ![](img/icons/metal_ico.png)  |
+| Cloth             | ![](img/icons/cloth_ico.png)    | Medicine          | ![](img/icons/medicine_ico.png)|
+| Mana              | ![](img/icons/mana_ico.png)     | Teleport          | ![](img/icons/tele_ico.png)   |
+| Wood              | ![](img/icons/wood_ico.png)     |                   |                       |
+
 #### Crysta Types
 
 | Type              | Icon                  |
@@ -456,8 +465,8 @@ Card monster populer yang tampil di homepage. Klik card → popup detail modal.
 **Cara kerja Icon (card list):**
 - Jika **Icon** diisi → tampil emoji/teks dari Icon.
 - Jika **Icon** kosong → otomatis tampil icon PNG dari `img/icons/` berdasarkan Type.
-- Jika Type tidak dikenali → fallback ke `img/icons/1h_ico.png`.
-- Material, Consumable, dan Quest Item tetap pakai emoji (⛏️ 🧪 📦).
+- Item **Type** menentukan ikon (misal "Sword" -> 1h/2h, "Katana" -> katana icon, "Beast" -> beast icon).
+- Material biasa, Consumable, dan Quest Item tetap pakai emoji (⛏️ 🧪 📦) jika type-nya tidak ada dalam icon mapping.
 
 **Cara kerja ImageURL (popup modal):**
 - Jika **ImageURL** diisi → tampil sebagai gambar besar di popup detail.
