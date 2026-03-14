@@ -263,16 +263,40 @@ window.ToramSheets = (function () {
   // Maps full Type names (from Sheet) to short category values
   // matching the filter dropdown options in items.html.
   function typeToCategory(type) {
-    var t = (type || '').toLowerCase();
-    if (t.indexOf('sword') !== -1 || t === 'katana' || t === 'dagger') return 'sword';
-    if (t === 'bow' || t === 'bowgun') return 'bow';
-    if (t === 'staff' || t === 'magic device') return 'staff';
-    if (t.indexOf('armor') !== -1 || t === 'shield') return 'armor';
-    if (t === 'ring' || t === 'additional' || t === 'special' || t === 'ninjutsu scroll') return 'accessory';
-    if (t === 'material' || t === 'consumable' || t === 'quest item') return 'material';
-    if (t === 'knuckles' || t === 'halberd' || t === 'arrow') return t;
-    if (t.indexOf('crysta') !== -1) return 'accessory';
-    return t;
+    var t = (type || '').toLowerCase().trim();
+    // Weapons
+    if (t.indexOf('1-handed sword') !== -1 || t.indexOf('one-hand sword') !== -1 || t.indexOf('1 handed sword') !== -1) return '1h-sword';
+    if (t.indexOf('2-handed sword') !== -1 || t.indexOf('two-hand sword') !== -1 || t.indexOf('2 handed sword') !== -1) return '2h-sword';
+    if (t === 'katana') return 'katana';
+    if (t === 'bow') return 'bow';
+    if (t === 'bowgun') return 'bowgun';
+    if (t === 'staff') return 'staff';
+    if (t === 'magic device') return 'md';
+    if (t === 'knuckles') return 'knuckles';
+    if (t === 'halberd') return 'halberd';
+    if (t === 'dagger') return 'dagger';
+    if (t === 'arrow') return 'arrow';
+    // Defense
+    if (t === 'armor' || t.indexOf('armor') !== -1) return 'armor';
+    if (t === 'shield') return 'shield';
+    // Accessories
+    if (t === 'additional') return 'additional';
+    if (t === 'special' || t === 'ring') return 'special';
+    if (t === 'ninjutsu scroll') return 'scroll';
+    // Crystas
+    if (t.indexOf('crysta') !== -1) {
+      if (t.indexOf('weapon') !== -1) return 'crysta-weapon';
+      if (t.indexOf('armor') !== -1) return 'crysta-armor';
+      if (t.indexOf('additional') !== -1 || t.indexOf('add ') !== -1) return 'crysta-add';
+      if (t.indexOf('ring') !== -1 || t.indexOf('special') !== -1) return 'crysta-special';
+      return 'crysta-normal';
+    }
+    // Materials
+    if (t === 'material') return 'material';
+    if (t === 'consumable') return 'consumable';
+    if (t === 'quest item') return 'quest';
+    
+    return t.replace(/\s+/g, '-');
   }
 
   // ---- RENDERERS ----------------------------------------------------
@@ -298,13 +322,21 @@ window.ToramSheets = (function () {
       var stats  = esc(row['Stats']    || '');
       var rarity = esc(row['Rarity']   || '');
       var source = esc(row['Source']   || '');
+      var srcLower = source.toLowerCase();
+      var sourceCat = '';
+      if (srcLower.indexOf('drop') !== -1) sourceCat = 'drop';
+      else if (srcLower.indexOf('craft') !== -1) {
+        if (srcLower.indexOf('player') !== -1) sourceCat = 'craft-player';
+        else sourceCat = 'craft-npc';
+      }
 
       var el       = document.createElement('article');
       el.className = 'data-card';
       el.style.cursor = 'pointer';
-      el.dataset.filter    = (name + ' ' + type + ' ' + rarity).toLowerCase();
+      el.dataset.filter    = (name + ' ' + type + ' ' + rarity + ' ' + source).toLowerCase();
       el.dataset.category  = typeToCategory(type);
       el.dataset.category2 = rarity.toLowerCase();
+      el.dataset.category3 = sourceCat;
       el.dataset.name      = row['Name'] || '';
       if (row._index !== undefined) el.dataset.itemIndex = row._index;
       // Card icon: use Icon column or auto-detect from Type (NOT ImageURL).

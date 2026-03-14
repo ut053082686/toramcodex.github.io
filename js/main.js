@@ -76,11 +76,13 @@
   var filterInput   = document.getElementById('filterInput');
   var filterSelect  = document.getElementById('filterSelect');
   var filterSelect2 = document.getElementById('filterSelect2');
+  var filterSelect3 = document.getElementById('filterSelect3');
 
   function applyFilter() {
     var query = filterInput   ? filterInput.value.toLowerCase()   : '';
     var cat1  = filterSelect  ? filterSelect.value.toLowerCase()  : '';
     var cat2  = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
+    var cat3  = filterSelect3 ? filterSelect3.value.toLowerCase() : '';
 
     // Query fresh each time so dynamically rendered Sheets content is included.
     var visible = 0;
@@ -97,6 +99,7 @@
       var text  = (card.dataset.filter    || '').toLowerCase();
       var c1    = (card.dataset.category  || '').toLowerCase();
       var c2    = (card.dataset.category2 || '').toLowerCase();
+      var c3    = (card.dataset.category3 || '').toLowerCase();
 
       var matchText = !query || text.includes(query);
       var matchCat1 = !cat1  || c1 === cat1;
@@ -106,7 +109,10 @@
         var c2Parts = c2.split(';').map(function(s) { return s.trim(); });
         matchCat2 = c2Parts.indexOf(cat2) !== -1;
       }
-      var show = matchText && matchCat1 && matchCat2;
+
+      var matchCat3 = !cat3 || c3 === cat3;
+
+      var show = matchText && matchCat1 && matchCat2 && matchCat3;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
@@ -140,6 +146,7 @@
   if (filterInput)   filterInput.addEventListener('input', onFilterChange);
   if (filterSelect)  filterSelect.addEventListener('change', onFilterChange);
   if (filterSelect2) filterSelect2.addEventListener('change', onFilterChange);
+  if (filterSelect3) filterSelect3.addEventListener('change', onFilterChange);
 
   // Re-apply filters after Google Sheets data has been rendered.
   document.addEventListener('sheetsrendered', function () {

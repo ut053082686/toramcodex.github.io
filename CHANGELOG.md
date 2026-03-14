@@ -2,7 +2,20 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.23.0] — 2026-03-14
+### Added
+- **Advanced Item Filtering** — Filter item di menu Items kini jauh lebih detail:
+  - **Granular Categories**: Katana, Bowgun, Dagger, Halberd, Ninjutsu Scroll, dan berbagai tipe Crysta kini memiliki kategori sendiri-sendiri.
+  - **Source Search**: Menambahkan dropdown filter baru untuk membedakan item dari **Drop**, **Craft NPC (Blacksmith)**, atau **Craft Player**.
+  - **Auto-Icons**: Penyesuaian icon default sistem untuk kategori baru agar tetap konsisten dengan data Sheet.
+
+### Changed
+- **Filter Logic**: Mengupdate `main.js` untuk mendukung 3 filter sekaligus (Category + Rarity + Source).
+
+---
+
 ## [0.22.2] — 2026-03-14
+
 ### Fixed
 - **Item Not Found on First Click (Network Error fix)** — Memperbaiki bug yang disebabkan oleh kecepatan limitasi API Google Sheets di klik pertama. Menambahkan fitur **Auto-Retry** (otomatis mencoba mengunduh ulang hingga 3 kali) sehingga meminimalisir kegagalan.
 - Logika nomor baris (*index*) dikembalikan dan dipertahankan persis seperti versi v0.21.11.
