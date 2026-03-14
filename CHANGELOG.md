@@ -2,6 +2,15 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.22.0] — 2026-03-14
+### Fixed
+- **Item Not Found on First Click** — Menghapus logika pencarian index cross-sheet yang rusak. Index dari sheet "Items" tidak cocok dengan sheet "ItemDetails", menyebabkan error pada klik pertama.
+- **Loading Placeholder** — Modal sekarang menampilkan "Loading…" langsung saat dibuka, sebelum data selesai dimuat dari server. Mencegah flash "Item Not Found".
+
+### Changed
+- **Simplified Lookup** — Fungsi `open()` kini menggunakan pencarian nama saja (`findInCache`) yang selalu akurat. Index internal `_index` tetap dipertahankan untuk Variant Detector.
+
+---
 
 ## [0.21.10] — 2026-03-14
 ### Fixed
