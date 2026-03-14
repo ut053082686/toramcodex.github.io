@@ -261,7 +261,7 @@ window.ItemModal = (function () {
       obtEl.innerHTML = '<p class="text-muted">No obtain info available.</p>';
     }
 
-    // Recipe / Enhancement Path
+    // Recipe / Used For Tab Logic
     var recEl = document.getElementById('modalRecipe');
     var statsTab = document.querySelector('[data-tab="m-stats"]');
     var obtainTab = document.querySelector('[data-tab="m-obtain"]');
@@ -269,14 +269,14 @@ window.ItemModal = (function () {
     var isCrysta = type.toLowerCase().indexOf('crysta') !== -1;
     
     // Material types that need custom labels
-    var materialTypes = ['beast', 'cloth', 'mana', 'wood', 'metal', 'medicine', 'teleport'];
+    var materialTypes = ['beast', 'cloth', 'mana', 'wood', 'metal', 'medicine', 'teleport', 'material'];
     var isMaterial = materialTypes.indexOf(type.toLowerCase()) !== -1;
 
     // Update tab labels based on type
     if (statsTab) statsTab.textContent = isMaterial ? 'Details' : 'Stats/Effects';
-    if (obtainTab) obtainTab.textContent = isMaterial ? 'Used For' : 'Obtain';
+    if (obtainTab) obtainTab.textContent = 'Obtain'; // Always Obtain
     if (recTab) {
-      recTab.textContent = isCrysta ? 'Enhancement Path' : 'Recipe';
+      recTab.textContent = isMaterial ? 'Used For' : (isCrysta ? 'Enhancement Path' : 'Recipe');
     }
 
     if (isCrysta && rec) {
@@ -297,7 +297,6 @@ window.ItemModal = (function () {
         if (!stepIcon) {
           iconHTML = '💎';
         } else if (stepIcon.indexOf('<img') !== -1) {
-          // If it's already an <img> tag (from ToramSheets.iconHTML), it likely has an errHandler already
           iconHTML = stepIcon;
         } else if (stepIcon.match(/\.(png|jpg|gif|svg|webp)/i)) {
           var errHandler = 'onerror="this.onerror=null;this.src=\'img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
@@ -314,7 +313,6 @@ window.ItemModal = (function () {
           (isCurrent ? '<div class="enhancement-badge">Current</div>' : '') +
           '</div>';
 
-        // Arrow between steps
         if (idx < steps.length - 1) {
           pathHTML += '<div class="enhancement-arrow">↓</div>';
         }
@@ -323,21 +321,40 @@ window.ItemModal = (function () {
       pathHTML += '</div>';
       recEl.innerHTML = pathHTML;
 
-      // Bind click on non-current steps
       recEl.querySelectorAll('[data-enhance-name]').forEach(function (el) {
         el.addEventListener('click', function () {
           var targetName = this.getAttribute('data-enhance-name');
-          if (targetName) {
-            open(targetName);
-          }
+          if (targetName) open(targetName);
         });
       });
+    } else if (isMaterial) {
+      // Used For: Reverse search in cache
+      var usedIn = findUsedIn(name);
+      if (usedIn.length > 0) {
+        var usedHtml = '';
+        usedIn.forEach(function (match) {
+          usedHtml += '<div class="recipe-item drop-link" data-recipe-item="' + esc(match.itemName) + '" style="cursor:pointer">' +
+            '<div class="recipe-icon">⚒️</div>' +
+            '<span>' + esc(match.itemName) + ' <small class="text-muted">Requires: x' + esc(match.amount) + '</small></span>' +
+            '<span class="drop-arrow">→</span>' +
+            '</div>';
+        });
+        recEl.innerHTML = usedHtml;
+        recEl.querySelectorAll('[data-recipe-item]').forEach(function (el) {
+          el.addEventListener('click', function () {
+            var targetItem = this.getAttribute('data-recipe-item');
+            if (targetItem) open(targetItem);
+          });
+        });
+      } else {
+        recEl.innerHTML = '<p class="text-muted">No usage info (not found in any recipe).</p>';
+      }
     } else if (rec) {
+      // Normal Recipe
       var recHtml = '';
       rec.split(';').forEach(function (rp) {
         rp = rp.trim();
         if (!rp) return;
-        // Extract item name: "Iron Ore x3" → "Iron Ore"
         var itemName = rp.replace(/\s+x\d+$/i, '').trim();
         recHtml += '<div class="recipe-item drop-link" data-recipe-item="' + esc(itemName) + '" style="cursor:pointer">' +
           '<div class="recipe-icon">🧪</div>' +
@@ -346,14 +363,10 @@ window.ItemModal = (function () {
           '</div>';
       });
       recEl.innerHTML = recHtml;
-
-      // Bind click on recipe items → ItemModal (reopen with different item)
       recEl.querySelectorAll('[data-recipe-item]').forEach(function (el) {
         el.addEventListener('click', function () {
           var targetItem = this.getAttribute('data-recipe-item');
-          if (targetItem) {
-            open(targetItem);
-          }
+          if (targetItem) open(targetItem);
         });
       });
     } else {
@@ -418,6 +431,37 @@ window.ItemModal = (function () {
       }
     }
     return null;
+  }
+
+  function findUsedIn(materialName) {
+    if (!sheetsCache) return [];
+    var results = [];
+    var search = materialName.toLowerCase();
+    for (var i = 0; i < sheetsCache.length; i++) {
+      var item = sheetsCache[i];
+      var recipe = item['Recipe'] || '';
+      if (!recipe) continue;
+
+      // Split ingredients: Item A x5; Item B x2
+      var ingredients = recipe.split(';');
+      for (var j = 0; j < ingredients.length; j++) {
+        var part = ingredients[j].trim();
+        if (!part) continue;
+        
+        // Extract name: "Iron Ore x15" -> "Iron Ore"
+        var ingredientName = part.replace(/\s+x\d+$/i, '').trim();
+        var amountMatched = part.match(/x(\d+)$/i);
+        var amount = amountMatched ? amountMatched[1] : '???';
+
+        if (ingredientName.toLowerCase() === search) {
+          results.push({
+            itemName: item['Name'],
+            amount: amount
+          });
+        }
+      }
+    }
+    return results;
   }
 
   function close() {

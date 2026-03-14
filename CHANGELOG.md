@@ -4,6 +4,34 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.21.6] — 2026-03-14
+
+### Added
+- **Reverse Recipe Search (Used For)** — Fitur otomatis yang melacak penggunaan Material.
+  - Tab "Recipe" pada Material kini berubah menjadi **"Used For"**.
+  - Sistem otomatis menscan seluruh database dan menampilkan item apa saja yang membutuhkan material tersebut sebagai bahan crafting.
+  - Menampilkan jumlah yang dibutuhkan (contoh: *Requires: x15*) dan nama item hasil craft bisa langsung diklik.
+
+---
+
+## [0.21.5] — 2026-03-14
+
+### Changed
+- **Item Modal UI (Materials)** — Menyesuaikan label tab agar lebih kontekstual untuk kategori Material (`Beast`, `Cloth`, `Mana`, `Wood`, `Metal`, `Medicine`, `Teleport`).
+  - Tab "Stats/Effects" berubah menjadi **"Details"**.
+  - Tab "Obtain" tetap tersedia untuk rute farming.
+
+---
+
+## [0.21.4] — 2026-03-14
+
+### Added
+- **Intelligent Icon Detector** — Sistem pendeteksi konten pintar pada kolom `Icon` Google Sheets.
+  - Jika kolom berisi teks path (`img/icons/`), sistem otomatis merendernya sebagai gambar `<img>` di semua modal dan tabel.
+  - Tetap mendukung Emoji jika kolom berisi teks biasa.
+
+---
+
 ## [0.21.3] — 2026-03-14
 
 ### Added
