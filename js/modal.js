@@ -474,34 +474,44 @@ window.ItemModal = (function () {
         }
         populate(found);
       } else {
+        document.getElementById('modalName').innerHTML = 'Loading…';
+        document.getElementById('modalType').textContent = '';
         var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
-        window.ToramSheets.fetchSheet(sheetName)
-          .then(function (csv) {
-            sheetsCache = window.ToramSheets.parseCSV(csv);
-            // Crucial: ALWAYS attach indexes so variant detector works
-            sheetsCache.forEach(function(r, i) { r._index = i; });
-            
-            var found;
-            var idx2 = parseInt(rowIndex, 10);
-            var search = (itemName || '').trim().toLowerCase();
-            
-            // Try index first, but ONLY if names match
-            if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === search) {
-              found = sheetsCache[idx2];
-            } else {
-              found = findInCache(itemName);
-            }
-            
-            if (found) {
-              populate(found);
-            } else {
-              // Final fallback to sample data
-              populate(SAMPLE_ITEMS[itemName] || null);
-            }
-          })
-          .catch(function () {
-            populate(SAMPLE_ITEMS[itemName] || null);
-          });
+        
+        var attemptFetch = function(retries) {
+          window.ToramSheets.fetchSheet(sheetName)
+            .then(function (csv) {
+              sheetsCache = window.ToramSheets.parseCSV(csv);
+              // Crucial: ALWAYS attach indexes so variant detector works
+              sheetsCache.forEach(function(r, i) { r._index = i; });
+              
+              var found;
+              var idx2 = parseInt(rowIndex, 10);
+              var search = (itemName || '').trim().toLowerCase();
+              
+              // Try index first, but ONLY if names match
+              if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === search) {
+                found = sheetsCache[idx2];
+              } else {
+                found = findInCache(itemName);
+              }
+              
+              if (found) {
+                populate(found);
+              } else {
+                // Final fallback to sample data
+                populate(SAMPLE_ITEMS[itemName] || null);
+              }
+            })
+            .catch(function () {
+              if (retries > 0) {
+                setTimeout(function() { attemptFetch(retries - 1); }, 600);
+              } else {
+                populate(SAMPLE_ITEMS[itemName] || null);
+              }
+            });
+        };
+        attemptFetch(2);
       }
     } else {
       populate(SAMPLE_ITEMS[itemName] || null);

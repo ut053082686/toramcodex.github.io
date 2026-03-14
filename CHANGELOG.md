@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.22.2] — 2026-03-14
+### Fixed
+- **Item Not Found on First Click (Network Error fix)** — Memperbaiki bug yang disebabkan oleh kecepatan limitasi API Google Sheets di klik pertama. Menambahkan fitur **Auto-Retry** (otomatis mencoba mengunduh ulang hingga 3 kali) sehingga meminimalisir kegagalan.
+- Logika nomor baris (*index*) dikembalikan dan dipertahankan persis seperti versi v0.21.11.
+
+---
 
 ## [0.21.10] — 2026-03-14
 ### Fixed
