@@ -106,14 +106,14 @@
       
       var matchCat2 = !cat2;
       if (cat2 && c2) {
-        var c2Parts = c2.split(';').map(function(s) { return s.trim(); });
-        matchCat2 = c2Parts.indexOf(cat2) !== -1;
+        var c2Parts = c2.split(';').map(function(s) { return s.trim().toLowerCase(); });
+        matchCat2 = c2Parts.indexOf(cat2.toLowerCase()) !== -1;
       }
 
       var matchCat3 = !cat3;
       if (cat3 && c3) {
-        var c3Parts = c3.split(';').map(function(s) { return s.trim(); });
-        matchCat3 = c3Parts.indexOf(cat3) !== -1;
+        var c3Parts = c3.split(';').map(function(s) { return s.trim().toLowerCase(); });
+        matchCat3 = c3Parts.indexOf(cat3.toLowerCase()) !== -1;
       }
 
       var show = matchText && matchCat1 && matchCat2 && matchCat3;
@@ -126,7 +126,7 @@
     if (grid) {
       var isTable = grid.tagName === 'TBODY';
       var emptyEl = grid.querySelector('.empty-state');
-      if (visible === 0 && items.length && (query || cat1 || cat2)) {
+      if (visible === 0 && items.length && (query || cat1 || cat2 || cat3)) {
         if (!emptyEl) {
           if (isTable) {
             emptyEl = document.createElement('tr');

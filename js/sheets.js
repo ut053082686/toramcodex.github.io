@@ -332,8 +332,8 @@ window.ToramSheets = (function () {
         rarityCat = 'non-event';
       } else if (combinedData.indexOf('event') !== -1) {
         rarityCat = 'event';
-      } else {
-        rarityCat = rarity.toLowerCase().replace(/\s+/g, '-');
+      } else if (rarity) {
+        rarityCat = rarity.toLowerCase().trim().replace(/[\s;]+/g, '-').replace(/-+/g, '-');
       }
 
       // 2. Detect Source Tags (Drop / Craft)

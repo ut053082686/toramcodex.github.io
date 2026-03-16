@@ -2,7 +2,18 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.23.3] — 2026-03-16
+### Fixed
+- **Filter Stability Update** — Memperkuat sistem filter agar benar-benar akurat dalam mendeteksi data:
+  - **Case-Insensitive Matching**: Filter kini mengabaikan perbedaan huruf besar/kecil secara total (Drop vs drop vs DROP).
+  - **Whitespace Trim**: Menangani spasi tersembunyi yang mungkin terbawa dari Google Sheets.
+  - **Empty Results Fix**: Memperbaiki logika pesan "No results found" agar tidak muncul keliru saat hanya filter Source yang digunakan.
+  - **Robust Hypothesis**: Mengatasi kemungkinan isu cache browser dengan pembaruan logika internal.
+
+---
+
 ## [0.23.2] — 2026-03-16
+
 ### Fixed
 - **Filter Logic v2 (Deep Search)** — Memperbaiki sistem filter agar lebih toleran terhadap format pengisian data:
   - **Hybrid Search**: Kata kunci pencarian (Drop, Craft, Event, dsb) kini dicari di **kedua kolom sekaligus** (Rarity & Source).
