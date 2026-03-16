@@ -191,14 +191,20 @@
 
       function formatAct(val) {
         if (!val) return '<span class="text-muted">\u2014</span>';
-        var first = val.charAt(0);
-        var rest = val.substring(1).trim();
-        if (first === '>') {
-          return '<span style="color:#dc2626;font-weight:600">' + esc(rest) + ' \u2191</span>';
-        } else if (first === '<') {
-          return '<span style="color:#0891b2;font-weight:600">' + esc(rest) + ' \u2193</span>';
-        }
-        return esc(val);
+        var parts = val.split(';');
+        var results = parts.map(function(p) {
+          p = p.trim();
+          if (!p) return '';
+          var first = p.charAt(0);
+          var rest = p.substring(1).trim();
+          if (first === '>') {
+            return '<span style="color:#dc2626;font-weight:600">' + esc(rest) + ' \u2191</span>';
+          } else if (first === '<') {
+            return '<span style="color:#0891b2;font-weight:600">' + esc(rest) + ' \u2193</span>';
+          }
+          return esc(p);
+        });
+        return results.filter(Boolean).join('; ');
       }
 
       function colorHTML(c) {

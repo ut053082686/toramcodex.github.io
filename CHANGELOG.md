@@ -2,6 +2,15 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.24.1] — 2026-03-16
+### Added
+- **Multi-Value Pet Acts**: Kini mendukung multiple skema dalam satu kolom (misal: `>200;<150`). Tiap bagian akan diwarnai dan diberi panah secara terpisah.
+- **Robust Data Handling**: Meningkatkan akurasi pembacaan kolom di Sheet (lebih toleran terhadap spasi/huruf kapital pada header kolom).
+### Fixed
+- **Empty Values Fix**: Memperbaiki masalah data Act pet yang terkadang tidak muncul jika header kolom memiliki format sedikit berbeda di Sheet.
+
+---
+
 ## [0.24.0] — 2026-03-16
 ### Changed
 - **Pet Modal UI Enhancements** — Pembaruan informasi detail pada modal Pet:

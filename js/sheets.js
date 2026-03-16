@@ -702,11 +702,29 @@ window.ToramSheets = (function () {
     }
 
     rows.forEach(function (row) {
-      var name    = esc(row['Name']        || '');
-      var icon    = esc(row['Icon']        || '');
-      var imgURL  = (row['ImageURL']       || '').trim();
-      var level   = esc(row['Level']       || '');
-      var spawnAt = esc(row['SpawnAt']     || '');
+      // Helper to find column case-insensitively and with/without spaces
+      var get = function(keys) {
+        if (typeof keys === 'string') keys = [keys];
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          if (row[k] !== undefined) return row[k];
+          // Try variations
+          var kLower = k.toLowerCase();
+          var kNoSpace = k.replace(/\s+/g, '');
+          for (var prop in row) {
+            var pLower = prop.toLowerCase().trim();
+            var pNoSpace = pLower.replace(/\s+/g, '');
+            if (pLower === kLower || pNoSpace === kNoSpace) return row[prop];
+          }
+        }
+        return '';
+      };
+
+      var name    = esc(get('Name'));
+      var icon    = esc(get('Icon'));
+      var imgURL  = (get('ImageURL')).trim();
+      var level   = esc(get('Level'));
+      var spawnAt = esc(get('SpawnAt'));
 
       var petIcon = imgURL
         ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:48px;height:48px;object-fit:contain;border-radius:4px;vertical-align:middle;margin-right:6px" />'
@@ -719,17 +737,17 @@ window.ToramSheets = (function () {
       // Store full detail data for modal
       tr.dataset.petName    = name;
       tr.dataset.petImg     = imgURL;
-      tr.dataset.petEmoji   = (row['Icon'] || '').trim() || '\uD83D\uDC3E';
+      tr.dataset.petEmoji   = icon || '\uD83D\uDC3E';
       tr.dataset.petLevel   = level;
       tr.dataset.petSpawn   = spawnAt;
-      tr.dataset.petNmagic  = (row['NormalMagic'] || '').trim();
-      tr.dataset.petSupport = (row['Support']     || '').trim();
-      tr.dataset.petAct1    = (row['Act1'] || '').trim();
-      tr.dataset.petAct2    = (row['Act2'] || '').trim();
-      tr.dataset.petAct3    = (row['Act3'] || '').trim();
-      tr.dataset.petAct4    = (row['Act4'] || '').trim();
-      tr.dataset.petAct5    = (row['Act5'] || '').trim();
-      tr.dataset.petColor   = (row['ColorInfo'] || '').trim();
+      tr.dataset.petNmagic  = (get('NormalMagic')).trim();
+      tr.dataset.petSupport = (get('Support')).trim();
+      tr.dataset.petAct1    = (get(['Act1', 'Act 1'])).trim();
+      tr.dataset.petAct2    = (get(['Act2', 'Act 2'])).trim();
+      tr.dataset.petAct3    = (get(['Act3', 'Act 3'])).trim();
+      tr.dataset.petAct4    = (get(['Act4', 'Act 4'])).trim();
+      tr.dataset.petAct5    = (get(['Act5', 'Act 5'])).trim();
+      tr.dataset.petColor   = (get(['ColorInfo', 'Color Info'])).trim();
 
       tr.innerHTML =
         '<td><span class="pet-name">' + petIcon + name + '</span></td>' +
