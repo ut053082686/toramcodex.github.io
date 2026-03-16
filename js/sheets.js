@@ -93,11 +93,15 @@ window.ToramSheets = (function () {
 
     var url =
       'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID +
-      '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(sheetName);
+      '/export?format=csv&sheet=' + encodeURIComponent(sheetName);
+    
+    console.log('DEBUG Fetching URL:', url);
+
     return fetch(url).then(function (res) {
       if (!res.ok) { throw new Error('HTTP ' + res.status); }
       return res.text();
     }).then(function (text) {
+      console.log('DEBUG Raw CSV Response Length (first 100 char):', text.substring(0, 100));
       try {
         localStorage.setItem(cacheKey, text);
         localStorage.setItem(tsKey, String(Date.now()));
