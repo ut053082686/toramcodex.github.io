@@ -701,9 +701,14 @@ window.ToramSheets = (function () {
       }
     }
 
+    console.log('DEBUG Pet Sheet Headers:', Object.keys(rows[0] || {}));
+    
     rows.forEach(function (row, idx) {
-      // DEBUG: Log the first few rows to see actual keys/values
-      if (idx < 5) console.log('DEBUG Pet Row ' + idx + ' (Name: ' + row['Name'] + '):', row);
+      // Log full row for first few pets to check for shifts
+      if (idx < 5) {
+        console.log('DEBUG Raw Pet Row ' + idx + ' (' + (row['Name'] || 'Unnamed') + '):');
+        console.table(row); 
+      }
 
       // Helper to find column case-insensitively and with/without spaces
       var get = function(keys) {
@@ -727,8 +732,8 @@ window.ToramSheets = (function () {
       var name    = esc(get('Name'));
       var icon    = (get('Icon') || '').trim();
       var imgURL  = (get('ImageURL')).trim();
-      var level   = esc(get('Level'));
-      var spawnAt = esc(get('SpawnAt'));
+      var level   = get('Level');
+      var spawnAt = get('SpawnAt');
 
       var petIcon = imgURL
         ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:48px;height:48px;object-fit:contain;border-radius:4px;vertical-align:middle;margin-right:6px" />'
@@ -738,8 +743,8 @@ window.ToramSheets = (function () {
       tr.dataset.filter = name.toLowerCase();
       tr.style.cursor = 'pointer';
 
-      // Store full detail data for modal
-      tr.dataset.petName    = name;
+      // Store full detail data for modal (Unescaped for logic)
+      tr.dataset.petName    = get('Name');
       tr.dataset.petImg     = imgURL;
       tr.dataset.petEmoji   = icon || '\uD83D\uDC3E';
       tr.dataset.petLevel   = level;

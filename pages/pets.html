@@ -196,11 +196,11 @@
           p = p.trim();
           if (!p) return '';
           
-          // Regex to detect > or < at the start
-          var match = p.match(/^([><])\s*(.*)$/);
+          // Regex to detect > or < anywhere at the start, making it more robust
+          var match = p.match(/^([><])\s*(.+)$/);
           if (match) {
             var sign = match[1];
-            var rest = match[2];
+            var rest = match[2].trim();
             var color = sign === '>' ? '#dc2626' : '#0891b2';
             var arrow = sign === '>' ? '\u2191' : '\u2193';
             return '<span style="color:' + color + ';font-weight:600">' + esc(rest) + ' ' + arrow + '</span>';
