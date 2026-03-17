@@ -212,6 +212,7 @@
   var paginationEl = document.querySelector('.pagination');
 
   function paginate() {
+    var paginationEl = document.querySelector('.pagination');
     if (!paginationEl) return;
 
     // First remove all pagination hiding so we can count filter-visible items

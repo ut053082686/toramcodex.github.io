@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.32.1] - 2026-03-17
+### Fixed
+- Missing pagination styles in `style.css`: Pagination controls are now visible and beautifully styled.
+- MQ Calculator "Final Chapter" format: Now correctly shows "CH XX - [Quest Name]" (e.g., CH12 - Ark Crisis).
+- Robust pagination element selection in `main.js`.
+
 ## [0.32.0] - 2026-03-17
 ### Added
 - "Partial Run" logic in MQ Calculator simulation: The simulation now stops accurately at the quest where the target level is reached, showing the correct final chapter and percentage.

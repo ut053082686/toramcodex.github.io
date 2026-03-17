@@ -227,7 +227,9 @@
           if (name.includes('venena meta coenubia') && !skipVenena) exp += 12500000;
           
           [tLv, tPct] = addXP(tLv, tPct, exp);
-          lastQName = q['Name'] || q['name'];
+          const qName = q['Name'] || q['name'];
+          const qCh = q['Chapter'] || q['chapter'] || '';
+          lastQName = (qCh ? 'CH' + qCh + ' - ' : '') + qName;
           if (tLv >= targetLvl) break;
         }
         curLv = tLv;
