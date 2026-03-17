@@ -57,6 +57,13 @@
 window.ToramSheets = (function () {
   'use strict';
 
+  // Global state for On-Demand Rendering
+  var dataState = {
+    fullData: [],   // The raw data from Google Sheets
+    pageType: '',   // 'items', 'monsters', etc.
+    containerId: ''
+  };
+
   // ---- CONFIGURATION ------------------------------------------------
   var CONFIG = {
     // Replace with your Google Sheets document ID.
@@ -807,9 +814,16 @@ window.ToramSheets = (function () {
         // Attach original sheet index (absolute) before potentially filtering or reversing
         rows.forEach(function (r, i) { r._index = i; });
         var data = rows.slice().reverse(); // Don't mutate cache, reverse for "Latest" feel
-        renderer(data, container);
-        // Signal to main.js that new filterable elements are ready.
-        document.dispatchEvent(new CustomEvent('sheetsrendered'));
+        
+        // Update global state for On-Demand Rendering
+        dataState.fullData = data;
+        dataState.pageType = page;
+        dataState.containerId = containerId;
+
+        // Signal to main.js that data is ready for filtering/pagination
+        document.dispatchEvent(new CustomEvent('sheetsdataready', { 
+          detail: { data: data, page: page, containerId: containerId } 
+        }));
       })
       .catch(function (err) {
         var msg = 'Could not load data from Google Sheets. ' +
@@ -1062,6 +1076,7 @@ window.ToramSheets = (function () {
 
   return {
     CONFIG       : CONFIG,
+    dataState    : dataState, // Expose state for main.js
     load         : load,
     loadLatest   : loadLatest,
     loadHomepage : loadHomepage,
@@ -1069,6 +1084,21 @@ window.ToramSheets = (function () {
     parseCSV     : parseCSV,
     esc          : esc,
     resolveIcon  : resolveIcon,
-    iconHTML     : iconHTML
+    iconHTML     : iconHTML,
+    // Helper to render a specific slice of data
+    renderData   : function(page, data, container) {
+      if (typeof container === 'string') container = document.getElementById(container);
+      if (!container) return;
+      var renderer = RENDERERS[page];
+      if (renderer) {
+        // Clear container and render only this slice
+        if (page === 'monsters') {
+          container.innerHTML = ''; 
+        } else {
+          container.innerHTML = '';
+        }
+        renderer(data, container);
+      }
+    }
   };
 }());

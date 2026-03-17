@@ -78,73 +78,107 @@
   var filterSelect2 = document.getElementById('filterSelect2');
   var filterSelect3 = document.getElementById('filterSelect3');
 
+  var filteredData = []; // Store filtered array for pagination
+
   function applyFilter() {
-    var query = filterInput   ? filterInput.value.toLowerCase()   : '';
+    var query = filterInput   ? filterInput.value.toLowerCase().trim()   : '';
     var cat1  = filterSelect  ? filterSelect.value.toLowerCase()  : '';
     var cat2  = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
     var cat3  = filterSelect3 ? filterSelect3.value.toLowerCase() : '';
 
-    // Query fresh each time so dynamically rendered Sheets content is included.
-    var visible = 0;
-    var items = document.querySelectorAll('[data-filter]');
-    items.forEach(function (card) {
-      // Respect collapsed monster variant rows
-      if (card.dataset.monGroup) {
-        var gid = card.dataset.monGroup;
-        var toggle = document.querySelector('[data-group="' + gid + '"]');
-        var groupOpen = toggle && toggle.dataset.open === '1';
-        if (!groupOpen) { card.style.display = 'none'; return; }
-      }
-
-      var text  = (card.dataset.filter    || '').toLowerCase();
-      var c1    = (card.dataset.category  || '').toLowerCase();
-      var c2    = (card.dataset.category2 || '').toLowerCase();
-      var c3    = (card.dataset.category3 || '').toLowerCase();
-
-      var matchText = !query || text.includes(query);
-      var matchCat1 = !cat1  || c1 === cat1;
+    var fullData = (window.ToramSheets && window.ToramSheets.dataState.fullData) || [];
+    
+    filteredData = fullData.filter(function (row) {
+      // 1. Text Search (Name, Type, Rarity, Source)
+      var name   = (row['Name']   || '').toLowerCase();
+      var type   = (row['Type']   || '').toLowerCase();
+      var rarity = (row['Rarity'] || '').toLowerCase();
+      var source = (row['Source'] || '').toLowerCase();
+      var stats  = (row['Stats']  || '').toLowerCase(); // Useful for some pages
       
+      var combined = (name + ' ' + type + ' ' + rarity + ' ' + source + ' ' + stats);
+      var matchText = !query || combined.indexOf(query) !== -1;
+
+      // 2. Category 1 (Type)
+      var c1 = typeToCategory(type).toLowerCase();
+      var matchCat1 = !cat1 || c1 === cat1;
+
+      // 3. Category 2 (Rarity / Event) - Match semicolon parts
       var matchCat2 = !cat2;
-      if (cat2 && c2) {
-        var c2Parts = c2.split(';').map(function(s) { return s.trim().toLowerCase(); });
-        matchCat2 = c2Parts.indexOf(cat2.toLowerCase()) !== -1;
+      if (cat2) {
+        var rarityLower = rarity.toLowerCase();
+        // Check for "Non-Event" or explicit match
+        if (cat2 === 'non-event') {
+          matchCat2 = rarityLower.indexOf('non event') !== -1 || rarityLower.indexOf('non-event') !== -1;
+        } else {
+          var rParts = rarityLower.split(';').map(function(s) { return s.trim(); });
+          matchCat2 = rParts.indexOf(cat2) !== -1;
+        }
       }
 
+      // 4. Category 3 (Source / Drop/Craft)
       var matchCat3 = !cat3;
-      if (cat3 && c3) {
-        var c3Parts = c3.split(';').map(function(s) { return s.trim().toLowerCase(); });
-        matchCat3 = c3Parts.indexOf(cat3.toLowerCase()) !== -1;
+      if (cat3) {
+        var sourceLower = source.toLowerCase();
+        if (cat3 === 'drop') {
+          matchCat3 = sourceLower.indexOf('drop') !== -1;
+        } else if (cat3 === 'craft-npc') {
+          matchCat3 = sourceLower.indexOf('smith') !== -1 || sourceLower.indexOf('npc') !== -1 || (sourceLower.indexOf('craft') !== -1 && sourceLower.indexOf('player') === -1);
+        } else if (cat3 === 'craft-player') {
+          matchCat3 = sourceLower.indexOf('player') !== -1;
+        }
       }
 
-      var show = matchText && matchCat1 && matchCat2 && matchCat3;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+      return matchText && matchCat1 && matchCat2 && matchCat3;
     });
 
+    // Refresh display
+    renderCurrentView();
+  }
+
+  function renderCurrentView() {
+    var itemsCount = filteredData.length;
+    var containerId = window.ToramSheets.dataState.containerId;
+    var container = document.getElementById(containerId);
+    if (!container) return;
+
     // Show/hide empty-state message
-    var grid = items.length ? items[0].parentNode : null;
-    if (grid) {
-      var isTable = grid.tagName === 'TBODY';
-      var emptyEl = grid.querySelector('.empty-state');
-      if (visible === 0 && items.length && (query || cat1 || cat2 || cat3)) {
+    var emptyEl = container.querySelector('.empty-state');
+    if (itemsCount === 0 && (window.ToramSheets.dataState.fullData.length > 0)) {
         if (!emptyEl) {
+          var isTable = container.tagName === 'TBODY';
           if (isTable) {
             emptyEl = document.createElement('tr');
             emptyEl.className = 'empty-state';
-            var cols = grid.closest('table').querySelectorAll('thead th').length || 4;
+            var cols = container.closest('table').querySelectorAll('thead th').length || 4;
             emptyEl.innerHTML = '<td colspan="' + cols + '" style="text-align:center;padding:2rem;color:var(--text-secondary)">\uD83D\uDD0D No results found. Try different keywords.</td>';
           } else {
             emptyEl = document.createElement('div');
             emptyEl.className = 'empty-state';
             emptyEl.innerHTML = '<span>\uD83D\uDD0D</span>No results found. Try different keywords.';
           }
-          grid.appendChild(emptyEl);
+          container.appendChild(emptyEl);
         }
         emptyEl.style.display = '';
-      } else if (emptyEl) {
+    } else if (emptyEl) {
         emptyEl.style.display = 'none';
-      }
     }
+
+    paginate();
+  }
+
+  // Helper from sheets.js logic to keep categorization consistent
+  function typeToCategory(type) {
+    if (!type) return 'Other';
+    var t = type.toLowerCase();
+    if (t.includes('sword') || t.includes('blade')) return 'Sword';
+    if (t.includes('bow') || t.includes('gun')) return 'Bow';
+    if (t.includes('staff') || t.includes('magic')) return 'Staff';
+    if (t.includes('armor') || t.includes('garb')) return 'Armor';
+    if (t.includes('add') || t.includes('hat') || t.includes('wing')) return 'Additional';
+    if (t.includes('ring') || t.includes('charm') || t.includes('spec')) return 'Special';
+    if (t.includes('crysta')) return 'Crysta';
+    return 'Other';
   }
 
   if (filterInput)   filterInput.addEventListener('input', onFilterChange);
@@ -152,11 +186,10 @@
   if (filterSelect2) filterSelect2.addEventListener('change', onFilterChange);
   if (filterSelect3) filterSelect3.addEventListener('change', onFilterChange);
 
-  // Re-apply filters after Google Sheets data has been rendered.
-  document.addEventListener('sheetsrendered', function () {
+  // Re-apply filters after Google Sheets data has been ready.
+  document.addEventListener('sheetsdataready', function () {
     currentPage = 1;
     applyFilter();
-    paginate();
   });
 
   /* ---------- Pagination ---------- */
@@ -178,14 +211,14 @@
       return el.style.display !== 'none';
     });
 
-    var totalPages = Math.ceil(visibleItems.length / PAGE_SIZE);
+    var totalPages = Math.ceil(filteredData.length / PAGE_SIZE);
 
     // Hide pagination if not enough items
     if (totalPages <= 1) {
       paginationEl.innerHTML = '';
       paginationEl.style.display = 'none';
-      // Show all visible items (no slicing needed)
-      visibleItems.forEach(function (el) { el.classList.remove('paginated-hide'); });
+      // Only render the filtered items (all of them)
+      window.ToramSheets.renderData(window.ToramSheets.dataState.pageType, filteredData, window.ToramSheets.dataState.containerId);
       return;
     }
 
@@ -195,16 +228,12 @@
 
     paginationEl.style.display = '';
 
-    // Apply page visibility
+    // Slice and Render ONLY the 20 items for this page
     var start = (currentPage - 1) * PAGE_SIZE;
     var end = start + PAGE_SIZE;
-    visibleItems.forEach(function (el, i) {
-      if (i >= start && i < end) {
-        el.classList.remove('paginated-hide');
-      } else {
-        el.classList.add('paginated-hide');
-      }
-    });
+    var pagedSlice = filteredData.slice(start, end);
+    
+    window.ToramSheets.renderData(window.ToramSheets.dataState.pageType, pagedSlice, window.ToramSheets.dataState.containerId);
 
     // Build page buttons
     renderPageButtons(totalPages);

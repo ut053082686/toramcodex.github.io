@@ -2,12 +2,16 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
-## [0.26.0] — 2026-03-16
+## [0.27.0] — 2026-03-17
 ### Added
-- **Material Processing Display**: Peningkatan tampilan pada kolom *SellOther* di Modal Item.
-  - Data seperti `3 Mana` atau `Mana: 3` kini otomatis ditampilkan sebagai **Process : 3** lengkap dengan ikon kustom.
-  - **Premium Styling**: Badge *Process* kini menggunakan tema warna **Hijau (Green)** untuk membedakannya secara visual dari harga jual Spina (Emas).
-  - Mendukung berbagai varian format input dari Google Sheet.
+- **On-Demand Rendering (Pure Pagination)**: Optimasi performa besar-besaran untuk menangani database skala besar (25.000+ data).
+  - Sistem kini hanya merender **20 item yang terlihat** di layar, bukan seluruh database sekaligus.
+  - **Pencarian Kilat**: Logika filtering dipindahkan ke memori JavaScript, membuat pencarian tetap instan meskipun data bertambah banyak.
+  - **RAM Optimization**: Mengurangi penggunaan memori browser secara drastis, mencegah tab website hang atau crash di HP.
+
+---
+
+## [0.26.0] — 2026-03-16
 
 ---
 
