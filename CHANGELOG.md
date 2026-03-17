@@ -2,14 +2,27 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
-## [0.27.0] — 2026-03-17
+## [0.29.0] — 2026-03-17
 ### Added
-- **On-Demand Rendering (Pure Pagination)**: Optimasi performa besar-besaran untuk menangani database skala besar (25.000+ data).
-  - Sistem kini hanya merender **20 item yang terlihat** di layar, bukan seluruh database sekaligus.
-  - **Pencarian Kilat**: Logika filtering dipindahkan ke memori JavaScript, membuat pencarian tetap instan meskipun data bertambah banyak.
-  - **RAM Optimization**: Mengurangi penggunaan memori browser secara drastis, mencegah tab website hang atau crash di HP.
+- **Quest UI Enhancements**: Tampilan halaman Quests yang lebih premium dan informatif.
+  - **Chapter Badges**: Marker chapter otomatis pada setiap kartu quest.
+  - **Reward Highlighting**: Kotak Reward khusus untuk menonjolkan jumlah EXP dan item.
+  - **Quick Calculator Link**: Tombol "Use Calculator" pada kartu Main Quest untuk akses instan.
+- **Dynamic Loading**: Halaman Quests kini sepenuhnya mengambil data dari Google Sheets (mendukung 120+ data MQ).
 
 ---
+
+## [0.28.0] — 2026-03-17
+### Added
+- **MQ EXP Calculator**: Alat baru untuk menghitung kebutuhan EXP Main Quest (MQ) berdasarkan formula Toram Tools.
+  - Data quest diambil secara dinamis dari tab **Quests** di Google Sheets.
+  - Mendukung simulasi "Run" atau "Spam" quest untuk mencapai target level.
+- **Other Tools Dropdown**: Penambahan menu dropdown "Other Tools" pada navigasi utama untuk akses fitur-fitur baru di masa depan.
+- **Mobile Navigation Update**: Menu kalkulator baru juga tersedia di navigasi mobile.
+
+---
+
+## [0.27.0] — 2026-03-17
 
 ## [0.26.0] — 2026-03-16
 

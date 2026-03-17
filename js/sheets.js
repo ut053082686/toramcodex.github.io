@@ -678,29 +678,42 @@ window.ToramSheets = (function () {
       return;
     }
     rows.forEach(function (row) {
-      var name   = esc(row['Name']        || '');
-      var icon   = esc(row['Icon']        || '');
-      var imgURL = (row['ImageURL']       || '').trim();
-      var type   = esc(row['Type']        || '');
-      var minlv  = esc(row['MinLevel']    || '');
-      var reward = esc(row['Reward']      || '');
-      var desc   = esc(row['Description'] || '');
+      // Robust column mapping
+      var name    = esc(row['Name'] || '');
+      var icon    = esc(row['Icon'] || '');
+      var imgURL  = (row['ImageURL'] || '').trim();
+      var type    = (row['Type'] || 'Main Story').trim();
+      var ch      = esc(row['Chapter'] || '');
+      var reward  = esc(row['Reward'] || '');
+      var minlv   = esc(row['MinLevel'] || '');
+      var desc    = esc(row['Description'] || '');
+      
+      // Heuristic for MQ to show calculator link
+      var isMQ = type.toLowerCase().includes('main') || type.toLowerCase().includes('mq');
 
-      var el       = document.createElement('article');
+      var el = document.createElement('article');
       el.className = 'data-card';
-      el.dataset.filter   = (name + ' ' + type).toLowerCase();
-      el.dataset.category = type.toLowerCase();
+      el.dataset.filter = (name + ' ' + type + ' ' + ch).toLowerCase();
+      el.dataset.category = type.toLowerCase().replace(/\s+/g, '-');
+      
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest item', name) + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest icon', name) + '</div>' +
           '<div>' +
-            '<div class="data-card-title">' + name + '</div>' +
+            '<div class="data-card-title">' + 
+               (ch ? '<span class="tag-ch">Ch.' + ch + '</span>' : '') + name + 
+            '</div>' +
             '<div class="data-card-subtitle">' + type + (minlv ? ' · Lv.' + minlv + '+' : '') + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="data-card-body">' +
-          (desc   ? '<p class="mt-1 text-muted">'     + desc   + '</p>' : '') +
-          (reward ? '<p class="mt-1"><strong>Reward:</strong> ' + reward + '</p>' : '') +
+          (desc ? '<p class="mt-1 text-muted">' + desc + '</p>' : '') +
+          (reward ? 
+            '<div class="reward-box">' +
+              '<strong>Reward:</strong> <span class="reward-value">' + reward + '</span>' +
+            '</div>' : ''
+          ) +
+          (isMQ ? '<a href="calculator.html" class="btn-tiny">🧮 Use Calculator</a>' : '') +
         '</div>';
       container.appendChild(el);
     });
@@ -803,10 +816,10 @@ window.ToramSheets = (function () {
     }
     var sheetName = CONFIG.SHEETS[page];
     var renderer  = RENDERERS[page];
-    var container = document.getElementById(containerId);
-    if (!sheetName || !renderer || !container) { return; }
+    var container = containerId ? document.getElementById(containerId) : null;
+    if (!sheetName) { return; }
 
-    if (page !== 'monsters') { showLoading(container); }
+    if (container && page !== 'monsters') { showLoading(container); }
 
     fetchSheet(sheetName)
       .then(function (csv) {
