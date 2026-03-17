@@ -690,35 +690,36 @@ window.ToramSheets = (function () {
       
       // Heuristic for MQ to show calculator link
       var isMQ = type.toLowerCase().includes('main') || type.toLowerCase().includes('mq');
+      var category = (type.toLowerCase().includes('main') ? 'main' : 
+                      (type.toLowerCase().includes('side') ? 'side' : 
+                      (type.toLowerCase().includes('daily') ? 'daily' : 
+                      (type.toLowerCase().includes('event') ? 'event' : type.toLowerCase().replace(/\s+/g, '-')))));
 
       var el = document.createElement('article');
-      el.className = 'data-card';
-      // Ensure all searchable text is in data-filter for any legacy selectors, 
-      // though main.js now filters the raw data object directly.
+      el.className = 'data-card quest-card';
       el.dataset.filter = (name + ' ' + type + ' ' + ch + ' ' + reward + ' ' + desc).toLowerCase();
-      el.dataset.category = (type.toLowerCase().includes('main') ? 'main' : 
-                            (type.toLowerCase().includes('side') ? 'side' : 
-                            (type.toLowerCase().includes('daily') ? 'daily' : 
-                            (type.toLowerCase().includes('event') ? 'event' : type.toLowerCase().replace(/\s+/g, '-')))));
+      el.dataset.category = category;
       
       el.innerHTML =
         '<div class="data-card-header">' +
           '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest icon', name) + '</div>' +
           '<div>' +
-            '<div class="data-card-title">' + 
-               (ch ? '<span class="tag-ch">Ch.' + ch + '</span>' : '') + name + 
-            '</div>' +
+            (ch ? '<span class="quest-card-ep">Chapter ' + ch + '</span>' : '') +
+            '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + type + (minlv ? ' · Lv.' + minlv + '+' : '') + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="data-card-body">' +
-          (desc ? '<p class="mt-1 text-muted">' + desc + '</p>' : '') +
+          (desc ? '<p class="mt-1 text-muted">' + desc.replace(/\n/g, '<br>') + '</p>' : '') +
           (reward ? 
             '<div class="reward-box">' +
-              '<strong>Reward:</strong> <span class="reward-value">' + reward + '</span>' +
+              '<strong>Quest Reward</strong><span class="reward-value">' + reward + '</span>' +
             '</div>' : ''
           ) +
-          (isMQ ? '<a href="calculator.html" class="btn-tiny">🧮 Use Calculator</a>' : '') +
+          '<div class="mt-2" style="display:flex; justify-content:space-between; align-items:center;">' +
+            (isMQ ? '<a href="calculator.html" class="btn-tiny">🧮 Use Calculator</a>' : '<span></span>') +
+            '<span class="tag ' + (category === 'main' ? 'legendary' : (category === 'side' ? 'info' : '')) + '">' + type + '</span>' +
+          '</div>' +
         '</div>';
       container.appendChild(el);
     });
@@ -831,7 +832,12 @@ window.ToramSheets = (function () {
         var rows = parseCSV(csv);
         // Attach original sheet index (absolute) before potentially filtering or reversing
         rows.forEach(function (r, i) { r._index = i; });
-        var data = rows.slice().reverse(); // Don't mutate cache, reverse for "Latest" feel
+        var data = rows.slice();
+        // Chronological order for quests (CH1 to CH15), 
+        // reversed order for others (latest first)
+        if (page !== 'quests') {
+          data.reverse(); 
+        }
         
         // Update global state for On-Demand Rendering
         dataState.fullData = data;

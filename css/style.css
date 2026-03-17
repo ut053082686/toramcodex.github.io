@@ -675,15 +675,53 @@ ul { list-style: none; }
 
 .reward-box {
   margin-top: 0.75rem;
-  padding: 0.6rem;
-  background: rgba(184,134,11,0.05);
+  padding: 0.8rem;
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  border-left: 2px solid var(--accent);
   font-size: 0.82rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.reward-box strong { color: var(--text-primary); }
-.reward-value { color: var(--accent); font-weight: 700; }
+.reward-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.reward-box strong { color: var(--text-primary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.reward-value { color: var(--accent); font-weight: 700; display: block; margin-top: 2px; font-size: 0.9rem; }
+
+/* Premium Quest Card */
+.quest-card {
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quest-card[data-category="main"] { border-left-color: var(--accent); }
+.quest-card[data-category="side"] { border-left-color: var(--el-ice); }
+.quest-card[data-category="daily"] { border-left-color: var(--el-wind); }
+.quest-card[data-category="event"] { border-left-color: var(--rarity-epic); }
+
+.quest-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.quest-card-ep {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: block;
+}
 
 .btn-tiny {
   display: inline-block;
@@ -1436,10 +1474,32 @@ footer {
   50%       { opacity: .45; }
 }
 
+.items-hero {
+  background: linear-gradient(135deg, #334155 0%, #0f172a 100%) !important;
+  padding: 4rem 1rem !important;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-icon {
+  width: 48px;
+  height: 48px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+}
+
 .skeleton {
-  background: var(--bg-card);
-  animation: pulse 1.4s ease-in-out infinite;
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
   border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
 }
 
 /* ============================================================
@@ -1469,6 +1529,62 @@ footer {
 #backToTop:hover   { transform: translateY(-2px); }
 
 /* ============================================================
+   PAGE HERO PREMIUM VARIANTS
+   ============================================================ */
+.quests-hero {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+  padding: 4rem 1rem !important;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(184,134,11,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-search-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  background: rgba(255,255,255,0.05);
+  padding: 0.5rem;
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-search-box .search-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding-left: 1rem;
+}
+
+.hero-search-box input {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 0.8rem 0.5rem !important;
+}
+
+.hero-search-box select {
+  background: var(--bg-card) !important;
+  width: auto !important;
+  min-width: 150px;
+}
+
+/* ============================================================
    PAGINATION STYLES
    ============================================================ */
 .pagination {
@@ -1476,8 +1592,12 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin: 3rem 0;
+  margin: 4rem 0 2rem;
   flex-wrap: wrap;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: rgba(184,134,11,0.03);
+  border: 1px dashed var(--border);
 }
 
 .page-btn {

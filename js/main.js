@@ -215,34 +215,20 @@
     var paginationEl = document.querySelector('.pagination');
     if (!paginationEl) return;
 
-    // First remove all pagination hiding so we can count filter-visible items
-    document.querySelectorAll('.paginated-hide').forEach(function (el) {
-      el.classList.remove('paginated-hide');
-    });
-
-    // Gather items not hidden by filter (style.display set by applyFilter)
-    var allItems = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
-    var visibleItems = allItems.filter(function (el) {
-      return el.style.display !== 'none';
-    });
-
     var totalPages = Math.ceil(filteredData.length / PAGE_SIZE);
-    console.log(`[ToramDB] Paginating: ${filteredData.length} items, Page ${currentPage}/${totalPages}`);
-
-    // Hide pagination if not enough items
+    
+    // Hide pagination if not enough items or data empty
     if (totalPages <= 1) {
       paginationEl.innerHTML = '';
       paginationEl.style.display = 'none';
-      // Only render the filtered items (all of them)
-      window.ToramSheets.renderData(window.ToramSheets.dataState.pageType, filteredData, window.ToramSheets.dataState.containerId);
+      // Render everything (0 or up to 20 items)
+      if (window.ToramSheets.dataState.containerId) {
+        window.ToramSheets.renderData(window.ToramSheets.dataState.pageType, filteredData, window.ToramSheets.dataState.containerId);
+      }
       return;
     }
 
-    // Clamp current page
-    if (currentPage > totalPages) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-
-    paginationEl.style.display = '';
+    paginationEl.style.display = 'flex'; // Ensure visible as flex
 
     // Slice and Render ONLY the 20 items for this page
     var start = (currentPage - 1) * PAGE_SIZE;
