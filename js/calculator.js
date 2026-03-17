@@ -184,7 +184,7 @@
       const resultTableGroup = document.getElementById('resultTableGroup');
       if (spamAdv) {
         resultTableGroup.style.display = 'block';
-        evaluateDiaries(lv, pct, xpRequired, mqXP, mqEnd);
+        evaluateDiaries(lv, pct, xpRequired, mqXP, mqBegin, mqEnd, skipVenena);
       } else {
         resultTableGroup.style.display = 'none';
       }
@@ -194,34 +194,55 @@
     }
   }
 
-  function evaluateDiaries(startLv, startPct, targetXP, questXP, mqEndIndex) {
+  function evaluateDiaries(startLv, startPct, targetXP, questXP, mqBeginIndex, mqEndIndex, skipVenena) {
     const tableBody = document.getElementById('resultTableBody');
     tableBody.innerHTML = '';
-
-    const untilText = document.getElementById('mqUntil').options[document.getElementById('mqUntil').selectedIndex].text;
+    const targetLvl = parseInt(document.getElementById('targetLvl').value) || LV_CAP;
     
     let curLv = startLv;
     let curPct = startPct;
-    let reachedTarget = false;
     let runs = 0;
 
     // Safety limit 200 runs
     while (runs < 200) {
       runs++;
-      [curLv, curPct] = addXP(curLv, curPct, questXP);
-      
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${runs}</td>
-        <td>${untilText}</td>
-        <td>${curLv} (${curPct}%)</td>
-      `;
-      tableBody.appendChild(row);
+      const xpNeededNow = getTotalXP(curLv, curPct, targetLvl);
+      if (xpNeededNow <= 0) break;
 
-      // Check if we hit total XP requirement
-      if (getTotalXP(startLv, startPct, curLv) + (curPct/100 * getXP(curLv)) >= targetXP) {
-        reachedTarget = true;
+      if (questXP >= xpNeededNow) {
+        // Partial run: simulate quest by quest
+        let tLv = curLv;
+        let tPct = curPct;
+        let lastQName = '';
+        
+        for (let i = mqBeginIndex; i <= mqEndIndex; i++) {
+          const q = cachedQuestData[i];
+          let val = q['EXP'] || q['exp'];
+          if (!val && q['Reward']) {
+            const m = q['Reward'].match(/([\d,]+)\s*EXP/i);
+            if (m) val = m[1];
+          }
+          let exp = parseInt((val || '0').toString().replace(/,/g, ''));
+          const name = (q['Name'] || q['name'] || '').toLowerCase();
+          if (name.includes('venena meta coenubia') && !skipVenena) exp += 12500000;
+          
+          [tLv, tPct] = addXP(tLv, tPct, exp);
+          lastQName = q['Name'] || q['name'];
+          if (tLv >= targetLvl) break;
+        }
+        curLv = tLv;
+        curPct = tPct;
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${runs}</td><td>${lastQName}</td><td>${curLv} (${curLv >= LV_CAP ? 0 : curPct}%)</td>`;
+        tableBody.appendChild(row);
         break;
+      } else {
+        [curLv, curPct] = addXP(curLv, curPct, questXP);
+        const untilText = document.getElementById('mqUntil').options[document.getElementById('mqUntil').selectedIndex].text;
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${runs}</td><td>${untilText}</td><td>${curLv} (${curLv >= LV_CAP ? 0 : curPct}%)</td>`;
+        tableBody.appendChild(row);
       }
     }
   }

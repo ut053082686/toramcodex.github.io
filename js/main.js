@@ -135,6 +135,8 @@
       return matchText && matchCat1 && matchCat2 && matchCat3;
     });
 
+    console.log('[ToramDB] Filtering complete. Items shown:', filteredData.length, 'Total data:', fullData.length);
+
     // Refresh display
     renderCurrentView();
   }
@@ -190,7 +192,7 @@
     if (t.includes('ring') || t.includes('charm') || t.includes('spec')) return 'special';
     if (t.includes('crysta')) return 'crysta';
     
-    return t.replace(/\s+/g, '-');
+    return 'other';
   }
 
   if (filterInput)   filterInput.addEventListener('input', onFilterChange);
@@ -224,6 +226,7 @@
     });
 
     var totalPages = Math.ceil(filteredData.length / PAGE_SIZE);
+    console.log(`[ToramDB] Paginating: ${filteredData.length} items, Page ${currentPage}/${totalPages}`);
 
     // Hide pagination if not enough items
     if (totalPages <= 1) {

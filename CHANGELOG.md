@@ -2,6 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.32.0] - 2026-03-17
+### Added
+- "Partial Run" logic in MQ Calculator simulation: The simulation now stops accurately at the quest where the target level is reached, showing the correct final chapter and percentage.
+- Diagnostic logging to `main.js` to help troubleshoot data loading and pagination issues.
+### Fixed
+- Calculator percentage overflow (e.g., 545%) at level cap.
+- Improved Quest category matching in `main.js` to ensure pagination controls appear reliably.
+
 ## [0.31.0] - 2026-03-17
 ### Added
 - Pagination to Quests page (20 items per page).
