@@ -663,27 +663,31 @@ ul { list-style: none; }
 
 /* Quest Specific Enhancements */
 .tag-ch {
-  background: var(--accent);
-  color: #fff;
-  font-size: .65rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 3px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
   font-weight: 700;
   text-transform: uppercase;
-  margin-right: 0.4rem;
+  margin-right: 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .reward-box {
   margin-top: 0.75rem;
-  padding: 0.6rem;
-  background: rgba(184,134,11,0.05);
-  border-radius: var(--radius-sm);
-  border-left: 2px solid var(--accent);
+  padding: 0.75rem;
+  background: #fffbef;
+  border-radius: 8px;
+  border: 1px dashed rgba(184, 134, 11, 0.3);
   font-size: 0.82rem;
+  position: relative;
 }
 
-.reward-box strong { color: var(--text-primary); }
-.reward-value { color: var(--accent); font-weight: 700; }
+.reward-box strong { color: #92400e; display: block; margin-bottom: 2px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.reward-value { color: #b45309; font-weight: 700; font-size: 0.88rem; }
 
 .btn-tiny {
   display: inline-block;

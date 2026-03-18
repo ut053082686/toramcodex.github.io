@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.35.0] - 2026-03-18
+### Fixed
+- **Items Filter Logic**: Updated the filtering for "Drop", "Craft NPC", and "Craft Player" to correctly use the **Rarity** column from Google Sheets, resolving the "No data found" issue.
+- **Quest List Polish**: Refined the visual design of Quest cards for the light theme, including a cleaner `tag-ch` badge and an enhanced `reward-box` for better readability.
+- **Schema Update**: Synchronized the technical mapping documentation to reflect the latest data structure requirements.
+
 ## [0.34.0] - 2026-03-17
 ### Fixed
 - **UI Revert**: Restored the light theme (v0.32.1) for Quests and Items pages as requested by the user.

@@ -119,16 +119,15 @@
         }
       }
 
-      // 4. Category 3 (Source / Drop/Craft)
+      // 4. Category 3 (Source / Drop/Craft) - Using Rarity column per user request
       var matchCat3 = !cat3;
       if (cat3) {
-        var sourceLower = source.toLowerCase();
         if (cat3 === 'drop') {
-          matchCat3 = sourceLower.indexOf('drop') !== -1;
+          matchCat3 = rarity.indexOf('drop') !== -1;
         } else if (cat3 === 'craft-npc') {
-          matchCat3 = sourceLower.indexOf('smith') !== -1 || sourceLower.indexOf('npc') !== -1 || (sourceLower.indexOf('craft') !== -1 && sourceLower.indexOf('player') === -1);
+          matchCat3 = rarity.indexOf('smith') !== -1 || rarity.indexOf('npc') !== -1 || (rarity.indexOf('craft') !== -1 && rarity.indexOf('player') === -1);
         } else if (cat3 === 'craft-player') {
-          matchCat3 = sourceLower.indexOf('player') !== -1;
+          matchCat3 = rarity.indexOf('player') !== -1;
         }
       }
 
