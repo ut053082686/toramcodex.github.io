@@ -20,6 +20,16 @@ window.MonsterModal = (function () {
     return (str || '').replace(/[^a-z0-9]/gi, '_').toLowerCase();
   }
 
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   function elemIcon(el) {
     // Icons removed as per user request
     return '';
@@ -83,7 +93,8 @@ window.MonsterModal = (function () {
 
     try {
       var mon = currentVariant;
-      var name = esc(mon['Name']);
+      var nameRAW = mon['Name'] || '';
+      var name = esc(nameRAW);
       var difficulty = (mon['Difficulty'] || 'Normal').trim();
 
       document.getElementById('monModalName').textContent = name;
@@ -116,7 +127,7 @@ window.MonsterModal = (function () {
         var imgURL = (mon['ImageURL'] || '').trim();
         var icon = mon['Icon'] || '';
         var type = mon['Type'] || '';
-        imageEl.innerHTML = window.ToramSheets.iconHTML(imgURL, icon, type, name);
+        imageEl.innerHTML = window.ToramSheets.iconHTML(imgURL, icon, type, nameRAW);
       } else {
         imageEl.innerHTML = '<span style="font-size:3rem; opacity:0.3;">👾</span>';
       }
