@@ -81,11 +81,12 @@ window.MonsterModal = (function () {
     currentGroup = group;
     currentVariant = selectedVariant || group[0];
 
-    var mon = currentVariant;
-    var name = esc(mon['Name']);
-    var difficulty = (mon['Difficulty'] || 'Normal').trim();
+    try {
+      var mon = currentVariant;
+      var name = esc(mon['Name']);
+      var difficulty = (mon['Difficulty'] || 'Normal').trim();
 
-    document.getElementById('monModalName').textContent = name;
+      document.getElementById('monModalName').textContent = name;
 
     // Difficulty Tabs
     var diffTabs = document.getElementById('monModalDiffTabs');
@@ -174,73 +175,88 @@ window.MonsterModal = (function () {
       return (DIFFICULTY_ORDER[da] || 0) - (DIFFICULTY_ORDER[db] || 0);
     });
 
-    sortedGroup.forEach(function(v) {
-      var d = (v['Difficulty'] || 'Normal').trim();
-      var isCurrent = (v === currentVariant);
-      var row = document.createElement('div');
-      row.className = 'compare-row' + (isCurrent ? ' current' : '');
-      row.innerHTML = 
-        '<div class="compare-diff-info">' + d + '</div>' +
-        '<div class="compare-hp">' + esc(v['HP']) + '</div>';
-      compareRows.appendChild(row);
-    });
+      sortedGroup.forEach(function(v) {
+        var d = (v['Difficulty'] || 'Normal').trim();
+        var isCurrent = (v === currentVariant);
+        var row = document.createElement('div');
+        row.className = 'compare-row' + (isCurrent ? ' current' : '');
+        row.innerHTML = 
+          '<div class="compare-diff-info">' + d + '</div>' +
+          '<div class="compare-hp">' + esc(v['HP']) + '</div>';
+        compareRows.appendChild(row);
+      });
+    } catch(err) {
+      console.error('MonsterModal populate error:', err);
+      document.getElementById('monModalName').textContent = 'Error Populating Data';
+    }
 
-    // Switch Tab if requested
-    if (startTab) {
-      var tabBtn = document.querySelector('.modal-nav-tab[data-tab="' + startTab + '"]');
-      if (tabBtn) tabBtn.click();
+    try {
+      // Switch Tab if requested
+      if (startTab) {
+        var container = document.getElementById('monsterModal');
+        var tabBtn = container.querySelector('.modal-nav-tab[data-tab="' + startTab + '"]');
+        if (tabBtn) tabBtn.click();
+      }
+    } catch(e) {
+      console.error('MonsterModal tab error:', e);
     }
   }
 
   function open(monsterName, difficulty, startTab, initialGroup) {
-    var overlay = document.getElementById('monsterModal');
-    if (!overlay) return;
-    buildModalHTML();
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    try {
+      var overlay = document.getElementById('monsterModal');
+      if (!overlay) return;
+      buildModalHTML();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
 
-    var group = initialGroup || [];
-    
-    // If no initial group, try searching in existing state
-    if (!group.length) {
-      if (window.ToramSheets && window.ToramSheets.dataState && window.ToramSheets.dataState.fullData) {
-        var data = window.ToramSheets.dataState.fullData;
-        group = data.filter(function(r) { 
+      var group = initialGroup || [];
+      
+      // If no initial group, try searching in existing state
+      if (!group.length) {
+        if (window.ToramSheets && window.ToramSheets.dataState && window.ToramSheets.dataState.fullData) {
+          var data = window.ToramSheets.dataState.fullData;
+          group = data.filter(function(r) { 
+            var rname = (r['Name'] || '').trim().toLowerCase();
+            return rname === (monsterName || '').trim().toLowerCase(); 
+          });
+        }
+      }
+      
+      // Fallback to sample if not found
+      if (!group.length && SAMPLE_MONSTERS[monsterName]) {
+        group = SAMPLE_MONSTERS[monsterName];
+      } else if (!group.length && sheetsCache) {
+        group = sheetsCache.filter(function(r) { 
           var rname = (r['Name'] || '').trim().toLowerCase();
           return rname === (monsterName || '').trim().toLowerCase(); 
         });
       }
-    }
-    
-    // Fallback to sample if not found
-    if (!group.length && SAMPLE_MONSTERS[monsterName]) {
-      group = SAMPLE_MONSTERS[monsterName];
-    } else if (!group.length && sheetsCache) {
-      group = sheetsCache.filter(function(r) { 
-        var rname = (r['Name'] || '').trim().toLowerCase();
-        return rname === (monsterName || '').trim().toLowerCase(); 
-      });
-    }
 
-    if (!group.length) {
-      // Last attempt: fetch sheet
-      var sheetName = (window.ToramSheets && window.ToramSheets.CONFIG.SHEETS.monsters) || 'Monsters';
-      if (window.ToramSheets && window.ToramSheets.fetchSheet) {
-          window.ToramSheets.fetchSheet(sheetName).then(function(csv){
-              sheetsCache = window.ToramSheets.parseCSV(csv);
-              open(monsterName, difficulty, startTab); 
-          }).catch(function(){
-              populate(null);
-          });
-          return;
+      if (!group.length) {
+        // Last attempt: fetch sheet
+        var sheetName = (window.ToramSheets && window.ToramSheets.CONFIG.SHEETS.monsters) || 'Monsters';
+        if (window.ToramSheets && window.ToramSheets.fetchSheet) {
+            window.ToramSheets.fetchSheet(sheetName).then(function(csv){
+                sheetsCache = window.ToramSheets.parseCSV(csv);
+                open(monsterName, difficulty, startTab); 
+            }).catch(function(){
+                populate(null);
+            });
+            return;
+        }
       }
-    }
 
-    var selected = null;
-    if (difficulty && group.length) {
-      selected = group.find(function(v) { return (v['Difficulty'] || '').toLowerCase() === difficulty.toLowerCase(); });
+      var selected = null;
+      if (difficulty && group.length) {
+        selected = group.find(function(v) { return (v['Difficulty'] || '').toLowerCase() === difficulty.toLowerCase(); });
+      }
+      populate(group, selected, startTab);
+    } catch(err) {
+      console.error('MonsterModal open error:', err);
+      var nameEl = document.getElementById('monModalName');
+      if(nameEl) nameEl.textContent = 'Error Opening Modal';
     }
-    populate(group, selected, startTab);
   }
 
   function close() {

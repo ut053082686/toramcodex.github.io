@@ -514,25 +514,29 @@ window.ToramSheets = (function () {
 
     // Click handler for grid
     grid.addEventListener('click', function (e) {
-      var card = e.target.closest('.monster-card');
-      if (!card) return;
+      try {
+        var card = e.target.closest('.monster-card');
+        if (!card) return;
 
-      var mName = card.dataset.monsterName;
-      var variants = JSON.parse(card.dataset.variants || '[]');
+        var mName = card.dataset.monsterName;
+        var variants = JSON.parse(card.dataset.variants || '[]');
 
-      // Details or Card body click -> Modal open
-      var isCompare = e.target.closest('[data-action="compare"]');
-      var isDrop    = e.target.closest('[data-drop-name]');
-      
-      if (isDrop) {
-        var itemName = e.target.closest('[data-drop-name]').dataset.dropName;
-        if (window.ItemModal) window.ItemModal.open(itemName);
-        return;
-      }
+        // Details or Card body click -> Modal open
+        var isCompare = e.target.closest('[data-action="compare"]');
+        var isDrop    = e.target.closest('[data-drop-name]');
+        
+        if (isDrop) {
+          var itemName = e.target.closest('[data-drop-name]').dataset.dropName;
+          if (window.ItemModal) window.ItemModal.open(itemName);
+          return;
+        }
 
-      if (window.MonsterModal) {
-        // Pass variants directly from card dataset to avoid lookup issues
-        window.MonsterModal.open(mName, null, isCompare ? 'compare' : 'info', variants);
+        if (window.MonsterModal) {
+          // Pass variants directly from card dataset to avoid lookup issues
+          window.MonsterModal.open(mName, null, isCompare ? 'compare' : 'info', variants);
+        }
+      } catch(err) {
+        console.error('Monster grid click error:', err);
       }
     });
   }
