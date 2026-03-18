@@ -645,8 +645,10 @@ window.ItemModal = (function () {
       return;
     }
 
-    var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
-    pendingItemDetailsFetch = window.ToramSheets.fetchSheet(sheetName)
+    var s = window.ToramSheets.CONFIG.SHEETS.itemdetails;
+    var sName = (s && s.name) ? s.name : 'ItemDetails';
+    var sGid = (s && s.gid) ? s.gid : '';
+    pendingItemDetailsFetch = window.ToramSheets.fetchSheet(sName, sGid)
       .then(function (csv) {
         sheetsCache = window.ToramSheets.parseCSV(csv);
         sheetsCache.forEach(function(r, i) { r._index = i; });
