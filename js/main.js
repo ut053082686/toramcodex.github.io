@@ -227,7 +227,16 @@
     applyFilter();
   });
 
-  /* ---------- Pagination ---------- */
+  /* ---------- Global Boss Link Listener (for Quest cards) ---------- */
+  document.addEventListener('click', function (e) {
+    var bossLink = e.target.closest('.boss-link');
+    if (bossLink && bossLink.dataset.bossName && window.MonsterModal) {
+      e.preventDefault();
+      window.MonsterModal.open(bossLink.dataset.bossName);
+    }
+  });
+
+  /* ---------- Initialization ---------- */
   var PAGE_SIZE = 20;
   var currentPage = 1;
   var paginationEl = document.querySelector('.pagination');

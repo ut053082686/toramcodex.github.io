@@ -2,6 +2,16 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.40.0] - 2026-03-18
+### Added
+- **Quest UI Redesign**: Completely overhauled the Quest card layout into a 4-row structure:
+  1. Icon | Chapter info
+  2. Quest Category (Main/Side)
+  3. Episode XX : Quest Name
+  4. Boss info (Clickable link to Monster Modal)
+- **Interactive Bosses**: Quest boss names are now interactive links that open the monster detail popup when clicked.
+- **EXP Calculator Safety**: Verified and ensured that UI changes do not interfere with the EXP calculator logic.
+
 ## [0.39.0] - 2026-03-18
 ### Fixed
 - **Item Badge Layout**: Resolved the issue where item badges (Rarity, Drop, Stats) were stacked vertically. Implemented a horizontal `.tag-row` container to ensure cards look cleaner and badges are aligned 'Event | Drop' style.
