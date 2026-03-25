@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.45.0] - 2026-03-25
+### Added
+- **Featured Showcase (Homepage)**: Redesigned the "Featured" section from a single large card to a responsive **3-column Grid**.
+- **Multi-Featured Support**: Users can now highlight up to 3 different entries (Items, Monsters, Pets) simultaneously via the Google Sheets `Homepage` tab.
+- **Showcase Cards**: New vertical card design with large icons and accent borders for highlighted content.
+
 ## [0.44.1] - 2026-03-25
 ### Fixed
 - **Pet Event Highlighting**: Forced the "Spawn At" tags to display as **Orange** for events and **Grey** for standard maps using direct inline styling, ensuring a consistent premium look regardless of CSS caching.

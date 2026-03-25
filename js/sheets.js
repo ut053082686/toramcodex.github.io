@@ -912,14 +912,14 @@ window.ToramSheets = (function () {
         if (!rows || !rows.length) return;
 
         var categories = [];
-        var featured   = null;
+        var featured   = [];
         var stats      = [];
         var popularMonsters = [];
 
         rows.forEach(function (row) {
           var section = (row['Section'] || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
           if (section === 'category')         categories.push(row);
-          else if (section === 'featured')    featured = row;
+          else if (section === 'featured')    featured.push(row);
           else if (section === 'stat')        stats.push(row);
           else if (section === 'popular_monster') popularMonsters.push(row);
         });
@@ -957,54 +957,66 @@ window.ToramSheets = (function () {
           }
         }
 
-        // --- Render featured/spotlight ---
-        if (featured) {
-          var spot = document.getElementById('spotlightCard');
-          if (spot) {
-            var fname   = esc(featured['Name']        || '');
-            var ficon   = featured['Icon']             || '🗡️';
-            var fimgURL = (featured['ImageURL']        || '').trim();
-            var ftype   = esc(featured['Type']         || '');
-            var flevel  = esc(featured['Level']        || '');
-            var frarity = esc(featured['Rarity']       || '');
-            var fstats  = esc(featured['Stats']        || '');
-            var fdesc   = esc(featured['Description']  || '');
-            var flink   = featured['Link']             || 'pages/items.html';
+        // --- Render featured/spotlight grid ---
+        if (featured.length) {
+          var grid = document.getElementById('spotlightGrid');
+          if (grid) {
+            grid.innerHTML = '';
+            // Limit to top 3 featured items
+            featured.slice(0, 3).forEach(function (f) {
+              var fname   = esc(f['Name']         || '');
+              var ficon   = f['Icon']              || '🗡️';
+              var fimgURL = (f['ImageURL']         || '').trim();
+              var ftype   = esc(f['Type']          || '');
+              var flevel  = esc(f['Level']         || '');
+              var frarity = esc(f['Rarity']        || '');
+              var fstats  = esc(f['Stats']         || '');
+              var fdesc   = esc(f['Description']   || '');
+              var flink   = f['Link']              || 'pages/items.html';
 
-            var errHandler = 'onerror="this.onerror=null;this.src=\'' + (ICON_BASE + 'no_image.png') + '\';this.style.opacity=\'0.6\';"';
-            var spotIcon;
-            if (fimgURL) {
-              spotIcon = '<img src="' + esc(fimgURL) + '" alt="' + fname + '" ' + errHandler + ' />';
-            } else {
-              spotIcon = esc(ficon);
-            }
+              var errHandler = 'onerror="this.onerror=null;this.src=\'' + (ICON_BASE + 'no_image.png') + '\';this.style.opacity=\'0.6\';"';
+              var spotIcon;
+              if (fimgURL) {
+                spotIcon = '<img src="' + esc(fimgURL) + '" alt="' + fname + '" ' + errHandler + ' />';
+              } else {
+                spotIcon = esc(ficon);
+              }
 
-            var frarityHTML = '';
-            if (frarity) {
-              frarity.split(';').forEach(function(rp) {
-                rp = rp.trim();
-                if (rp) {
-                  var rc = rarityClass(rp);
-                  var tagClass = rc ? 'tag ' + rc : 'tag';
-                  frarityHTML += '<span class="' + tagClass + '">' + esc(rp) + '</span> ';
-                }
-              });
-            }
+              var frarityHTML = '';
+              if (frarity) {
+                frarity.split(';').forEach(function(rp) {
+                  rp = rp.trim();
+                  if (rp) {
+                    var rc = rarityClass(rp);
+                    var tagClass = rc ? 'tag ' + rc : 'tag';
+                    frarityHTML += '<span class="' + tagClass + '">' + esc(rp) + '</span> ';
+                  }
+                });
+              }
 
-            spot.innerHTML =
-              '<div class="spotlight-icon">' + spotIcon + '</div>' +
-              '<div class="spotlight-info">' +
-                '<p class="title">' + (flevel ? 'Lv.' + flevel + ' ' : '') + fname + '</p>' +
-                '<div class="tag-row" style="margin-bottom:0.5rem">' +
-                  frarityHTML +
-                  (ftype   ? '<span class="tag">' + ftype + '</span>' : '') +
-                  (fstats  ? '<span class="tag green">' + fstats + '</span>' : '') +
+              var card = document.createElement('article');
+              card.className = 'data-card spotlight-grid-card';
+              card.style.borderLeft = '4px solid var(--accent)';
+              card.innerHTML =
+                '<div class="data-card-header">' +
+                  '<div class="data-card-icon" style="background:rgba(184,134,11,.1);font-size:1.8rem">' + spotIcon + '</div>' +
+                  '<div>' +
+                    '<div class="data-card-title">' + (flevel ? 'Lv.' + flevel + ' ' : '') + fname + '</div>' +
+                    '<div class="tag-row" style="margin-top:4px">' +
+                      frarityHTML +
+                      (ftype ? '<span class="tag">' + ftype + '</span>' : '') +
+                    '</div>' +
+                  '</div>' +
                 '</div>' +
-                (fdesc ? '<p class="text-muted" style="font-size:.875rem">' + fdesc + '</p>' : '') +
-                '<div class="mt-2">' +
-                  '<a href="' + esc(flink) + '" class="btn btn-outline" style="font-size:.85rem;padding:.45rem 1rem">View Details →</a>' +
-                '</div>' +
-              '</div>';
+                '<div class="data-card-body">' +
+                  (fstats ? '<div class="tag-row mb-2"><span class="tag green">' + fstats + '</span></div>' : '') +
+                  (fdesc ? '<p class="text-muted" style="line-height:1.4;margin-bottom:1rem">' + fdesc + '</p>' : '') +
+                  '<div style="margin-top:auto">' +
+                    '<a href="' + esc(flink) + '" class="btn btn-outline" style="width:100%;text-align:center;font-size:0.85rem;padding:0.5rem">View Details →</a>' +
+                  '</div>' +
+                '</div>';
+              grid.appendChild(card);
+            });
           }
         }
 
