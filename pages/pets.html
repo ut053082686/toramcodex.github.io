@@ -124,8 +124,8 @@
     </div>
   </div>
 
-  <script src="../js/sheets.js?v=3.11"></script>
-  <script src="../js/main.js?v=3.11"></script>
+  <script src="../js/sheets.js?v=3.12"></script>
+  <script src="../js/main.js?v=3.12"></script>
   <script>
     // Grid filter for pets
     (function () {
@@ -200,16 +200,13 @@
       function openModal(card) {
         var d = card.dataset;
 
-        var errHandler = 'onerror="this.onerror=null;this.src=\'../img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
-        // Render large pet image (or emoji fallback)
+        // Render pet icon/image using the shared helper for consistency
         var imgEl = document.getElementById('pmImage');
-        if (d.petImg) {
-          imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" ' + errHandler + ' style="width:120px;height:120px;object-fit:contain;border-radius:8px;margin:0 auto" />';
-        } else if (d.petEmoji && (d.petEmoji.indexOf('/') !== -1 || d.petEmoji.indexOf('.png') !== -1)) {
-          imgEl.innerHTML = '<img src="' + esc(d.petEmoji) + '" alt="' + esc(d.petName) + '" ' + errHandler + ' style="width:120px;height:120px;object-fit:contain;opacity:0.8;margin:0 auto" />';
-        } else {
-          imgEl.innerHTML = '<span style="font-size:4rem">' + esc(d.petEmoji) + '</span>';
-        }
+        var iconHTML = ToramSheets.iconHTML(d.petImg, d.petEmoji, 'item', d.petName, 'contain');
+        
+        // Wrap it in a styled container for neatness
+        imgEl.innerHTML = '<div class="data-card-icon" style="width:100px;height:100px;margin:0 auto 1rem;font-size:3rem">' + iconHTML + '</div>';
+
         document.getElementById('pmName').textContent = d.petName;
         document.getElementById('pmSubtitle').textContent = d.petLevel ? 'Lv. ' + d.petLevel + (d.petSpawn ? ' · ' + d.petSpawn : '') : (d.petSpawn || '');
 
