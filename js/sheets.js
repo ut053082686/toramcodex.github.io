@@ -711,22 +711,11 @@ window.ToramSheets = (function () {
     });
   }
 
-  function renderPets(rows, tbody) {
-    tbody.innerHTML = '';
+  function renderPets(rows, container) {
+    container.innerHTML = '';
     if (!rows.length) {
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td colspan="3" class="text-muted" style="padding:1rem">No pet data found. Check your Sheet ID and column headers (Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1-Act5, ColorInfo).</td>';
-      tbody.appendChild(tr);
+      container.innerHTML = '<p class="text-muted" style="grid-column:1/-1;padding:1rem 0">No pet data found. Check your Sheet ID and column headers (Name, Icon, ImageURL, Level, SpawnAt, NormalMagic, Support, Act1-Act5, ColorInfo).</p>';
       return;
-    }
-
-    // Update thead
-    var table = tbody.closest('table');
-    if (table) {
-      var thead = table.querySelector('thead tr');
-      if (thead) {
-        thead.innerHTML = '<th>Pet</th><th>Level</th><th>Spawn At</th>';
-      }
     }
 
     rows.forEach(function (row, idx) {
@@ -749,40 +738,47 @@ window.ToramSheets = (function () {
         return '';
       };
 
-      var name    = esc(get('Name'));
+      var name    = get('Name');
       var icon    = (get('Icon') || '').trim();
       var imgURL  = (get('ImageURL')).trim();
       var level   = get('Level');
       var spawnAt = get('SpawnAt');
 
-      var petIcon = imgURL
-        ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:48px;height:48px;object-fit:contain;border-radius:4px;vertical-align:middle;margin-right:6px" />'
-        : (icon || '\uD83D\uDC3E') + ' ';
+      // Use shared iconHTML helper for professional avatars
+      var avatarHTML = iconHTML(imgURL, icon, 'item', name, 'contain');
 
-      var tr = document.createElement('tr');
-      tr.dataset.filter = name.toLowerCase();
-      tr.style.cursor = 'pointer';
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.filter = name.toLowerCase();
+      
+      // Store full detail data for modal
+      card.dataset.petName    = name;
+      card.dataset.petImg     = imgURL;
+      card.dataset.petEmoji   = icon;
+      card.dataset.petLevel   = level;
+      card.dataset.petSpawn   = spawnAt;
+      card.dataset.petNmagic  = (get('NormalMagic')).trim();
+      card.dataset.petSupport = (get('Support')).trim();
+      card.dataset.petAct1    = (get(['Act1', 'Act 1'])).trim();
+      card.dataset.petAct2    = (get(['Act2', 'Act 2'])).trim();
+      card.dataset.petAct3    = (get(['Act3', 'Act 3'])).trim();
+      card.dataset.petAct4    = (get(['Act4', 'Act 4'])).trim();
+      card.dataset.petAct5    = (get(['Act5', 'Act 5'])).trim();
+      card.dataset.petColor   = (get(['ColorInfo', 'Color Info'])).trim();
 
-      // Store full detail data for modal (Unescaped for logic)
-      tr.dataset.petName    = get('Name');
-      tr.dataset.petImg     = imgURL;
-      tr.dataset.petEmoji   = icon || '\uD83D\uDC3E';
-      tr.dataset.petLevel   = level;
-      tr.dataset.petSpawn   = spawnAt;
-      tr.dataset.petNmagic  = (get('NormalMagic')).trim();
-      tr.dataset.petSupport = (get('Support')).trim();
-      tr.dataset.petAct1    = (get(['Act1', 'Act 1'])).trim();
-      tr.dataset.petAct2    = (get(['Act2', 'Act 2'])).trim();
-      tr.dataset.petAct3    = (get(['Act3', 'Act 3'])).trim();
-      tr.dataset.petAct4    = (get(['Act4', 'Act 4'])).trim();
-      tr.dataset.petAct5    = (get(['Act5', 'Act 5'])).trim();
-      tr.dataset.petColor   = (get(['ColorInfo', 'Color Info'])).trim();
+      card.innerHTML =
+        '<div class="card-icon">' + avatarHTML + '</div>' +
+        '<div class="card-content">' +
+          '<div class="card-header">' +
+            '<h3 class="card-title">' + esc(name) + '</h3>' +
+            '<span class="card-badge">Lv.' + esc(level) + '</span>' +
+          '</div>' +
+          '<div class="card-info">' +
+            '<span class="info-item">📍 ' + esc(spawnAt) + '</span>' +
+          '</div>' +
+        '</div>';
 
-      tr.innerHTML =
-        '<td><span class="pet-name">' + petIcon + name + '</span></td>' +
-        '<td data-label="Level"><span class="tag">' + level + '</span></td>' +
-        '<td data-label="Spawn At">' + spawnAt + '</td>';
-      tbody.appendChild(tr);
+      container.appendChild(card);
     });
   }
 

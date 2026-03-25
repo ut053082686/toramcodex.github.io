@@ -70,35 +70,8 @@
         <input type="search" id="filterInput" class="search-sync" placeholder="Search pet name…" aria-label="Filter by name" />
       </div>
 
-      <!-- Table view for pets -->
-      <div class="table-wrap" id="petsTableWrapDiv">
-        <table id="petsTableWrap">
-          <thead>
-            <tr>
-              <th>Pet</th>
-              <th>Level</th>
-              <th>Spawn At</th>
-            </tr>
-          </thead>
-          <tbody id="petsTable">
-            <tr data-filter="cerberus pup" data-pet-name="Cerberus Pup" data-pet-emoji="🐕" data-pet-img="" data-pet-level="120" data-pet-spawn="Lava Valley" data-pet-nmagic="No" data-pet-support="5%" data-pet-act1="Fire Bite" data-pet-act2="Guard" data-pet-act3="" data-pet-act4="" data-pet-act5="" data-pet-color="Red/Black" style="cursor:pointer">
-              <td><span class="pet-name">🐕 Cerberus Pup</span></td>
-              <td data-label="Level"><span class="tag">120</span></td>
-              <td data-label="Spawn At">Lava Valley</td>
-            </tr>
-            <tr data-filter="frost owl" data-pet-name="Frost Owl" data-pet-emoji="🦉" data-pet-img="" data-pet-level="180" data-pet-spawn="Frozen Tundra" data-pet-nmagic="Yes" data-pet-support="8%" data-pet-act1="Ice Gust" data-pet-act2="Heal" data-pet-act3="Screech" data-pet-act4="" data-pet-act5="" data-pet-color="White/Blue" style="cursor:pointer">
-              <td><span class="pet-name">🦉 Frost Owl</span></td>
-              <td data-label="Level"><span class="tag">180</span></td>
-              <td data-label="Spawn At">Frozen Tundra</td>
-            </tr>
-            <tr data-filter="spirit fox" data-pet-name="Spirit Fox" data-pet-emoji="🦊" data-pet-img="" data-pet-level="200" data-pet-spawn="Spirit Forest" data-pet-nmagic="Yes" data-pet-support="12%" data-pet-act1="Spirit Claw" data-pet-act2="Reflect" data-pet-act3="Heal" data-pet-act4="Swift" data-pet-act5="" data-pet-color="Gold/White" style="cursor:pointer">
-              <td><span class="pet-name">🦊 Spirit Fox</span></td>
-              <td data-label="Level"><span class="tag">200</span></td>
-              <td data-label="Spawn At">Spirit Forest</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Card Grid for pets -->
+      <div id="petsGrid" class="card-grid"></div>
 
       <div class="pagination" role="navigation" aria-label="Pagination"></div>
     </div>
@@ -151,38 +124,38 @@
     </div>
   </div>
 
-  <script src="../js/sheets.js?v=3.8"></script>
-  <script src="../js/main.js?v=3.8"></script>
+  <script src="../js/sheets.js?v=3.9"></script>
+  <script src="../js/main.js?v=3.9"></script>
   <script>
-    // Table filter for pets — same pattern as monsters page.
+    // Grid filter for pets
     (function () {
       var filterInput  = document.getElementById('filterInput');
       var filterSelect = document.getElementById('filterSelect');
-      var tbody        = document.getElementById('petsTable');
+      var grid         = document.getElementById('petsGrid');
 
-      function applyTableFilter() {
+      function applyGridFilter() {
         var q    = filterInput  ? filterInput.value.toLowerCase()  : '';
         var elem = filterSelect ? filterSelect.value.toLowerCase() : '';
-        tbody.querySelectorAll('tr').forEach(function (row) {
-          var text = (row.dataset.filter   || '').toLowerCase();
-          var cat  = (row.dataset.category || '').toLowerCase();
+        grid.querySelectorAll('.card').forEach(function (card) {
+          var text = (card.dataset.filter   || '').toLowerCase();
+          var cat  = (card.dataset.category || '').toLowerCase();
           var ok = (!q    || text.includes(q))
                 && (!elem || cat === elem);
-          row.style.display = ok ? '' : 'none';
+          card.style.display = ok ? '' : 'none';
         });
       }
 
-      if (filterInput)  filterInput.addEventListener('input',  applyTableFilter);
-      if (filterSelect) filterSelect.addEventListener('change', applyTableFilter);
-      document.addEventListener('sheetsrendered', applyTableFilter);
+      if (filterInput)  filterInput.addEventListener('input',  applyGridFilter);
+      if (filterSelect) filterSelect.addEventListener('change', applyGridFilter);
+      document.addEventListener('sheetsrendered', applyGridFilter);
     }());
 
-    ToramSheets.load('pets', 'petsTable');
+    ToramSheets.load('pets', 'petsGrid');
 
     // ---- Pet detail modal ----
     (function () {
       var overlay = document.getElementById('petModal');
-      var tbody   = document.getElementById('petsTable');
+      var grid    = document.getElementById('petsGrid');
 
       function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -224,8 +197,8 @@
         return esc(c);
       }
 
-      function openModal(tr) {
-        var d = tr.dataset;
+      function openModal(card) {
+        var d = card.dataset;
 
         var errHandler = 'onerror="this.onerror=null;this.src=\'../img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
         // Render large pet image (or emoji fallback)
@@ -274,9 +247,9 @@
       overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
 
-      tbody.addEventListener('click', function (e) {
-        var tr = e.target.closest('tr');
-        if (tr && tr.dataset.petName) openModal(tr);
+      grid.addEventListener('click', function (e) {
+        var card = e.target.closest('.card');
+        if (card && card.dataset.petName) openModal(card);
       });
     }());
   </script>
