@@ -479,7 +479,7 @@ window.ItemModal = (function () {
           else if (mLow === 'mana')  { mIcon = modalIconBase + 'mana_ico.png'; mUseImg = true; }
           else if (mLow === 'beast') { mIcon = modalIconBase + 'beast_ico.png'; mUseImg = true; }
           else if (mLow === 'medicine') { mIcon = modalIconBase + 'medicine_ico.png'; mUseImg = true; }
-          else if (mLow === 'fee')   { mIcon = '💰'; }
+          else if (mLow === 'fee')   { mIcon = modalIconBase + 'fee_ico.png'; mUseImg = true; }
           else {
              var matchItem = findInCache(match.itemName);
              mIcon = matchItem ? (window.ToramSheets ? window.ToramSheets.resolveIcon(matchItem['Type']) : '⚒️') : '⚒️';
@@ -526,7 +526,7 @@ window.ItemModal = (function () {
         else if (iLow === 'mana')  { iIcon = modalIconBase + 'mana_ico.png'; iUseImg = true; }
         else if (iLow === 'beast') { iIcon = modalIconBase + 'beast_ico.png'; iUseImg = true; }
         else if (iLow === 'medicine') { iIcon = modalIconBase + 'medicine_ico.png'; iUseImg = true; }
-        else if (iLow === 'fee')   { iIcon = '💰'; }
+        else if (iLow === 'fee')   { iIcon = modalIconBase + 'fee_ico.png'; iUseImg = true; }
         else {
           var ingItem = findInCache(itemName);
           iIcon = ingItem ? (window.ToramSheets ? window.ToramSheets.resolveIcon(ingItem['Type']) : '🧪') : '🧪';

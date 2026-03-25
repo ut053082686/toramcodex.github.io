@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.46.0] - 2026-03-25
+### Added
+- **Custom Icon Assets**: Integrated official `quest_ico.png`, `pets_ico.png`, and `fee_ico.png` across the entire platform.
+- **Visual Overhaul**: Replaced Quest and Pet emojis with high-quality icon assets in the homepage categories, mobile menus, and page headers.
+- **Default Fallback Logic**: Refactored `sheets.js` and `modal.js` to use these new icons as the default representation for Quest items, Pets, and Crafting Fees if no specific icon is provided in the Sheet.
+
 ## [0.45.0] - 2026-03-25
 ### Added
 - **Featured Showcase (Homepage)**: Redesigned the "Featured" section from a single large card to a responsive **3-column Grid**.

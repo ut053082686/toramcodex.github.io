@@ -227,7 +227,9 @@ window.ToramSheets = (function () {
     // Non-equipment (emoji)
     'material':       '⛏️',
     'consumable':     '🧪',
-    'quest item':     '📦',
+    'quest item':     'img/icons/quest_ico.png',
+    'quest':          'img/icons/quest_ico.png',
+    'pet':            'img/icons/pets_ico.png',
     // Monster types
     'boss':           'img/icons/monsters_ico.png',
     'mini-boss':      'img/icons/monsters_ico.png',
@@ -242,6 +244,8 @@ window.ToramSheets = (function () {
     // Fallback if type is not specifically in TYPE_ICONS
     if (!icon) {
        if (t.indexOf('boss') !== -1 || t === 'monster' || t === 'mob') icon = 'img/icons/monsters_ico.png';
+       else if (t.indexOf('quest') !== -1) icon = 'img/icons/quest_ico.png';
+       else if (t.indexOf('pet') !== -1) icon = 'img/icons/pets_ico.png';
        else icon = 'img/icons/items_ico.png'; // Generic item fallback
     }
 
@@ -666,7 +670,7 @@ window.ToramSheets = (function () {
       // Row 4: Boss : Boss name (Clickable)
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest icon', name) + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest', name) + '</div>' +
           '<div class="tag-row">' +
              (ch ? '<span class="tag-ch">Ch.' + ch + '</span>' : '<span class="tag-ch">Story</span>') +
              '<span class="tag-type">' + typeRaw + '</span>' +
@@ -745,7 +749,7 @@ window.ToramSheets = (function () {
       var spawnAt = get('SpawnAt');
 
       // Use shared iconHTML helper for professional avatars
-      var avatarHTML = iconHTML(imgURL, icon, 'item', name, 'contain');
+      var avatarHTML = iconHTML(imgURL, icon, 'pet', name, 'contain');
 
       var card = document.createElement('div');
       card.className = 'data-card';
