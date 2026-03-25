@@ -837,6 +837,30 @@ ul { list-style: none; }
   padding: 0.2rem 0.5rem;
 }
 
+.f-cond-group {
+  margin-bottom: 0.6rem;
+}
+
+.f-cond-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #b8860b; 
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.02em;
+}
+
+.f-cond-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.f-cond-value.positive { color: #16a34a; font-weight: 600; }
+.f-cond-value.negative { color: #dc2626; font-weight: 600; }
+
 /* Element tags */
 .tag.red,
 .tag.fire       { background: rgba(217,75,26,.1);  color: var(--el-fire); }

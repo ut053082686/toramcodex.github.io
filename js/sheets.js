@@ -1007,16 +1007,11 @@ window.ToramSheets = (function () {
                   st = st.trim();
                   if (!st) return;
 
-                  var displayStat = st;
-                  var isCond = st.charAt(0) === '>';
-                  
-                  if (isCond) {
-                    displayStat = st.substring(1).trim();
-                    var colorClass = (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) ? ' red' : ' green';
-                    condBadges.push('<span class="tag' + colorClass + ' conditional">' + esc(displayStat) + '</span>');
+                  if (st.charAt(0) === '>') {
+                    condBadges.push(st.substring(1).trim());
                   } else {
-                    var colorClass = (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) ? ' red' : ' green';
-                    normalBadges.push('<span class="tag' + colorClass + '">' + esc(displayStat) + '</span>');
+                    var colorClass = (st.indexOf(':-') !== -1 || (st.indexOf(':') === -1 && st.indexOf('-') === 0)) ? ' red' : ' green';
+                    normalBadges.push('<span class="tag' + colorClass + '">' + esc(st) + '</span>');
                   }
                 });
 
@@ -1031,12 +1026,40 @@ window.ToramSheets = (function () {
                     '</div>';
                 }
 
-                // 2. Conditional Stats Section
+                // 2. Conditional Stats Section (Modal Style)
                 if (condBadges.length) {
-                  fstatsHTML += '<div class="conditional-section">' +
-                    '<div class="conditional-label">Bonus Info:</div>' +
-                    '<div class="tag-row">' + condBadges.join('') + '</div>' +
-                  '</div>';
+                  var condHTML = '';
+                  condBadges.forEach(function(cb) {
+                    var parts = cb.split(':');
+                    if (parts.length >= 3) {
+                      // >Section:Name:Value
+                      var section = parts[0].trim();
+                      var sName   = parts[1].trim();
+                      var sValue  = parts[2].trim();
+                      var color   = (sValue.charAt(0) === '-' || sValue.indexOf(':-') !== -1) ? 'negative' : 'positive';
+                      
+                      condHTML += '<div class="f-cond-group">' +
+                        '<div class="f-cond-label">' + esc(section) + ':</div>' +
+                        '<div class="f-cond-row">' +
+                          '<span>' + esc(sName) + '</span>' +
+                          '<span class="f-cond-value ' + color + '">' + esc(sValue) + '</span>' +
+                        '</div>' +
+                      '</div>';
+                    } else if (parts.length === 2) {
+                      // >Name:Value
+                      var sName  = parts[0].trim();
+                      var sValue = parts[1].trim();
+                      var color  = (sValue.charAt(0) === '-' || sValue.indexOf(':-') !== -1) ? 'negative' : 'positive';
+                      
+                      condHTML += '<div class="f-cond-row">' +
+                        '<span>' + esc(sName) + '</span>' +
+                        '<span class="f-cond-value ' + color + '">' + esc(sValue) + '</span>' +
+                      '</div>';
+                    } else {
+                      condHTML += '<div class="f-cond-row"><span>' + esc(cb) + '</span></div>';
+                    }
+                  });
+                  fstatsHTML += '<div class="conditional-section">' + condHTML + '</div>';
                 }
               }
 

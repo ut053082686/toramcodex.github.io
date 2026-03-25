@@ -2,6 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.53.0] - 2026-03-25
+### Added
+- **Modal-Style Conditional Stats (v3.23)**: 
+  - Upgraded conditional cards to use structured rows (Label + Name/Value) instead of badges.
+  - Implemented gold-colored section labels for mastery/requirements.
+  - Added left/right alignment for stat name and value with bottom dividers.
+  - Mirrored the premium look of the item detail modals onto the homepage grid.
+
 ## [0.52.0] - 2026-03-25
 ### Added
 - **Organized Featured Stats (v3.22)**: 
