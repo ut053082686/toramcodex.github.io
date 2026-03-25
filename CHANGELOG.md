@@ -2,12 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
-## [0.56.0] - 2026-03-25
-### Fixed
-- **Grouped Modal Stats (v3.26)**: 
-  - Refactored item modal stat rendering to support grouped conditional requirements.
-  - Fixed inconsistent indentation and repeating headers for mastery/bonus sections.
-  - Implemented robust regex-splitting to handle dense spreadsheet data in modals.
+## [0.56.0] - 2026-03-26
+### Added
+- **Modernized Featured Showcase & Modal Stats**: 
+  - **Grouped Conditional Stats**: Stat bonus (seperti Mastery) kini dikelompokkan otomatis di bawah satu judul kategori yang rapi.
+  - **Modal-Style Layout**: Tampilan stat kondisional di homepage dan modal detail item kini menggunakan baris terstruktur (bukan badge) dengan indentasi profesional.
+  - **Smart Badge Limiter**: Card featured kini membatasi maksimal 6 badge stat normal dengan indikator `+X more` agar tetap bersih.
+  - **Robust Parsing**: Peningkatan deteksi stat yang lebih toleran terhadap kesalahan penulisan (tanpa titik koma) di spreadsheet.
+- **Mobile UI Fixes**: Standarisasi jarak menu navigasi dan pembaruan ikon Quest/Pet pada tampilan mobile.
 
 ## [0.55.0] - 2026-03-25
 ### Fixed
