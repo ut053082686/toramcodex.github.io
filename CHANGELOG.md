@@ -2,6 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.52.0] - 2026-03-25
+### Added
+- **Organized Featured Stats (v3.22)**: 
+  - Separated "Normal Stats" from "Conditional Stats" (Bonus Info).
+  - Implemented 6-badge limit for normal stats with a `+X more` overflow indicator.
+  - Added dedicated UI section for conditional modifiers (Bonus Info) with vertical separation.
+  - Refined badge typography and spacing for the homepage grid.
+
 ## [0.51.0] - 2026-03-25
 ### Fixed
 - **Featured Stats Parsing (v3.21)**: 

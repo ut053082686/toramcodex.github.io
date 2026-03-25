@@ -805,6 +805,38 @@ ul { list-style: none; }
 .tag.conditional   { border-style: dashed; }
 .tag.red           { background: rgba(239,68,68,.1); color: #dc2626; border-color: rgba(239,68,68,.2); }
 
+.stats-more {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-left: 0.4rem;
+  background: var(--bg-base);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px dashed var(--border);
+}
+
+.conditional-section {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.conditional-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+
+/* Homepage specific tag refinement */
+.spotlight-grid-card .tag {
+  font-size: 0.68rem;
+  padding: 0.2rem 0.5rem;
+}
+
 /* Element tags */
 .tag.red,
 .tag.fire       { background: rgba(217,75,26,.1);  color: var(--el-fire); }

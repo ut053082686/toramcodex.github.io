@@ -1000,28 +1000,44 @@ window.ToramSheets = (function () {
 
               var fstatsHTML = '';
               if (fstats) {
+                var normalBadges = [];
+                var condBadges = [];
+                
                 fstats.split(';').forEach(function(st) {
                   st = st.trim();
                   if (!st) return;
 
                   var displayStat = st;
-                  var extraClass = '';
-
-                  if (st.charAt(0) === '>') {
+                  var isCond = st.charAt(0) === '>';
+                  
+                  if (isCond) {
                     displayStat = st.substring(1).trim();
-                    extraClass = ' conditional';
+                    var colorClass = (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) ? ' red' : ' green';
+                    condBadges.push('<span class="tag' + colorClass + ' conditional">' + esc(displayStat) + '</span>');
+                  } else {
+                    var colorClass = (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) ? ' red' : ' green';
+                    normalBadges.push('<span class="tag' + colorClass + '">' + esc(displayStat) + '</span>');
                   }
-
-                  // Determine color: Red for negative stats
-                  var colorClass = ' green';
-                  // Check raw string before escaping for negative sign
-                  if (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) {
-                    colorClass = ' red';
-                  }
-
-                  fstatsHTML += '<span class="tag' + colorClass + extraClass + '">' + esc(displayStat) + '</span> ';
                 });
-                if (fstatsHTML) fstatsHTML = '<div class="tag-row mb-2">' + fstatsHTML + '</div>';
+
+                // 1. Normal Stats with limit
+                var maxNormal = 6;
+                var shownNormal = normalBadges.slice(0, maxNormal);
+                var overflow = normalBadges.length - maxNormal;
+                
+                if (shownNormal.length) {
+                  fstatsHTML += '<div class="tag-row mb-1">' + shownNormal.join('') + 
+                    (overflow > 0 ? '<span class="stats-more">+' + overflow + ' more</span>' : '') + 
+                    '</div>';
+                }
+
+                // 2. Conditional Stats Section
+                if (condBadges.length) {
+                  fstatsHTML += '<div class="conditional-section">' +
+                    '<div class="conditional-label">Bonus Info:</div>' +
+                    '<div class="tag-row">' + condBadges.join('') + '</div>' +
+                  '</div>';
+                }
               }
 
               var card = document.createElement('article');
