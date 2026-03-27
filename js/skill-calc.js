@@ -198,11 +198,8 @@
         const svg = document.getElementById(`svg-${treeId}`);
         if (!svg) return;
 
-        // Node is 64x64 with CSS transform: translate(-50%, -50%)
-        // So the node's visual center is at (x, y)
-        // Top edge center = (x, y - 32)
-        // Bottom edge center = (x, y + 32)
-
+        // Node uses CSS transform: translate(-50%, -50%)
+        // So the visual center of each node is exactly at (x, y)
         svg.innerHTML = '';
         tree.skills.forEach(skill => {
             skill.reqIds.forEach(reqId => {
@@ -211,19 +208,8 @@
 
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-                // Parent: start from bottom edge center
-                const x1 = parent.x;
-                const y1 = parent.y + 32;
-
-                // Child: end at top edge center
-                const x2 = skill.x;
-                const y2 = skill.y - 32;
-
-                // Midpoint Y for the horizontal segment
-                const midY = y1 + (y2 - y1) / 2;
-
-                // Path: Down from parent → Horizontal → Down to child
-                const d = `M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}`;
+                // L-shape: Horizontal from parent center → then Vertical to child center
+                const d = `M ${parent.x} ${parent.y} L ${skill.x} ${parent.y} L ${skill.x} ${skill.y}`;
 
                 path.setAttribute("d", d);
                 path.setAttribute("class", (levels[skill.id] || 0) > 0 ? 'path-active' : 'path-inactive');

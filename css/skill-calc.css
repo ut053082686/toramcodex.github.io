@@ -13,8 +13,8 @@
     --text-muted: #7c7c7c;
     --border-color: #dcd0b9; /* Sandy Border */
     --node-bg: #fffdfa;
-    --path-inactive: #dcd0b9;
-    --path-active: #b08d23;
+    --path-inactive: #7ecbcb;
+    --path-active: #00e5ff;
 }
 
 body {
@@ -258,13 +258,14 @@ body {
 
 .path-inactive {
     stroke: var(--path-inactive);
-    stroke-width: 2.5;
+    stroke-width: 2;
     fill: none;
+    opacity: 0.5;
 }
 
 .path-active {
     stroke: var(--path-active);
-    stroke-width: 3.5;
+    stroke-width: 2.5;
     fill: none;
     stroke-linecap: round;
 }
