@@ -58,31 +58,43 @@
         <span class="current">Skill Simulator</span>
       </nav>
 
-      <div class="simulator-container">
-        <!-- Control Header -->
-        <div class="sim-header">
-          <div class="sim-title-group">
-            <h2 id="treeTitle" class="sim-tree-name">Loading Skill Tree…</h2>
-            <div id="spDisplay" class="sp-counter">Total SP: <span id="totalSP">0</span></div>
-          </div>
-          <div class="sim-controls">
-            <select id="treeSelector" class="sim-select">
-              <option value="tamer">Tamer Skills</option>
-            </select>
-            <button id="resetBtn" class="sim-btn outline">Reset All</button>
-          </div>
+      <div class="simulator-dashboard">
+        <!-- Global SP Header -->
+        <div class="sp-global-header">
+            Total SP Used: <span id="total-sp">0</span>
         </div>
 
-        <!-- Tree Canvas -->
-        <div class="tree-viewport">
-          <div id="treeContainer" class="tree-container">
-            <svg id="treeSVG" class="tree-svg"></svg>
-            <div id="nodesLayer" class="nodes-layer"></div>
-          </div>
+        <!-- Star Gems Section (Placeholder) -->
+        <div class="stargems-section card-box">
+            <div class="section-title">
+                <img src="../img/icons/pets_ico.png" alt="star" class="title-icon">
+                Selected Star Gems (<span id="star-gems-cost">0</span> Costs)
+            </div>
+            <button class="btn-primary" onclick="alert('Star Gems configuration coming soon!')">
+                <span class="plus-icon">+</span> Add/Remove Star Gems
+            </button>
         </div>
 
-        <div class="sim-footer">
-          <p class="text-muted small">💡 <strong>Left-Click</strong>: Level Up (+1) | <strong>Right-Click</strong>: Level Down (-1)</p>
+        <!-- Skill Trees Accordion -->
+        <div id="tree-accordion" class="accordion-container">
+            <!-- Trees will be injected here dynamically -->
+        </div>
+      </div>
+
+      <!-- Floating Level Controls -->
+      <div class="level-controls">
+        <div class="control-group">
+            <button class="btn-ctrl active" onclick="setStep(1)">1</button>
+            <button class="btn-ctrl" onclick="setStep(5)">5</button>
+            <button class="btn-ctrl" onclick="setStep(10)">10</button>
+        </div>
+        <div class="control-group">
+            <button class="btn-ctrl" onclick="setMode('plus')">+</button>
+            <button class="btn-ctrl" onclick="setMode('minus')">-</button>
+        </div>
+        <div class="control-group">
+            <button class="btn-ctrl" onclick="resetAll()"><img src="../img/icons/skills_ico.png" style="width:16px"></button>
+            <button class="btn-ctrl" onclick="collapseAll()"><img src="../img/icons/skills_ico.png" style="width:16px; transform:rotate(180deg)"></button>
         </div>
       </div>
     </div>

@@ -1,156 +1,179 @@
-/* Skill Simulator Styles */
+/* Skill Simulator Styles v0.59.0 */
 
-.simulator-container {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    overflow: hidden;
-    margin-top: 1rem;
-    border: 1px solid #eee;
+:root {
+    --sim-blue: #2563eb;
+    --sim-dark: #0f172a;
+    --sim-card: #1e293b;
+    --sim-border: #334155;
+    --sim-text-muted: #94a3b8;
 }
 
-.sim-header {
-    background: #1a2a3a;
-    color: #fff;
-    padding: 1.5rem;
+.simulator-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sp-global-header {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-box {
+    background: var(--sim-card);
+    border: 1px solid var(--sim-border);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.section-title {
+    display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: var(--sim-text-muted);
+    font-weight: 500;
 }
 
-.sim-tree-name {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #ffcc00; /* Gold header like game */
-    font-weight: 700;
+.title-icon {
+    width: 24px;
+    height: 24px;
 }
 
-.sp-counter {
-    font-weight: 600;
-    background: rgba(255,255,255,0.1);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-top: 4px;
-}
-
-.sim-controls {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sim-select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: #2c3e50;
-    color: #fff;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.sim-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
+.btn-primary {
+    background: var(--sim-blue);
+    color: white;
     border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+/* Accordion */
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 100px; /* Space for controls */
+}
+
+.accordion-item {
+    background: var(--sim-card);
+    border: 1px solid var(--sim-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.accordion-item.active {
+    border-color: var(--sim-blue);
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.accordion-header:hover {
+    background: #2d3748;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tree-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.tree-label {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #f1f5f9;
+}
+
+.sp-badge {
+    color: var(--sim-text-muted);
     font-size: 0.9rem;
-    transition: all 0.2s;
 }
 
-.sim-btn.outline {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.4);
-    color: #fff;
+.arrow-icon {
+    transition: transform 0.3s;
+    color: var(--sim-text-muted);
+    font-size: 0.8rem;
 }
 
-.sim-btn.outline:hover {
-    background: rgba(255,255,255,0.1);
+.accordion-item.active .arrow-icon {
+    transform: rotate(90deg);
 }
 
-/* Tree Area */
-.tree-viewport {
-    background: #000; /* Original dark background */
-    padding: 3rem 1rem;
-    overflow-x: auto;
+.tree-content {
+    display: none;
     position: relative;
+    padding: 30px;
+    border-top: 1px solid var(--sim-border);
+    background: #000;
+    overflow: auto;
     min-height: 400px;
 }
 
-.tree-container {
+.accordion-item.active .tree-content {
+    display: block;
+}
+
+/* Tree Grid & Nodes */
+.tree-grid {
     position: relative;
-    width: 800px; /* Base width for Tamer Tree */
-    height: 400px;
     margin: 0 auto;
 }
 
-.tree-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.nodes-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-}
-
-/* Skill Node */
 .skill-node {
     position: absolute;
     width: 64px;
     height: 64px;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    user-select: none;
-    transition: transform 0.1s;
-}
-
-.skill-node:active {
-    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 2;
 }
 
 .node-icon-wrapper {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #333;
-    border: 3px solid #666;
+    background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+    border: 3px solid #64748b;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    background: radial-gradient(circle, #444 0%, #111 100%);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 .skill-node.active .node-icon-wrapper {
-    border-color: #00ccff; /* Blue active glow like game */
-    box-shadow: 0 0 15px rgba(0, 204, 255, 0.6);
-}
-
-.skill-node.max .node-icon-wrapper {
-    border-color: #ffcc00;
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
-}
-
-.skill-node.locked {
-    filter: grayscale(1);
-    opacity: 0.5;
-    cursor: not-allowed;
+    border-color: var(--sim-blue);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
 }
 
 .node-icon {
@@ -164,10 +187,9 @@
     bottom: -22px;
     left: 50%;
     transform: translateX(-50%);
-    color: #fff;
-    font-weight: 700;
-    font-size: 1rem;
-    text-shadow: 1px 1px 2px #000;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
 }
 
 .node-label {
@@ -175,40 +197,91 @@
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    color: #fff;
+    color: #cbd5e1;
+    font-size: 0.75rem;
     white-space: nowrap;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 2px black;
     pointer-events: none;
 }
 
-/* SVG Path Styling */
-.tree-line {
+/* SVG Connections */
+.svg-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.path-inactive {
     fill: none;
-    stroke: #333;
+    stroke: #334155;
     stroke-width: 4px;
-    transition: stroke 0.3s;
 }
 
-.tree-line.active {
-    stroke: #00ccff;
+.path-active {
+    fill: none;
+    stroke: var(--sim-blue);
+    stroke-width: 4px;
 }
 
-.sim-footer {
-    padding: 1rem;
-    background: #fdfdfd;
-    border-top: 1px solid #eee;
-    text-align: center;
+/* Floating Controls */
+.level-controls {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 1px solid var(--sim-border);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
 }
 
-/* Responsive */
+.control-group {
+    display: flex;
+    border: 1px solid var(--sim-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.btn-ctrl {
+    background: transparent;
+    color: var(--sim-text-muted);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    border-right: 1px solid var(--sim-border);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-ctrl:last-child {
+    border-right: none;
+}
+
+.btn-ctrl:hover:not(.active) {
+    background: #334155;
+}
+
+.btn-ctrl.active {
+    background: var(--sim-blue);
+    color: white;
+}
+
 @media (max-width: 768px) {
-    .tree-container {
-        transform: scale(0.85);
-        transform-origin: top left;
-    }
-    .tree-viewport {
-        min-height: 350px;
+    .level-controls {
+        flex-direction: column;
+        bottom: 10px;
+        padding: 8px;
     }
 }
