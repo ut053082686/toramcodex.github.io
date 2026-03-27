@@ -1,21 +1,20 @@
 /* 
  * ToramDB Skill Simulator Styles
- * v0.60.0 Light Theme Refinement
+ * v0.61.0 Soft Light (Parchment) Refinement
  */
 
  :root {
-    --bg-main: #fcfdfd;
-    --bg-card: #ffffff;
-    --bg-header: #f8fafc;
+    --bg-main: #f5f2eb;      /* Soft Parchment */
+    --bg-card: #fffdfa;      /* Warm White */
+    --bg-header: #ede7d9;    /* Muted Sand */
     --accent-blue: #2563eb;
-    --accent-gold: #b08d23;
-    --text-main: #334155;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --node-bg: #f8fafc;
-    --path-inactive: #cbd5e1;
-    --path-active: #b08d23; /* Gold for active paths */
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --accent-gold: #b08d23;  /* Toram Gold */
+    --text-main: #4a4a4a;    /* Softer Dark */
+    --text-muted: #7c7c7c;
+    --border-color: #dcd0b9; /* Sandy Border */
+    --node-bg: #fffdfa;
+    --path-inactive: #dcd0b9;
+    --path-active: #b08d23;
 }
 
 body {
@@ -24,20 +23,23 @@ body {
     font-family: 'Outfit', sans-serif;
     margin: 0;
     padding-bottom: 80px;
+    /* Subtle Grid Pattern from Home Page */
+    background-image: radial-gradient(var(--border-color) 0.5px, transparent 0.5px);
+    background-size: 30px 30px;
 }
 
 /* --- Dashboard Header --- */
 .sp-global-header {
     position: sticky;
-    top: 0;
+    top: 60px; /* Stay below the 60px height Navbar */
     z-index: 1000;
     background: #ffffff;
-    border-bottom: 2px solid var(--accent-gold);
+    border-bottom: 3px solid var(--accent-gold);
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .sp-title {
@@ -45,32 +47,38 @@ body {
     color: var(--accent-gold);
     font-size: 1.1rem;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .sp-counter {
-    background: var(--bg-header);
-    padding: 6px 15px;
+    background: var(--bg-main);
+    padding: 6px 18px;
     border-radius: 20px;
     font-weight: 800;
     color: var(--accent-gold);
     border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
 /* --- Star Gems Section --- */
 .stargem-dashboard {
-    background: #ffffff;
-    margin: 20px;
-    padding: 15px;
+    background: var(--bg-card);
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
     border-radius: 12px;
-    border: 1px dashed var(--accent-gold);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid var(--accent-gold);
     text-align: center;
+    box-shadow: 0 4px 12px rgba(176, 141, 35, 0.05);
 }
 
 .stargem-title {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--accent-gold);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 /* --- Accordion --- */
@@ -82,87 +90,91 @@ body {
 
 .accordion-item {
     background: var(--bg-card);
-    border-radius: 12px;
+    border-radius: 8px;
     margin-bottom: 12px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
     transition: all 0.2s ease;
 }
 
 .accordion-item.active {
     border-color: var(--accent-gold);
+    box-shadow: 0 4px 15px rgba(176, 141, 35, 0.1);
 }
 
 .accordion-header {
-    padding: 15px 20px;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    background: #f8fafc;
+    background: linear-gradient(to right, #ffffff, var(--bg-header));
     user-select: none;
 }
 
 .accordion-item.active .accordion-header {
-    background: #fffbeb; /* Light gold tint */
+    background: linear-gradient(to right, #fffbeb, var(--bg-header));
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
 }
 
 .tree-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     background: #ffffff;
     border: 1px solid var(--border-color);
-    object-fit: contain;
+    padding: 2px;
 }
 
 .tree-label {
     font-weight: 700;
     color: var(--text-main);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 .sp-badge {
     font-size: 0.85rem;
     color: var(--text-muted);
+    font-weight: 600;
+    padding-left: 8px;
 }
 
 .arrow-icon {
     transition: transform 0.3s ease;
-    color: var(--text-muted);
+    color: var(--accent-gold);
+    font-size: 0.7rem;
 }
 
 .accordion-item.active .arrow-icon {
     transform: rotate(90deg);
-    color: var(--accent-gold);
 }
 
 /* --- Tree Grid --- */
 .tree-content {
     display: none;
     background: #ffffff;
-    border-top: 1px solid var(--border-color);
 }
 
 .accordion-item.active .tree-content {
     display: block;
     overflow-x: auto;
-    padding: 30px;
+    padding: 40px 20px;
+    /* Inner grid texture */
+    background-image: 
+        linear-gradient(var(--bg-main) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-main) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
 .tree-grid {
     position: relative;
     margin: 0 auto;
-    background: #ffffff;
-    background-image: radial-gradient(var(--border-color) 0.5px, transparent 0.5px);
-    background-size: 20px 20px;
 }
 
 /* --- Skill Nodes --- */
@@ -173,9 +185,7 @@ body {
     z-index: 10;
     cursor: pointer;
     transform: translate(-50%, -50%);
-    padding: 0;
     text-align: center;
-    user-select: none;
 }
 
 .node-icon-wrapper {
@@ -193,7 +203,7 @@ body {
 
 .skill-node.active .node-icon-wrapper {
     border-color: var(--accent-gold);
-    box-shadow: 0 0 15px rgba(176, 141, 35, 0.2);
+    box-shadow: 0 0 15px rgba(176, 141, 35, 0.15);
 }
 
 .node-icon {
@@ -204,14 +214,12 @@ body {
 
 .node-level {
     position: absolute;
-    bottom: -15px;
+    bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
-    background: #ffffff;
     color: var(--text-muted);
     font-weight: 800;
     font-size: 13px;
-    text-shadow: 0 0 2px white;
 }
 
 .skill-node.active .node-level {
@@ -241,13 +249,13 @@ body {
 
 .path-inactive {
     stroke: var(--path-inactive);
-    stroke-width: 3;
+    stroke-width: 2.5;
     fill: none;
 }
 
 .path-active {
     stroke: var(--path-active);
-    stroke-width: 4;
+    stroke-width: 3.5;
     fill: none;
     stroke-linecap: round;
 }
@@ -263,19 +271,19 @@ body {
     padding: 8px 15px;
     border-radius: 30px;
     display: flex;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(176, 141, 35, 0.15);
     z-index: 1001;
 }
 
 .btn-ctrl {
-    background: #f8fafc;
-    color: var(--text-main);
+    background: var(--bg-main);
+    color: var(--accent-gold);
     border: 1px solid var(--border-color);
-    padding: 6px 14px;
-    border-radius: 12px;
+    padding: 6px 16px;
+    border-radius: 15px;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -283,7 +291,6 @@ body {
 .btn-ctrl:hover {
     background: var(--accent-gold);
     color: white;
-    border-color: var(--accent-gold);
 }
 
 .btn-ctrl.active {
@@ -298,14 +305,9 @@ body {
     border-color: #fecaca;
 }
 
-.btn-reset:hover {
-    background: #ef4444;
-    color: white;
-}
-
 /* --- Utilities --- */
 .hidden { display: none; }
 @media (max-width: 600px) {
-    .level-controls { width: 90%; justify-content: space-around; padding: 10px; }
+    .level-controls { width: 95%; justify-content: space-around; }
     .sp-title { display: none; }
 }
