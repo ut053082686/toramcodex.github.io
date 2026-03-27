@@ -21,13 +21,18 @@
 
         if (window.skillTrees) {
             window.skillTrees.forEach(tree => {
+                // Calculate dynamic height if not explicitly smaller
+                const skills = tree.skills || [];
+                const maxY = skills.length > 0 ? Math.max(...skills.map(s => s.y)) : 0;
+                const dynamicHeight = maxY + 120; // Extra space for labels & lines
+
                 SKILL_TREES[tree.id] = {
                     id: tree.id,
                     label: tree.label,
                     width: tree.width || 980,
-                    height: tree.height || 730,
+                    height: Math.min(tree.height || 1000, dynamicHeight),
                     icon: tree.icon ? tree.icon.split('/').pop() : 'skills_ico.png',
-                    skills: tree.skills.map(s => ({
+                    skills: skills.map(s => ({
                         id: s.id,
                         name: s.name,
                         max: s.max || 10,
