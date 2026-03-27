@@ -1,6 +1,6 @@
 /**
  * ToramDB Skill Simulator Logic
- * v0.60.0 English & Elbow Connections
+ * v0.64.0 Restructured + Beta Compatibility
  */
 
 (function() {
@@ -21,7 +21,10 @@
 
         if (window.skillTrees) {
             window.skillTrees.forEach(tree => {
-                // Calculate dynamic height if not explicitly smaller
+                // Skip hidden trees (e.g. Event Skills)
+                if (tree.visible === false) return;
+
+                // Calculate dynamic height
                 const skills = tree.skills || [];
                 const maxY = skills.length > 0 ? Math.max(...skills.map(s => s.y)) : 0;
                 const dynamicHeight = maxY + 60; // Compact like beta
