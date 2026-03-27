@@ -1,0 +1,466 @@
+TreeID,TreeName,ID,Name,X,Y,Max,Req,ReqLv,Icon
+blade,Blade Skills,hammer_slam,Hammer Slam,100,40,10,,0,skills_ico.png
+blade,Blade Skills,cleaving_attack,Cleaving Attack,340,40,10,hammer_slam,5,skills_ico.png
+blade,Blade Skills,storm_blaze,Storm Blaze,460,40,10,cleaving_attack,5,skills_ico.png
+blade,Blade Skills,garde_blade,Garde Blade,580,40,10,storm_blaze,5,skills_ico.png
+blade,Blade Skills,orge_slash,Orge Slash,700,40,10,garde_blade,5,skills_ico.png
+blade,Blade Skills,hard_hit,Hard Hit,100,220,10,,0,skills_ico.png
+blade,Blade Skills,astute,Astute,220,150,10,hard_hit,5,skills_ico.png
+blade,Blade Skills,trigger_slash,Trigger Slash,340,150,10,astute,5,skills_ico.png
+blade,Blade Skills,rampage,Rampage,460,150,10,trigger_slash,5,skills_ico.png
+blade,Blade Skills,shut_out,Shut-Out,840,150,10,rampage,5,skills_ico.png
+blade,Blade Skills,meteor_breaker,Meteor Breaker,580,220,10,trigger_slash,5,skills_ico.png
+blade,Blade Skills,lunar_slash,Lunar Slash,700,220,10,meteor_breaker,5,skills_ico.png
+blade,Blade Skills,sonic_blade,Sonic Blade,220,290,10,hard_hit,5,skills_ico.png
+blade,Blade Skills,spiral_air,Spiral Air,340,290,10,sonic_blade,5,skills_ico.png
+blade,Blade Skills,sword_tempest,Sword Tempest,460,290,10,spiral_air,5,skills_ico.png
+blade,Blade Skills,buster_blade,Buster Blade,580,360,10,spiral_air,5,skills_ico.png
+blade,Blade Skills,aura_blade,Aura Blade,700,360,10,buster_blade,5,skills_ico.png
+blade,Blade Skills,sword_mastery,Sword Mastery,100,420,10,,0,skills_ico.png
+blade,Blade Skills,quick_slash,Quick Slash,220,420,10,sword_mastery,5,skills_ico.png
+blade,Blade Skills,sword_techniques,Sword Techniques,340,420,10,quick_slash,5,skills_ico.png
+blade,Blade Skills,warcry,War Cry,460,490,10,quick_slash,5,skills_ico.png
+blade,Blade Skills,swift_attack,Swift Attack,460,620,10,,0,skills_ico.png
+blade,Blade Skills,berserk,Berserk,580,490,10,warcry,5,skills_ico.png
+shot,Shot Skills,gladiate,Gladiate,700,490,10,berserk,5,skills_ico.png
+shot,Shot Skills,power_shot,Power Shot,100,250,10,,0,skills_ico.png
+shot,Shot Skills,bulleyes,Bulleyes,220,250,10,power_shot,5,skills_ico.png
+shot,Shot Skills,rain_arrow,Arrow Rain,340,250,10,bulleyes,5,skills_ico.png
+shot,Shot Skills,cross_fire,Cross Fire,580,250,10,rain_arrow,5,skills_ico.png
+shot,Shot Skills,twin_storm,Twin Storm,700,180,10,cross_fire,5,skills_ico.png
+shot,Shot Skills,quick_loader,Quick Loader,820,250,10,cross_fire,5,skills_ico.png
+shot,Shot Skills,retrograde_shot,Retrograde Shot,700,320,10,cross_fire,5,skills_ico.png
+shot,Shot Skills,snipe,Snipe,460,110,10,bulleyes,5,skills_ico.png
+shot,Shot Skills,piercing_shot,Piercing Shot,700,40,10,snipe,5,skills_ico.png
+shot,Shot Skills,vanquisher,Vanquisher,820,110,10,snipe,5,skills_ico.png
+shot,Shot Skills,moeba_shot,Moeba Shot,220,390,10,power_shot,5,skills_ico.png
+shot,Shot Skills,paralysis_shot,Paralysis Shot,340,390,10,moeba_shot,5,skills_ico.png
+shot,Shot Skills,smoke_dust,Smoke Dust,460,390,10,paralysis_shot,5,skills_ico.png
+shot,Shot Skills,arm_break,Arm Break,580,390,10,smoke_dust,5,skills_ico.png
+shot,Shot Skills,parabola_cannon,Parabola Cannon,820,390,10,arm_break,5,skills_ico.png
+shot,Shot Skills,spread_shot,Spread Shot,700,460,10,arm_break,5,skills_ico.png
+shot,Shot Skills,shot_mastery,Shot Mastery,100,530,10,,0,skills_ico.png
+shot,Shot Skills,long_range,Long Range,340,530,10,shot_mastery,5,skills_ico.png
+shot,Shot Skills,quick_draw,Quick Draw,460,530,10,long_range,5,skills_ico.png
+shot,Shot Skills,decoy_shot,Decoy Shot,580,530,10,quick_draw,5,skills_ico.png
+shot,Shot Skills,element_starter,Element Starter,820,530,10,decoy_shot,5,skills_ico.png
+shot,Shot Skills,samurai_archery,Samurai Archery,700,600,10,shot_mastery,5,skills_ico.png
+shot,Shot Skills,sneak_attack,Sneak Attack,340,670,10,shot_mastery,5,skills_ico.png
+shot,Shot Skills,hunting_buddy,Hunting Buddy,580,670,10,sneak_attack,5,skills_ico.png
+magic,Magic Skills,fatal_shot,Fatal Shot,460,740,10,,0,skills_ico.png
+magic,Magic Skills,magic_arrow,Magic: Arrow,100,110,10,,0,skills_ico.png
+magic,Magic Skills,magic_javelin,Magic: Javelin,220,40,10,magic_arrow,5,skills_ico.png
+magic,Magic Skills,magic_lance,Magic: Lance,340,40,10,magic_javelin,5,skills_ico.png
+magic,Magic Skills,magic_impact,Magic: Impact,460,40,10,magic_lance,5,skills_ico.png
+magic,Magic Skills,magic_finale,Magic: Finale,580,40,10,magic_impact,5,skills_ico.png
+magic,Magic Skills,chronos_shift,Chronos Shift,700,40,10,magic_finale,5,skills_ico.png
+magic,Magic Skills,magic_laser,Magic: Laser,820,110,10,magic_finale,5,skills_ico.png
+magic,Magic Skills,magic_wall,Magic: Wall,220,180,10,magic_arrow,5,skills_ico.png
+magic,Magic Skills,magic_blast,Magic: Blast,340,180,10,magic_wall,5,skills_ico.png
+magic,Magic Skills,magic_storm,Magic: Storm,460,180,10,magic_blast,5,skills_ico.png
+magic,Magic Skills,magic_burst,Magic: Burst,580,180,10,magic_storm,5,skills_ico.png
+magic,Magic Skills,magic_cannon,Magic Cannon,700,180,10,magic_burst,5,skills_ico.png
+magic,Magic Skills,magic_crash,Magic: Crash,820,250,10,magic_storm,5,skills_ico.png
+magic,Magic Skills,magic_mastery,Magic Mastery,100,320,10,,0,skills_ico.png
+magic,Magic Skills,magic_knife,Magic Knife,340,320,10,magic_mastery,5,skills_ico.png
+magic,Magic Skills,qadal,Qadal,460,320,10,magic_knife,5,skills_ico.png
+magic,Magic Skills,spell_calibration,Spell Calibration,580,320,10,qadal,5,skills_ico.png
+magic,Magic Skills,mp_charge,MP Charge,100,460,10,,0,skills_ico.png
+magic,Magic Skills,chain_cast,Chain Cast,340,460,10,mp_charge,5,skills_ico.png
+magic,Magic Skills,power_wave,Power Wave,460,460,10,chain_cast,5,skills_ico.png
+magic,Magic Skills,maximizer,Maximizer,580,460,10,power_wave,5,skills_ico.png
+magic,Magic Skills,rapid_charge,Rapid Charge,700,460,10,maximizer,5,skills_ico.png
+magic,Magic Skills,enchanted_barrier,Enchanted Barrier,700,600,10,maximizer,5,skills_ico.png
+halberd,Halberd Skills,magic_guardian_beam,Magic: Guardian Beam,460,600,10,,0,skills_ico.png
+halberd,Halberd Skills,flash_stab,Flash Stab,100,110,10,,0,skills_ico.png
+halberd,Halberd Skills,cannon_spear,Cannon Spear,220,110,10,flash_stab,5,skills_ico.png
+halberd,Halberd Skills,dragon_tail,Dragon Tail,340,110,10,cannon_spear,5,skills_ico.png
+halberd,Halberd Skills,dive_impact,Dive Impact,460,110,10,dragon_tail,5,skills_ico.png
+halberd,Halberd Skills,dragon_tooth,Dragon Tooth,580,40,10,dragon_tail,5,skills_ico.png
+halberd,Halberd Skills,draconic_charge,Draconic Charge,700,40,10,dragon_tooth,5,skills_ico.png
+halberd,Halberd Skills,deadly_spear,Deadly Spear,220,250,10,flash_stab,5,skills_ico.png
+halberd,Halberd Skills,strike_stab,Strike Stab,460,250,10,deadly_spear,5,skills_ico.png
+halberd,Halberd Skills,chronos_drive,Chronos Drive,580,250,10,strike_stab,5,skills_ico.png
+halberd,Halberd Skills,infinite_dimemsion,Infinite Dimension,700,250,10,chronos_drive,5,skills_ico.png
+halberd,Halberd Skills,punish_ray,Punish Ray,340,390,10,deadly_spear,5,skills_ico.png
+halberd,Halberd Skills,blitz_spike,Blitz Spike,460,390,10,punish_ray,5,skills_ico.png
+halberd,Halberd Skills,lightning_hail,Lightning Hail,580,390,10,blitz_spike,5,skills_ico.png
+halberd,Halberd Skills,thors_hammer,Thor's Hammer,700,390,10,lightning_hail,5,skills_ico.png
+halberd,Halberd Skills,halberd_mastery,Halberd Mastery,100,530,10,,0,skills_ico.png
+halberd,Halberd Skills,critical_spear,Critical Spear,460,530,10,halberd_mastery,5,skills_ico.png
+halberd,Halberd Skills,tornado_lance,Tornado Lance,700,530,10,critical_spear,5,skills_ico.png
+halberd,Halberd Skills,quick_aura,Quick Aura,100,670,10,,0,skills_ico.png
+halberd,Halberd Skills,war_cry_of_struggle,War Cry of Struggle,340,670,10,quick_aura,5,skills_ico.png
+halberd,Halberd Skills,god_speed_wield,Godspeed Wield,580,670,10,war_cry_of_struggle,5,skills_ico.png
+halberd,Halberd Skills,almighty_wield,Almighty Wield,700,670,10,god_speed_wield,5,skills_ico.png
+mononofu,Mononofu Skills,buster_lance,Buster Lance,460,740,10,,0,skills_ico.png
+mononofu,Mononofu Skills,issen,Issen,100,40,10,,0,skills_ico.png
+mononofu,Mononofu Skills,pulse_blade,Pulse Blade,220,40,10,issen,5,skills_ico.png
+mononofu,Mononofu Skills,triple_thrust,Triple Thrust,340,40,10,pulse_blade,5,skills_ico.png
+mononofu,Mononofu Skills,hasso_happa,Hasso Happa,460,40,10,triple_thrust,5,skills_ico.png
+mononofu,Mononofu Skills,tenryu_ransei,Tenryu Ransei,580,40,10,hasso_happa,5,skills_ico.png
+mononofu,Mononofu Skills,kasumisetsu_getsuka,Kasumisetsu Getsuka,700,40,10,tenryu_ransei,5,skills_ico.png
+mononofu,Mononofu Skills,garyou_tensei,Garyou Tensei,580,180,10,hasso_happa,5,skills_ico.png
+mononofu,Mononofu Skills,shadowless_slash,Shadowless Slash,700,180,10,garyou_tensei,5,skills_ico.png
+mononofu,Mononofu Skills,pommel_strike,Pommel Strike,100,180,10,,0,skills_ico.png
+mononofu,Mononofu Skills,magadachi,Magadachi,340,180,10,pommel_strike,5,skills_ico.png
+mononofu,Mononofu Skills,zantei_settetsu,Zantei Settetsu,460,180,10,magadachi,5,skills_ico.png
+mononofu,Mononofu Skills,bushido,Bushido,100,320,10,,0,skills_ico.png
+mononofu,Mononofu Skills,shukuchi,Shukuchi,460,320,10,bushido,5,skills_ico.png
+mononofu,Mononofu Skills,nukiuchi_sennosen,Nukiuchi Sennosen,700,320,10,shukuchi,5,skills_ico.png
+mononofu,Mononofu Skills,two_handed,Two-Handed,220,460,10,bushido,5,skills_ico.png
+mononofu,Mononofu Skills,meikyo_shisui,Meikyo Shisui,340,460,10,two_handed,5,skills_ico.png
+mononofu,Mononofu Skills,kairiki,Kairiki Ranshin,580,460,10,meikyo_shisui,5,skills_ico.png
+mononofu,Mononofu Skills,dauntless,Dauntless,700,460,10,kairiki,5,skills_ico.png
+mononofu,Mononofu Skills,auspicious_wind,Auspicious Wind,340,600,10,meikyo_shisui,5,skills_ico.png
+mononofu,Mononofu Skills,gust,Gust,460,600,10,auspicious_wind,5,skills_ico.png
+mononofu,Mononofu Skills,zephyr_rush,Zephyr Rush,580,600,10,gust,5,skills_ico.png
+mononofu,Mononofu Skills,super_gust,Super Gust,700,600,10,zephyr_rush,5,skills_ico.png
+dual,Dual Sword Skills,bounching_blade,Bounching Blade,460,720,10,,0,skills_ico.png
+dual,Dual Sword Skills,dual_sword_mastery,Dual Sword Mastery,100,110,10,,0,skills_ico.png
+dual,Dual Sword Skills,twin_slash,Twin Slash,220,110,10,dual_sword_mastery,5,skills_ico.png
+dual,Dual Sword Skills,spinning_slash,Spinning Slash,340,110,10,twin_slash,5,skills_ico.png
+dual,Dual Sword Skills,phantom_slash,Phantom Slash,460,110,10,spinning_slash,5,skills_ico.png
+dual,Dual Sword Skills,aerial_cut,Aerial Cut,700,40,10,spinning_slash,5,skills_ico.png
+dual,Dual Sword Skills,cross_parry,Cross Parry,220,250,10,dual_sword_mastery,5,skills_ico.png
+dual,Dual Sword Skills,charging_slash,Charging Slash,340,250,10,cross_parry,5,skills_ico.png
+dual,Dual Sword Skills,shadowstep,Shadowstep,460,250,10,charging_slash,5,skills_ico.png
+dual,Dual Sword Skills,shining_cross,Shining Cross,580,250,10,shadowstep,5,skills_ico.png
+dual,Dual Sword Skills,lunar_misfortune,Lunar Misfortune,700,180,10,shining_cross,5,skills_ico.png
+dual,Dual Sword Skills,twin_buster_blade,Twin Buster Blade,700,320,10,shining_cross,5,skills_ico.png
+dual,Dual Sword Skills,reflex,Reflex,220,390,10,dual_sword_mastery,5,skills_ico.png
+dual,Dual Sword Skills,flash_blast,Flash Blast,460,390,10,reflex,5,skills_ico.png
+dual,Dual Sword Skills,storm_reaper,Storm Reaper,580,390,10,flash_blast,5,skills_ico.png
+dual,Dual Sword Skills,dual_sword_control,Dual Sword Control,220,530,10,dual_sword_mastery,5,skills_ico.png
+dual,Dual Sword Skills,godspeed,Godspeed,340,530,10,dual_sword_control,5,skills_ico.png
+dual,Dual Sword Skills,saber_aura,Saber Aura,580,530,10,godspeed,5,skills_ico.png
+dual,Dual Sword Skills,crescent_saber,Crescent Saber,700,530,10,saber_aura,5,skills_ico.png
+dual,Dual Sword Skills,aerial_slay,Aerial Slay,580,670,10,godspeed,5,skills_ico.png
+dual,Dual Sword Skills,horizon_cut,Horizon Cut,700,670,10,aerial_slay,5,skills_ico.png
+martial,Martial Skills,sting_blade,Sting Blade,820,600,10,aerial_slay,5,skills_ico.png
+martial,Martial Skills,smash,Smash,100,180,10,,0,skills_ico.png
+martial,Martial Skills,bash,Bash,220,110,10,smash,5,skills_ico.png
+martial,Martial Skills,shellbreak,Shell Break,340,110,10,bash,5,skills_ico.png
+martial,Martial Skills,heavy_smash,Heavy Smash,460,110,10,shellbreak,5,skills_ico.png
+martial,Martial Skills,chariot,Chariot,580,110,10,heavy_smash,5,skills_ico.png
+martial,Martial Skills,abstract_arms,Abstract Arms,700,110,10,chariot,5,skills_ico.png
+martial,Martial Skills,mountain_press,Mountain Press,820,40,10,chariot,5,skills_ico.png
+martial,Martial Skills,sonic_wave,Sonic Wave,220,250,10,smash,5,skills_ico.png
+martial,Martial Skills,earthbind,Earthbind,340,250,10,sonic_wave,5,skills_ico.png
+martial,Martial Skills,triple_kick,Triple Kick,460,250,10,earthbind,5,skills_ico.png
+martial,Martial Skills,rush,Rush,580,250,10,triple_kick,5,skills_ico.png
+martial,Martial Skills,asura_aura,Asura Aura,700,250,10,rush,5,skills_ico.png
+martial,Martial Skills,seismic_stomp,Seismic Stomp,820,180,10,earthbind,5,skills_ico.png
+martial,Martial Skills,spin_sweep,Spin Sweep,820,320,10,rush,5,skills_ico.png
+martial,Martial Skills,flash_blink,Flash Blink,700,400,10,triple_kick,5,skills_ico.png
+martial,Martial Skills,martial_mastery,Martial Mastery,100,470,10,,0,skills_ico.png
+martial,Martial Skills,martial_discipline,Martial Discipline,460,470,10,martial_mastery,5,skills_ico.png
+martial,Martial Skills,chakra,Chakra,580,470,10,martial_discipline,5,skills_ico.png
+martial,Martial Skills,energy_control,Energy Control,820,470,10,chakra,5,skills_ico.png
+martial,Martial Skills,aggravate,Aggravate,100,610,10,,0,skills_ico.png
+martial,Martial Skills,strong_chase_attack,Strong Chase Attack,340,610,10,aggravate,5,skills_ico.png
+crusher,Crusher Skills,slide,Slide,460,680,10,,0,skills_ico.png
+crusher,Crusher Skills,foreseen_punch,Foreseen Punch,100,40,10,,0,skills_ico.png
+crusher,Crusher Skills,goliath_punch,Goliath Punch,220,40,10,foreseen_punch,5,skills_ico.png
+crusher,Crusher Skills,god_hand,God Hand,340,40,10,goliath_punch,5,skills_ico.png
+crusher,Crusher Skills,divine_rigid_body,Divine Rigid Body,460,40,10,god_hand,5,skills_ico.png
+crusher,Crusher Skills,breathwork,Breathwork,100,180,10,,0,skills_ico.png
+crusher,Crusher Skills,floating_kick,Floating Kick,220,180,10,breathwork,5,skills_ico.png
+crusher,Crusher Skills,geyser_kick,Geyser Kick,460,180,10,floating_kick,5,skills_ico.png
+crusher,Crusher Skills,combination,Combination,220,320,10,breathwork,5,skills_ico.png
+crusher,Crusher Skills,annihilator,Annihilator,340,320,10,combination,5,skills_ico.png
+sprite,Sprite Skills,terrablast,Terrablast,460,320,10,annihilator,5,skills_ico.png
+sprite,Sprite Skills,auto_device,Auto-Device,100,250,10,,0,skills_ico.png
+sprite,Sprite Skills,express_aid,Express Aid,220,180,10,auto_device,5,skills_ico.png
+sprite,Sprite Skills,micro_heal,Micro Heal,340,110,10,express_aid,5,skills_ico.png
+sprite,Sprite Skills,resurrection,Resurrection,460,40,10,micro_heal,5,skills_ico.png
+sprite,Sprite Skills,enhance,Enhance,340,250,10,express_aid,5,skills_ico.png
+sprite,Sprite Skills,stabiliz,Stabiliz,460,180,10,enhance,5,skills_ico.png
+sprite,Sprite Skills,sprite_upgrade,Sprite Upgrade,580,180,10,stabiliz,5,skills_ico.png
+sprite,Sprite Skills,sprite_shield,Sprite Shield,460,320,10,enhance,5,skills_ico.png
+sprite,Sprite Skills,counterforce,Counterforce,220,320,10,auto_device,5,skills_ico.png
+sprite,Sprite Skills,astral_lance,Astral Lance,340,390,10,counterforce,5,skills_ico.png
+sprite,Sprite Skills,magic_vulkan,Magic Vulcan,460,460,10,astral_lance,5,skills_ico.png
+sprite,Sprite Skills,cursed_altar,Cursed Altar,580,460,10,magic_vulkan,5,skills_ico.png
+sprite,Sprite Skills,ignition,Ignition,100,600,10,,0,skills_ico.png
+sprite,Sprite Skills,terrawrym,Terrawrym,220,600,10,ignition,5,skills_ico.png
+sprite,Sprite Skills,faux_weapon,Faux Weapon,340,600,10,terrawrym,5,skills_ico.png
+sprite,Sprite Skills,slash_reaper,Slash Reaper,460,600,10,faux_weapon,5,skills_ico.png
+barehand,Barehand Skills,lebenglanz,Lebenglanz,580,600,10,slash_reaper,5,skills_ico.png
+barehand,Barehand Skills,unarmed_mastery,Unarmed Mastery,40,40,10,,0,skills_ico.png
+barehand,Barehand Skills,qi_charge,Qi Charge,100,180,10,,0,skills_ico.png
+barehand,Barehand Skills,lion_rage,Lion Rage,220,40,10,qi_charge,5,skills_ico.png
+barehand,Barehand Skills,ultima_lion_rage,Ultima Lion Rage,340,40,10,lion_rage,5,skills_ico.png
+barehand,Barehand Skills,earthshaker,Earthshaker,460,110,10,,0,skills_ico.png
+barehand,Barehand Skills,raving_storm,Raving Storm,220,180,10,qi_charge,5,skills_ico.png
+barehand,Barehand Skills,ultima_raving_storm,Ultima Raving Storm,340,180,10,raving_storm,5,skills_ico.png
+barehand,Barehand Skills,internal_elixir,Internal Elixir,220,320,10,qi_charge,5,skills_ico.png
+barehand,Barehand Skills,clash_of_enmity,Clash of Enmity,340,320,10,internal_elixir,5,skills_ico.png
+barehand,Barehand Skills,miracle_comeback,Miracle Comeback,460,320,10,clash_of_enmity,5,skills_ico.png
+barehand,Barehand Skills,ultima_qi_charge,Ultima Qi Charge,340,460,10,qi_charge,5,skills_ico.png
+shield,Shield Skills,hidden_talent,Hidden Talent,460,460,10,ultima_qi_charge,5,skills_ico.png
+shield,Shield Skills,shield_mastery,Shield Mastery,100,180,10,,0,skills_ico.png
+shield,Shield Skills,shield_bash,Shield Bash,220,40,10,shield_mastery,5,skills_ico.png
+shield,Shield Skills,shield_cannon,Shield Cannon,340,40,10,shield_bash,5,skills_ico.png
+shield,Shield Skills,guard_strike,Guard Strike,460,40,10,shield_cannon,5,skills_ico.png
+shield,Shield Skills,force_shield,Force Shield,220,180,10,shield_mastery,5,skills_ico.png
+shield,Shield Skills,magical_shield,Magical Shield,340,180,10,force_shield,5,skills_ico.png
+shield,Shield Skills,shield_uppercut,Shield Uppercut,220,320,10,shield_mastery,5,skills_ico.png
+shield,Shield Skills,dual_shields,Dual Shields,340,320,10,shield_uppercut,5,skills_ico.png
+shield,Shield Skills,shield_repair,Shield Repair,460,320,10,dual_shields,5,skills_ico.png
+shield,Shield Skills,belagerung,Belagerung,580,320,10,shield_repair,5,skills_ico.png
+shield,Shield Skills,protection,Protection,100,460,10,,0,skills_ico.png
+shield,Shield Skills,aegis,Aegis,220,460,10,protection,5,skills_ico.png
+dagger,Dagger Skills,guardian,Guardian,460,460,10,aegis,5,skills_ico.png
+dagger,Dagger Skills,throwing_knife,Throwing Knife,100,110,10,,0,skills_ico.png
+dagger,Dagger Skills,spike_dart,Spike Dart,220,40,10,throwing_knife,5,skills_ico.png
+dagger,Dagger Skills,gatling_knife,Gatling Knife,340,40,10,spike_dart,5,skills_ico.png
+dagger,Dagger Skills,amazing_throw,Amazing Throw,460,40,10,gatling_knife,5,skills_ico.png
+dagger,Dagger Skills,poison_dagger,Poison Dagger,220,180,10,throwing_knife,5,skills_ico.png
+dagger,Dagger Skills,double_stab,Double Stab,340,180,10,poison_dagger,5,skills_ico.png
+dagger,Dagger Skills,hidden_arm,Hidden Arm,100,320,10,,0,skills_ico.png
+dagger,Dagger Skills,intensive_knife,Intensive Knife,220,320,10,hidden_arm,5,skills_ico.png
+dagger,Dagger Skills,mail_breaker,Mail Breaker,460,320,10,intensive_knife,5,skills_ico.png
+dagger,Dagger Skills,knife_combat,Knife Combat,340,460,10,intensive_knife,5,skills_ico.png
+knight,Knight Skills,flincher_knife,Flincher Knife,460,460,10,knife_combat,5,skills_ico.png
+knight,Knight Skills,assault_attack,Assault Attack,100,40,10,,0,skills_ico.png
+knight,Knight Skills,parry,Parry,220,40,10,assault_attack,5,skills_ico.png
+knight,Knight Skills,perfect_defense,P. Defense,340,40,10,parry,5,skills_ico.png
+knight,Knight Skills,fareth,Fareth,460,40,10,perfect_defense,5,skills_ico.png
+knight,Knight Skills,aftershield,Aftershield,580,40,10,fareth,5,skills_ico.png
+knight,Knight Skills,provoke,Provoke,100,180,10,,0,skills_ico.png
+knight,Knight Skills,rage_sword,Rage Sword,220,180,10,provoke,5,skills_ico.png
+knight,Knight Skills,binding_strike,Binding Strike,340,180,10,rage_sword,5,skills_ico.png
+knight,Knight Skills,knight_will,Knight Will,460,180,10,binding_strike,5,skills_ico.png
+knight,Knight Skills,blink_sword,Blink Sword,580,180,10,knight_will,5,skills_ico.png
+knight,Knight Skills,sonic_thrust,Sonic Thrust,220,320,10,rage_sword,5,skills_ico.png
+knight,Knight Skills,revenir,Revenir,360,320,10,sonic_thrust,5,skills_ico.png
+knight,Knight Skills,knight_stance,Knight's Stance,100,390,10,,0,skills_ico.png
+knight,Knight Skills,knight_remedy,Knight's Remedy,460,390,10,knight_stance,5,skills_ico.png
+hunter,Hunter Skills,knight_pledge,Knight Pledge,580,390,10,knight_remedy,5,skills_ico.png
+hunter,Hunter Skills,kick,Kick,100,40,10,,0,skills_ico.png
+hunter,Hunter Skills,sunrise_arrow,Sunrise Arrow,220,40,10,kick,5,skills_ico.png
+hunter,Hunter Skills,marrow,Magic Arrow,340,40,10,sunrise_arrow,5,skills_ico.png
+hunter,Hunter Skills,satellite_arrow,Satellite Arrow,460,40,10,marrow,5,skills_ico.png
+hunter,Hunter Skills,focus,Focus,580,40,10,satellite_arrow,5,skills_ico.png
+hunter,Hunter Skills,sleep_trap,Sleep Trap,100,180,10,,0,skills_ico.png
+hunter,Hunter Skills,bear_trap,Bear Trap,220,180,10,sleep_trap,5,skills_ico.png
+hunter,Hunter Skills,land_mine,Land Mine,340,180,10,bear_trap,5,skills_ico.png
+hunter,Hunter Skills,dark_trap,Dark Trap,460,180,10,land_mine,5,skills_ico.png
+hunter,Hunter Skills,camouflage,Camouflage,580,180,10,dark_trap,5,skills_ico.png
+hunter,Hunter Skills,homing_shot,Homing Shot,100,390,10,,0,skills_ico.png
+hunter,Hunter Skills,detection,Detection,220,390,10,homing_shot,5,skills_ico.png
+hunter,Hunter Skills,cyclon_arrow,Cyclone Arrow,340,320,10,detection,5,skills_ico.png
+hunter,Hunter Skills,vertical_air,Vertical Air,460,320,10,cyclon_arrow,5,skills_ico.png
+hunter,Hunter Skills,hunter_bowgun,Hunter Bowgun,340,460,10,detection,5,skills_ico.png
+hunter,Hunter Skills,multiple_hunt,Multiple Hunt,460,460,10,hunter_bowgun,5,skills_ico.png
+priest,Priest Skills,hunter_knowledge,Hunter Knowledge,580,460,10,multiple_hunt,5,skills_ico.png
+priest,Priest Skills,bless,Bless,100,40,10,,0,skills_ico.png
+priest,Priest Skills,gloria,Gloria,220,40,10,bless,5,skills_ico.png
+priest,Priest Skills,enhanced_bless,Enhanced Bless,340,40,10,gloria,5,skills_ico.png
+priest,Priest Skills,royal_heal,Royal Heal,460,40,10,enhanced_bless,5,skills_ico.png
+priest,Priest Skills,sacred_teaching,Sacred Teaching,580,40,10,royal_heal,5,skills_ico.png
+priest,Priest Skills,holy_fist,Holy Fist,100,180,10,,0,skills_ico.png
+priest,Priest Skills,holy_light,Holy Light,220,180,10,holy_fist,5,skills_ico.png
+priest,Priest Skills,ether_barrier,Ether Barrier,340,180,10,holy_light,5,skills_ico.png
+priest,Priest Skills,prayer,Prayer,460,180,10,ether_barrier,5,skills_ico.png
+priest,Priest Skills,aspis_soul,Aspis Soul,580,180,10,prayer,5,skills_ico.png
+priest,Priest Skills,staff_thrust,Staff Thrust,100,320,10,,0,skills_ico.png
+priest,Priest Skills,exorcism,Exorcism,220,320,10,holy_light,5,skills_ico.png
+priest,Priest Skills,holy_book,Holy Book,340,320,10,exorcism,5,skills_ico.png
+priest,Priest Skills,nemesis,Nemesis,460,320,10,holy_book,5,skills_ico.png
+assassin,Assassin Skills,holy_grace,Holy Grace,580,320,10,nemesis,5,skills_ico.png
+assassin,Assassin Skills,assassin_stab,Assassin Stab,100,180,10,,0,skills_ico.png
+assassin,Assassin Skills,backstep,Backstep,220,180,10,assassin_stab,5,skills_ico.png
+assassin,Assassin Skills,arcane_strike,Arcane Strike,340,180,10,backstep,5,skills_ico.png
+assassin,Assassin Skills,sicarius,Sicarius,460,40,10,backstep,5,skills_ico.png
+assassin,Assassin Skills,secret_assassin,Secret Assassin,580,180,10,arcane_strike,5,skills_ico.png
+assassin,Assassin Skills,evasion,Evasion,100,320,10,,0,skills_ico.png
+assassin,Assassin Skills,serum,Serum,220,320,10,evasion,5,skills_ico.png
+assassin,Assassin Skills,foresight,Foresight,340,320,10,serum,5,skills_ico.png
+assassin,Assassin Skills,shadow_walk,Shadow Walk,460,320,10,foresight,5,skills_ico.png
+assassin,Assassin Skills,assault_chase,Assault Chase,580,320,10,shadow_walk,5,skills_ico.png
+assassin,Assassin Skills,venom_injection,Venom Injection,100,460,10,,0,skills_ico.png
+assassin,Assassin Skills,corrosive_poison,Corrosive Poison,220,460,10,venom_injection,5,skills_ico.png
+assassin,Assassin Skills,venom_thief,Venom Thief,340,460,10,corrosive_poison,5,skills_ico.png
+assassin,Assassin Skills,death_reception,Death Reception,460,460,10,venom_thief,5,skills_ico.png
+Wizard,Wizard Skills,poison_master,Poison Master,580,460,10,death_reception,5,skills_ico.png
+Wizard,Wizard Skills,familia,Familia,100,180,10,,0,skills_ico.png
+Wizard,Wizard Skills,lightning,Lightning,340,40,10,familia,5,skills_ico.png
+Wizard,Wizard Skills,blizzard,Blizzard,340,180,10,familia,5,skills_ico.png
+Wizard,Wizard Skills,meteor_strike,Meteor Strike,460,180,10,blizzard,5,skills_ico.png
+Wizard,Wizard Skills,imperial_ray,Imperial Ray,580,180,10,meteor_strike,5,skills_ico.png
+Wizard,Wizard Skills,magic_research,Magic Research,700,180,10,imperial_ray,5,skills_ico.png
+Wizard,Wizard Skills,mana_crystal,Mana Crystal,220,320,10,familia,5,skills_ico.png
+Wizard,Wizard Skills,stone_barrier,Stone Barrier,460,320,10,mana_crystal,5,skills_ico.png
+Wizard,Wizard Skills,advanced_familia,Advanced Familia,580,320,10,stone_barrier,5,skills_ico.png
+Wizard,Wizard Skills,kitty_treasure,Kitty's Treasure,700,320,10,advanced_familia,5,skills_ico.png
+Wizard,Wizard Skills,crystal_laser,Crystal Laser,340,460,10,mana_crystal,5,skills_ico.png
+Wizard,Wizard Skills,overlimit,Overlimit,460,460,10,crystal_laser,5,skills_ico.png
+Wizard,Wizard Skills,sorcery_guide,Sorcery Guide,580,460,10,overlimit,5,skills_ico.png
+Wizard,Wizard Skills,shift,Shift,700,460,10,sorcery_guide,5,skills_ico.png
+golem,Golem Skills,cast_mastery,Cast Mastery,100,460,10,,0,skills_ico.png
+golem,Golem Skills,golem_call,Golem Call,100,180,10,,0,skills_ico.png
+golem,Golem Skills,neo_lancer,Neo Lancer,220,40,10,golem_call,5,skills_ico.png
+golem,Golem Skills,attack_boost,Attack Boost,340,40,10,neo_lancer,5,skills_ico.png
+golem,Golem Skills,neo_shielder,Neo Shielder,220,180,10,golem_call,5,skills_ico.png
+golem,Golem Skills,shield_boost,Shield Boost,340,180,10,neo_shielder,5,skills_ico.png
+golem,Golem Skills,neo_buster,Neo Buster,220,320,10,golem_call,5,skills_ico.png
+golem,Golem Skills,speed_boost,Speed Boost,340,320,10,neo_buster,5,skills_ico.png
+golem,Golem Skills,magic_grenade,Magic Grenade,100,530,10,,0,skills_ico.png
+golem,Golem Skills,frost_grenade,Frost Grenade,220,460,10,magic_grenade,5,skills_ico.png
+guard,Guard Skills,flash_grenade,Flash Grenade,340,460,10,frost_grenade,5,skills_ico.png
+guard,Guard Skills,heavy_armor_mastery,Heavy Armor Mastery,100,110,10,,0,skills_ico.png
+guard,Guard Skills,physical_guard,Physical Guard,340,40,10,heavy_armor_mastery,5,skills_ico.png
+guard,Guard Skills,advanced_guard,Advanced Guard,220,110,10,heavy_armor_mastery,5,skills_ico.png
+guard,Guard Skills,light_armor_mastery,Light Armor Mastery,100,250,10,,0,skills_ico.png
+guard,Guard Skills,advanced_evasion,Advanced Evasion,220,250,10,light_armor_mastery,5,skills_ico.png
+dark_power,Dark Power Skills,mirage_evasion,Mirage Evasion,340,320,10,light_armor_mastery,5,skills_ico.png
+dark_power,Dark Power Skills,bloody_bite,Bloody Bite,100,40,10,,0,skills_ico.png
+dark_power,Dark Power Skills,dark_stinger,Dark Stinger,220,40,10,bloody_bite,5,skills_ico.png
+dark_power,Dark Power Skills,red_tear,Red Tear,340,40,10,dark_stinger,5,skills_ico.png
+dark_power,Dark Power Skills,soul_hunter,Soul Hunter,460,40,10,red_tear,5,skills_ico.png
+dark_power,Dark Power Skills,sacrifice,Sacrifice,100,180,10,,0,skills_ico.png
+dark_power,Dark Power Skills,demon_claw,Demon Claw,220,180,10,sacrifice,5,skills_ico.png
+dark_power,Dark Power Skills,regretless,Regretless,340,180,10,demon_claw,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,eternal_nightmare,Eternal Nightmare,460,180,10,regretless,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,magic_warrior_mastery,Magic Warrior Mastery,100,40,10,,0,skills_ico.png
+magic_warrior,Magic Warrior Skills,conversion,Conversion,220,40,10,magic_warrior_mastery,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,resonance,Resonance,340,40,10,conversion,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,enchanted_spell,Enchanted Spell,460,40,10,resonance,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,dual_bringer,Dual Bringer,580,40,10,enchanted_spell,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,ether_flare,Ether Flare,100,180,10,,0,skills_ico.png
+magic_warrior,Magic Warrior Skills,element_slash,Element Slash,220,180,10,ether_flare,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,enchant_sword,Enchant Sword,340,180,10,element_slash,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,enchanted_burst,Enchanted Burst,460,180,10,enchant_sword,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,union_sword,Union Sword,580,180,10,enchanted_burst,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,siphon_barrier,Siphon Barrier,100,320,10,,0,skills_ico.png
+magic_warrior,Magic Warrior Skills,teleport,Teleport,220,320,10,siphon_barrier,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,siphon_recall,Siphon Recall,340,320,10,teleport,5,skills_ico.png
+magic_warrior,Magic Warrior Skills,float_dash,Float Dash,460,320,10,siphon_recall,5,skills_ico.png
+ninja,Ninja Skills,magic_skin,Magic Skin,580,320,10,float_dash,5,skills_ico.png
+ninja,Ninja Skills,ninjutsu,Ninjutsu,100,40,10,,0,skills_ico.png
+ninja,Ninja Skills,ninja_spirit,Ninja Spirit,220,40,10,ninjutsu,5,skills_ico.png
+ninja,Ninja Skills,ninjutsu_drill,Ninjutsu Drill I,340,180,10,ninjutsu,5,skills_ico.png
+partisan,Partisan Skills,ninjutsu_drill_ii,Ninjutsu Drill II,460,180,10,ninjutsu_drill,5,skills_ico.png
+partisan,Partisan Skills,l_boomerang_i,L Boomerang,100,40,10,,0,skills_ico.png
+partisan,Partisan Skills,l_boomerang_ii,L Boomerang II,220,40,10,l_boomerang_i,5,skills_ico.png
+partisan,Partisan Skills,l_boomerang_iii,L Boomerang III,340,40,10,l_boomerang_ii,5,skills_ico.png
+partisan,Partisan Skills,n_dragon_tooth,N Dragon Tooth,340,180,10,,0,skills_ico.png
+partisan,Partisan Skills,healing_shot,Healing Shot,100,320,10,,0,skills_ico.png
+partisan,Partisan Skills,arrow_sharpening,Arrow Sharpening,220,320,10,healing_shot,5,skills_ico.png
+partisan,Partisan Skills,survival_instinct,Survival Instinct,340,320,10,arrow_sharpening,5,skills_ico.png
+partisan,Partisan Skills,frontliner,Frontliner,100,460,10,,0,skills_ico.png
+minstrel,Minstrel Skills,frontliner_ii,Frontliner II,220,460,10,frontliner,5,skills_ico.png
+minstrel,Minstrel Skills,healing_song,Healing Song,100,180,10,,0,skills_ico.png
+minstrel,Minstrel Skills,fairy_song,Fairy Song,220,180,10,healing_song,5,skills_ico.png
+minstrel,Minstrel Skills,passion_song,Passion Song,460,40,10,fairy_song,5,skills_ico.png
+minstrel,Minstrel Skills,wisdom_song,Wisdon Song,460,180,10,fairy_song,5,skills_ico.png
+minstrel,Minstrel Skills,life_song,Life Song,220,320,10,fairy_song,5,skills_ico.png
+minstrel,Minstrel Skills,fantasy_song,Fantasy Song,340,320,10,life_song,5,skills_ico.png
+dancer,Dancer Skills,ad_lib,Ad-Lib,340,460,10,,0,skills_ico.png
+dancer,Dancer Skills,fairy_dance,Fairy Dance,100,40,10,,0,skills_ico.png
+dancer,Dancer Skills,frenzy_dance,Frenzy Dance,220,40,10,fairy_dance,5,skills_ico.png
+dancer,Dancer Skills,astute_dance,Astute Dance,340,40,10,frenzy_dance,5,skills_ico.png
+dancer,Dancer Skills,charming_dance,Charming Dance,460,40,10,astute_dance,5,skills_ico.png
+dancer,Dancer Skills,spirited_dance,Spirited Dance,220,180,10,fairy_dance,5,skills_ico.png
+dancer,Dancer Skills,elegant_poise,Elegant Poise,340,250,10,,0,skills_ico.png
+necromancer,Necromancer Skills,nature_wonder,Nature's Wonder,460,250,10,elegant_poise,5,skills_ico.png
+necromancer,Necromancer Skills,grave_digger,Grave Digger,100,180,10,,0,skills_ico.png
+necromancer,Necromancer Skills,phantom_missle,Phantom Missle,220,40,10,grave_digger,5,skills_ico.png
+necromancer,Necromancer Skills,blood_siphon,Blood Siphon,340,40,10,phantom_missle,5,skills_ico.png
+necromancer,Necromancer Skills,soul_stream,Soul Stream,460,40,10,blood_siphon,5,skills_ico.png
+necromancer,Necromancer Skills,skeleton_call,Skeleton Call,340,180,10,grave_digger,5,skills_ico.png
+necromancer,Necromancer Skills,demonic_pact,Demonic Pact,460,180,10,skeleton_call,5,skills_ico.png
+necromancer,Necromancer Skills,fine_shovel,Fine Shovel,220,320,10,grave_digger,5,skills_ico.png
+necromancer,Necromancer Skills,harvest,Harvest,340,320,10,fine_shovel,5,skills_ico.png
+necromancer,Necromancer Skills,opportunist,Opportunist,460,320,10,harvest,5,skills_ico.png
+necromancer,Necromancer Skills,tomb,Tomb,100,460,10,,0,skills_ico.png
+necromancer,Necromancer Skills,skull_shaker,Skull Shaker,340,460,10,tomb,5,skills_ico.png
+support,Support Skills,hazard_strike,Hazard Strike,460,460,10,skull_shaker,5,skills_ico.png
+support,Support Skills,first_aid,First Aid,100,110,10,,0,skills_ico.png
+support,Support Skills,mini_heal,Mini Heal,220,40,10,,0,skills_ico.png
+support,Support Skills,recovery,Recovery,340,40,10,mini_heal,5,skills_ico.png
+support,Support Skills,sanctuary,Sanctuary,460,40,10,recovery,5,skills_ico.png
+support,Support Skills,heal,Heal,580,40,10,sanctuary,5,skills_ico.png
+support,Support Skills,life_recovery,Life Recovery,220,180,10,,0,skills_ico.png
+support,Support Skills,brave_aura,Brave Aura,340,180,10,life_recovery,5,skills_ico.png
+support,Support Skills,high_cycle,High Cycle,460,180,10,brave_aura,5,skills_ico.png
+support,Support Skills,quick_motion,Quick Motion,580,180,10,high_cycle,5,skills_ico.png
+support,Support Skills,mana_recharge,Mana Recharge,220,320,10,,0,skills_ico.png
+support,Support Skills,magic_barrier,Magic Barrier,340,320,10,mana_recharge,5,skills_ico.png
+support,Support Skills,immunity,Immunity,460,320,10,magic_barrier,5,skills_ico.png
+survival,Survival Skills,fast_reaction,Fast Reaction,580,320,10,immunity,5,skills_ico.png
+survival,Survival Skills,play_dead,Play Dead,100,110,10,,0,skills_ico.png
+survival,Survival Skills,exp_up,EXP Gain UP,100,250,10,,0,skills_ico.png
+survival,Survival Skills,drop_up,Drop Rate UP,100,390,10,,0,skills_ico.png
+survival,Survival Skills,safe_rest,Safe Rest,220,180,10,,0,skills_ico.png
+survival,Survival Skills,hp_boost,HP Boost,340,40,10,safe_rest,5,skills_ico.png
+survival,Survival Skills,fighter_high,Fighter's High,340,180,10,safe_rest,5,skills_ico.png
+survival,Survival Skills,short_rest,Short Rest,220,320,10,,0,skills_ico.png
+survival,Survival Skills,mp_boost,MP Boost,340,320,10,short_rest,5,skills_ico.png
+battle,Battle Skills,sober_analysis,Sober Analysis,340,460,10,short_rest,5,skills_ico.png
+battle,Battle Skills,magic_up,Magic UP,100,40,10,,0,skills_ico.png
+battle,Battle Skills,concentrate,Concentrate,220,40,10,magic_up,5,skills_ico.png
+battle,Battle Skills,desperate_resist,Desperate Resist,340,40,10,concentrate,5,skills_ico.png
+battle,Battle Skills,increased_energy,Increased Energy,460,40,10,desperate_resist,5,skills_ico.png
+battle,Battle Skills,spell_burst,Spell Burst,580,40,10,increased_energy,5,skills_ico.png
+battle,Battle Skills,attack_up,Attack UP,100,180,10,,0,skills_ico.png
+battle,Battle Skills,whack,Whack,220,180,10,attack_up,5,skills_ico.png
+battle,Battle Skills,critical_up,Critical UP,340,180,10,whack,5,skills_ico.png
+battle,Battle Skills,intimidating_power,Intimidating Power,460,180,10,critical_up,5,skills_ico.png
+battle,Battle Skills,secret_chase_attack,Secret Chase Attack,580,180,10,intimidating_power,5,skills_ico.png
+battle,Battle Skills,defense_up,Defense UP,100,320,10,,0,skills_ico.png
+battle,Battle Skills,dodge_up,Dodge UP,220,320,10,defense_up,5,skills_ico.png
+battle,Battle Skills,accuracy_up,Accuracy UP,340,320,10,dodge_up,5,skills_ico.png
+battle,Battle Skills,defense_mastery,Defense Mastery,460,320,10,accuracy_up,5,skills_ico.png
+smith,Smith Skills,super_grip,Super Grip,580,320,10,defense_mastery,5,skills_ico.png
+smith,Smith Skills,refine_equipment,Refine Equipment,100,180,10,,0,skills_ico.png
+smith,Smith Skills,notice_anvil,Notice's Anvil,220,40,10,refine_equipment,5,skills_ico.png
+smith,Smith Skills,craftsman_anvil,Craftsman's Anvil,340,40,10,notice_anvil,5,skills_ico.png
+smith,Smith Skills,blacksmith_anvil,Blacksmith's Anvil,460,40,10,craftsman_anvil,5,skills_ico.png
+smith,Smith Skills,master_anvil,Master's Anvil,580,40,10,blacksmith_anvil,5,skills_ico.png
+smith,Smith Skills,master_anvil_ii,Master's Anvil II,700,40,10,master_anvil,5,skills_ico.png
+smith,Smith Skills,mid_class_refinement,Mid-Class Refinement,340,180,10,refine_equipment,5,skills_ico.png
+smith,Smith Skills,high_class_refinement,High-Class Refinement,460,180,10,mid_class_refinement,5,skills_ico.png
+smith,Smith Skills,expert_refinement,Expert Refinement,580,180,10,high_class_refinement,5,skills_ico.png
+smith,Smith Skills,create_equipment,Create Equipment,220,320,10,refine_equipment,5,skills_ico.png
+smith,Smith Skills,careful_creation,Careful Creation,340,320,10,create_equipment,5,skills_ico.png
+smith,Smith Skills,expert_creation,Expert's Creation,580,320,10,careful_creation,5,skills_ico.png
+smith,Smith Skills,customize_equipment,Customize Equipment,340,460,10,create_equipment,5,skills_ico.png
+smith,Smith Skills,accurate_customization,Accurate Customization,460,460,10,customize_equipment,5,skills_ico.png
+smith,Smith Skills,expert_customization,Expert's Customization,580,460,10,accurate_customization,5,skills_ico.png
+smith,Smith Skills,expert_customization_ii,Expert's Customization II,700,460,10,expert_customization,5,skills_ico.png
+smith,Smith Skills,metal_compassion,Metal Compassion,820,40,10,,0,skills_ico.png
+smith,Smith Skills,fabric_compassion,Fabric Compassion,820,180,10,,0,skills_ico.png
+smith,Smith Skills,beast_compassion,Beast Compassion,820,320,10,,0,skills_ico.png
+smith,Smith Skills,wood_compassion,Wood Compassion,820,460,10,,0,skills_ico.png
+smith,Smith Skills,medicine_compassion,Medicine Compassion,820,600,10,,0,skills_ico.png
+smith,Smith Skills,mana_compassion,Mana Compassion,820,740,10,,0,skills_ico.png
+alchemy,Alchemy Skills,process_material,Process Material,100,460,10,,0,skills_ico.png
+alchemy,Alchemy Skills,process_material,Process Material,100,320,10,,0,skills_ico.png
+alchemy,Alchemy Skills,item_synthesis,Item Synthesis,100,180,10,,0,skills_ico.png
+alchemy,Alchemy Skills,notice_bottle,Notice's Bottle,220,40,10,item_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,craftsman_bottle,Craftsman's Bottle,340,40,10,notice_bottle,5,skills_ico.png
+alchemy,Alchemy Skills,synthesist_bottle,Synthesist's Bottle,460,40,10,craftsman_bottle,5,skills_ico.png
+alchemy,Alchemy Skills,master_bottle,Master's Bottle,580,40,10,synthesist_bottle,5,skills_ico.png
+alchemy,Alchemy Skills,master_bottle_ii,Master's Bottle II,700,40,10,master_bottle,5,skills_ico.png
+alchemy,Alchemy Skills,mid_class_synthesis,Mid-Class Synthesis,340,180,10,item_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,high_class_synthesis,High-Class Synthesis,460,180,10,mid_class_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,expert_synthesis,Expert's Synthesis,580,180,10,high_class_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,expert_synthesis_ii,Expert's Synthesis II,700,180,10,expert_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,synthesize_equipment,Synthesize Equipment,340,320,10,item_synthesis,5,skills_ico.png
+alchemy,Alchemy Skills,technical_synthesis,Technical Synthesis I,460,320,10,synthesize_equipment,5,skills_ico.png
+alchemy,Alchemy Skills,technical_synthesis_ii,Technical Synthesis II,580,320,10,technical_synthesis,5,skills_ico.png
+tamer,Tamer Skills,technical_synthesis_iii,Technical Synthesis III,700,320,10,technical_synthesis_ii,5,skills_ico.png
+tamer,Tamer Skills,taming,Taming,100,40,10,,0,skills_ico.png
+tamer,Tamer Skills,capture_technique,Capture Technique I,220,40,10,taming,5,skills_ico.png
+tamer,Tamer Skills,capture_technique_ii,Capture Technique II,340,40,10,capture_technique,5,skills_ico.png
+tamer,Tamer Skills,skillful_capture,Skillful Capture,220,180,10,taming,5,skills_ico.png
+tamer,Tamer Skills,careful_capture,Careful Capture,340,180,10,skillful_capture,5,skills_ico.png
+tamer,Tamer Skills,pet_heal,Pet Heal,220,320,10,taming,5,skills_ico.png
+event,Event Skills,pet_mp_charge,Pet MP Charge,340,320,10,pet_heal,5,skills_ico.png
+event,Event Skills,morning_star,Morning Star,100,40,10,,0,skills_ico.png
+event,Event Skills,iron_pipe,Iron Pipe,100,40,10,,0,skills_ico.png
+event,Event Skills,retro_bowgun,Retro Bowgun,100,40,10,,0,skills_ico.png
+event,Event Skills,magnum,Magnum,100,40,10,,0,skills_ico.png

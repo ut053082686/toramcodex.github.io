@@ -7,22 +7,43 @@
     'use strict';
 
     // --- Configuration & Data ---
-    const SKILL_TREES = {
+    let SKILL_TREES = {
         tamer: {
             name: "Tamer Skills",
             width: 700,
             height: 450,
             skills: [
-                { id: 'taming', name: 'Taming', max: 10, x: 150, y: 100, icon: 'taming_ico.png' },
-                { id: 'cap_tech', name: 'Capture Technique', max: 10, x: 350, y: 100, req: { id: 'taming', lv: 5 }, icon: 'cap_tech_ico.png' },
-                { id: 'cap_tech2', name: 'Capture Technique II', max: 10, x: 550, y: 100, req: { id: 'cap_tech', lv: 5 }, icon: 'cap_tech2_ico.png' },
-                { id: 'skillful', name: 'Skillful Capture', max: 10, x: 350, y: 220, req: { id: 'taming', lv: 5 }, icon: 'skillful_ico.png' },
-                { id: 'careful', name: 'Careful Capture', max: 10, x: 550, y: 220, req: { id: 'skillful', lv: 5 }, icon: 'careful_ico.png' },
-                { id: 'pet_heal', name: 'Pet Heal', max: 10, x: 350, y: 340, req: { id: 'taming', lv: 5 }, icon: 'pet_heal_ico.png' },
-                { id: 'pet_mp', name: 'Pet MP Charge', max: 10, x: 550, y: 340, req: { id: 'pet_heal', lv: 5 }, icon: 'pet_mp_ico.png' }
+                { id: 'taming', name: 'Taming', max: 10, x: 150, y: 100, icon: 'skills_ico.png' },
+                { id: 'cap_tech', name: 'Capture Technique', max: 10, x: 350, y: 100, req: { id: 'taming', lv: 5 }, icon: 'skills_ico.png' },
+                { id: 'cap_tech2', name: 'Capture Technique II', max: 10, x: 550, y: 100, req: { id: 'cap_tech', lv: 5 }, icon: 'skills_ico.png' },
+                { id: 'skillful', name: 'Skillful Capture', max: 10, x: 350, y: 220, req: { id: 'taming', lv: 5 }, icon: 'skills_ico.png' },
+                { id: 'careful', name: 'Careful Capture', max: 10, x: 550, y: 220, req: { id: 'skillful', lv: 5 }, icon: 'skills_ico.png' },
+                { id: 'pet_heal', name: 'Pet Heal', max: 10, x: 350, y: 340, req: { id: 'taming', lv: 5 }, icon: 'skills_ico.png' },
+                { id: 'pet_mp', name: 'Pet MP Charge', max: 10, x: 550, y: 340, req: { id: 'pet_heal', lv: 5 }, icon: 'skills_ico.png' }
             ]
         }
     };
+
+    // Merge with external beta data if available
+    if (window.skillTrees) {
+        window.skillTrees.forEach(tree => {
+            SKILL_TREES[tree.id] = {
+                name: tree.label || tree.name,
+                width: tree.width || 800,
+                height: tree.height || 600,
+                skills: tree.skills.map(s => ({
+                    id: s.id,
+                    name: s.name,
+                    max: s.max || 10,
+                    x: s.x,
+                    y: s.y,
+                    // Convert prerequisites array to our req object format
+                    req: s.prerequisites && s.prerequisites.length > 0 ? { id: s.prerequisites[0], lv: 5 } : (s.req || null),
+                    icon: s.icon ? s.icon.split('/').pop() : 'skills_ico.png'
+                }))
+            };
+        });
+    }
 
     // State
     let currentTreeId = 'tamer';
@@ -41,8 +62,19 @@
     function init() {
         if (!treeContainer) return;
 
-        // Load Default
-        loadTree(currentTreeId);
+        // Populate Tree Selector
+        treeSelector.innerHTML = '';
+        Object.keys(SKILL_TREES).forEach(id => {
+            const opt = document.createElement('option');
+            opt.value = id;
+            opt.textContent = SKILL_TREES[id].name;
+            treeSelector.appendChild(opt);
+        });
+
+        // Load Default (Try to find first added beta tree if tamer is empty)
+        const defaultTree = window.skillTrees && window.skillTrees.length > 0 ? window.skillTrees[0].id : 'tamer';
+        loadTree(defaultTree);
+        treeSelector.value = defaultTree;
 
         // Events
         treeSelector.addEventListener('change', (e) => loadTree(e.target.value));
@@ -110,7 +142,7 @@
         node.style.top = skill.y + 'px';
         node.dataset.id = skill.id;
 
-        const iconPath = `../img/icons/${skill.icon}`;
+        const iconPath = `../img/icons/skills/${skill.icon}`;
         
         node.innerHTML = `
             <div class="node-label">${skill.name}</div>
