@@ -198,8 +198,8 @@
         const svg = document.getElementById(`svg-${treeId}`);
         if (!svg) return;
 
-        // Node uses CSS transform: translate(-50%, -50%)
-        // So the visual center of each node is exactly at (x, y)
+        // Porting logic dari beta/skill_simulator.js drawSkillLine()
+        // Node menggunakan CSS translate(-50%, -50%) jadi (x, y) = center
         svg.innerHTML = '';
         tree.skills.forEach(skill => {
             skill.reqIds.forEach(reqId => {
@@ -207,9 +207,15 @@
                 if (!parent) return;
 
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                let d;
 
-                // L-shape: Horizontal from parent center → then Vertical to child center
-                const d = `M ${parent.x} ${parent.y} L ${skill.x} ${parent.y} L ${skill.x} ${skill.y}`;
+                if (parent.y === skill.y || parent.x === skill.x) {
+                    // Garis lurus (horizontal atau vertikal)
+                    d = `M ${parent.x} ${parent.y} L ${skill.x} ${skill.y}`;
+                } else {
+                    // Elbow: Vertikal dulu, lalu Horizontal (sama seperti beta)
+                    d = `M ${parent.x} ${parent.y} L ${parent.x} ${skill.y} L ${skill.x} ${skill.y}`;
+                }
 
                 path.setAttribute("d", d);
                 path.setAttribute("class", (levels[skill.id] || 0) > 0 ? 'path-active' : 'path-inactive');
