@@ -24,7 +24,7 @@
                 // Calculate dynamic height if not explicitly smaller
                 const skills = tree.skills || [];
                 const maxY = skills.length > 0 ? Math.max(...skills.map(s => s.y)) : 0;
-                const dynamicHeight = maxY + 120; // Extra space for labels & lines
+                const dynamicHeight = maxY + 60; // Compact like beta
 
                 SKILL_TREES[tree.id] = {
                     id: tree.id,
