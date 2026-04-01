@@ -49,6 +49,7 @@
         }
 
         console.log("SKILL_TREES snapshot:", SKILL_TREES);
+        loadState();
         renderAccordion();
         
         window.setStep = setStep;
@@ -56,6 +57,30 @@
         window.resetAll = resetAll;
         window.collapseAll = collapseAll;
         window.toggleTree = toggleTree;
+    }
+
+    function saveState() {
+        try {
+            const activeLevels = {};
+            for (let k in levels) {
+                if (levels[k] > 0) activeLevels[k] = levels[k];
+            }
+            const b64 = btoa(JSON.stringify(activeLevels));
+            window.history.replaceState(null, '', '#' + b64);
+            localStorage.setItem('toram_simulator_state', b64);
+        } catch(e) {}
+    }
+
+    function loadState() {
+        try {
+            let b64 = window.location.hash.substring(1);
+            if (!b64) b64 = localStorage.getItem('toram_simulator_state');
+            if (b64) {
+                levels = JSON.parse(atob(b64));
+            }
+        } catch(e) {
+            console.warn("Failed to parse saved skill state");
+        }
     }
 
     function renderAccordion() {
@@ -123,7 +148,7 @@
             <div class="node-icon-wrapper">
                 <img src="${iconPath}" alt="${skill.name}" class="node-icon" onerror="this.src='../img/icons/skills_ico.png'">
             </div>
-            <div class="node-level" id="lv-${skill.id}">0</div>
+            <div class="node-level" data-skill-id="${skill.id}">0</div>
         `;
 
         node.addEventListener('mousedown', (e) => {
@@ -159,6 +184,7 @@
         levels[id] = nextLv;
         if (dir < 0 && nextLv < 5) resetDependants(id, treeId);
         updateUI(treeId);
+        saveState();
     }
 
     function resetDependants(parentId, treeId) {
@@ -175,11 +201,9 @@
         const tree = SKILL_TREES[treeId];
         tree.skills.forEach(s => {
             const lv = levels[s.id] || 0;
-            const lvEl = document.getElementById(`lv-${s.id}`);
-            if (lvEl) lvEl.textContent = lv;
-
-            const node = document.querySelector(`.skill-node[data-id="${s.id}"]`);
-            if (node) node.classList.toggle('active', lv > 0);
+            // Update all nodes synchronously across different trees (e.g. Process Material)
+            document.querySelectorAll(`.node-level[data-skill-id="${s.id}"]`).forEach(el => el.textContent = lv);
+            document.querySelectorAll(`.skill-node[data-id="${s.id}"]`).forEach(el => el.classList.toggle('active', lv > 0));
         });
 
         let treeSP = 0;
@@ -248,6 +272,7 @@
         if (confirm("Reset ALL skill points across ALL trees?")) {
             Object.keys(levels).forEach(id => levels[id] = 0);
             Object.keys(SKILL_TREES).forEach(tid => updateUI(tid));
+            saveState();
         }
     }
 
