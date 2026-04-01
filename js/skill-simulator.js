@@ -48,6 +48,7 @@
             });
         }
 
+        console.log("SKILL_TREES snapshot:", SKILL_TREES);
         renderAccordion();
         
         window.setStep = setStep;
@@ -274,44 +275,53 @@
                 return;
             }
 
-            // Grouping logic
-            const treeMap = {};
-            const parsedTrees = [];
+            // Helper to find column values safely (ignoring header typos like trailing spaces)
+            const getVal = (row, keys) => {
+                for (let k of keys) {
+                    if (row[k] !== undefined) return row[k];
+                }
+                for (let actualKey in row) {
+                    let cleanKey = actualKey.trim().toLowerCase();
+                    if (keys.includes(cleanKey)) return row[actualKey];
+                }
+                return '';
+            };
 
             rows.forEach(row => {
-                const treeId = (row['tree_id'] || '').trim().toLowerCase();
+                const treeId = String(getVal(row, ['tree_id']) || '').trim().toLowerCase();
                 if (!treeId) return;
 
                 if (!treeMap[treeId]) {
+                    let tIcon = String(getVal(row, ['tree_icon']) || '').trim();
                     treeMap[treeId] = {
                         id: treeId,
-                        label: row['tree_label'] || 'Unknown Tree',
-                        width: parseInt(row['tree_width']) || 980,
-                        height: parseInt(row['tree_height']) || 1000,
-                        backgroundColor: row['tree_bg_color'] || '#ffffff',
-                        icon: row['tree_icon'] ? row['tree_icon'] + '.png' : 'skills_ico.png',
-                        visible: String(row['tree_visible']).toUpperCase() !== 'FALSE',
-                        star_gem_visible: String(row['tree_star_gem_usable']).toUpperCase() === 'TRUE',
+                        label: getVal(row, ['tree_label']) || 'Unknown Tree',
+                        width: parseInt(getVal(row, ['tree_width'])) || 980,
+                        height: parseInt(getVal(row, ['tree_height'])) || 1000,
+                        backgroundColor: getVal(row, ['tree_bg_color']) || '#ffffff',
+                        icon: tIcon ? tIcon + '.png' : 'skills_ico.png',
+                        visible: String(getVal(row, ['tree_visible'])).toUpperCase() !== 'FALSE',
+                        star_gem_visible: String(getVal(row, ['tree_star_gem_usable', 'tree_star_gem_u'])).toUpperCase() === 'TRUE',
                         skills: []
                     };
                     parsedTrees.push(treeMap[treeId]);
                 }
 
                 // Append skill to the tree
-                const rSkillId = (row['skill_id'] || '').trim().toLowerCase();
+                const rSkillId = String(getVal(row, ['skill_id']) || '').trim().toLowerCase();
                 if (rSkillId) {
-                    let preReqSplit = (row['skill_prerequisite'] || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+                    let preReqSplit = String(getVal(row, ['skill_prerequisite', 'skill_prerequisites']) || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
                     
                     treeMap[treeId].skills.push({
                         id: rSkillId,
-                        name: row['skill_name'] || 'Unknown Skill',
+                        name: getVal(row, ['skill_name']) || 'Unknown Skill',
                         level: 0,
-                        star_gem_available: String(row['skill_star_gem_usable']).toUpperCase() === 'TRUE',
-                        star_gem_cost: parseInt(row['skill_star_gem_cost']) || 0,
-                        star_gem_level: parseInt(row['skill_star_gem_level']) || 1,
+                        star_gem_available: String(getVal(row, ['skill_star_gem_usable', 'skill_star_gem_available'])).toUpperCase() === 'TRUE',
+                        star_gem_cost: parseInt(getVal(row, ['skill_star_gem_cost'])) || 0,
+                        star_gem_level: parseInt(getVal(row, ['skill_star_gem_level'])) || 1,
                         star_gem_selected: false,
-                        x: parseInt(row['skill_x']) || 0,
-                        y: parseInt(row['skill_y']) || 0,
+                        x: parseInt(getVal(row, ['skill_x'])) || 0,
+                        y: parseInt(getVal(row, ['skill_y'])) || 0,
                         prerequisites: preReqSplit
                     });
                 }
