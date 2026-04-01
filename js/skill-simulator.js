@@ -295,20 +295,31 @@
                 const treeId = String(getVal(row, ['tree_id']) || '').trim().toLowerCase();
                 if (!treeId) return;
 
+                let tIcon = String(getVal(row, ['tree_icon']) || '').trim();
+                let finalIcon = tIcon ? (tIcon.toLowerCase().endsWith('.png') ? tIcon : tIcon + '.png') : 'skills_ico.png';
+                
                 if (!treeMap[treeId]) {
-                    let tIcon = String(getVal(row, ['tree_icon']) || '').trim();
                     treeMap[treeId] = {
                         id: treeId,
                         label: getVal(row, ['tree_label']) || 'Unknown Tree',
                         width: parseInt(getVal(row, ['tree_width'])) || 980,
                         height: parseInt(getVal(row, ['tree_height'])) || 1000,
                         backgroundColor: getVal(row, ['tree_bg_color']) || '#ffffff',
-                        icon: tIcon ? tIcon + '.png' : 'skills_ico.png',
+                        icon: finalIcon,
                         visible: String(getVal(row, ['tree_visible'])).toUpperCase() !== 'FALSE',
                         star_gem_visible: String(getVal(row, ['tree_star_gem_usable', 'tree_star_gem_u'])).toUpperCase() === 'TRUE',
                         skills: []
                     };
                     parsedTrees.push(treeMap[treeId]);
+                } else {
+                    // Patch missing data if it appears in later rows
+                    if (finalIcon !== 'skills_ico.png' && treeMap[treeId].icon === 'skills_ico.png') {
+                        treeMap[treeId].icon = finalIcon;
+                    }
+                    let tLabel = getVal(row, ['tree_label']);
+                    if (tLabel && treeMap[treeId].label === 'Unknown Tree') {
+                        treeMap[treeId].label = tLabel;
+                    }
                 }
 
                 // Append skill to the tree
