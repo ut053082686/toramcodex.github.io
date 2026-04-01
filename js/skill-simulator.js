@@ -254,9 +254,80 @@
         document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
     }
 
+    function loadFromSheets() {
+        if (!window.ToramSheets || !window.ToramSheets.fetchSheet) {
+            console.error("ToramSheets core missing.");
+            return;
+        }
+
+        const accordion = document.getElementById('tree-accordion');
+        if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-color);">Loading Skill Data from Cloud...</div>';
+
+        const sheetName = (window.ToramSheets.CONFIG && window.ToramSheets.CONFIG.SHEETS && window.ToramSheets.CONFIG.SHEETS.skilltrees) ? window.ToramSheets.CONFIG.SHEETS.skilltrees.name : 'SkillTrees';
+
+        window.ToramSheets.fetchSheet(sheetName).then(csv => {
+            const rows = window.ToramSheets.parseCSV(csv);
+            if (!rows.length) {
+                if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;">Error: No skill data found. Ensure "SkillTrees" tab is published.</div>';
+                return;
+            }
+
+            // Grouping logic
+            const treeMap = {};
+            const parsedTrees = [];
+
+            rows.forEach(row => {
+                const treeId = (row['tree_id'] || '').trim().toLowerCase();
+                if (!treeId) return;
+
+                if (!treeMap[treeId]) {
+                    treeMap[treeId] = {
+                        id: treeId,
+                        label: row['tree_label'] || 'Unknown Tree',
+                        width: parseInt(row['tree_width']) || 980,
+                        height: parseInt(row['tree_height']) || 1000,
+                        backgroundColor: row['tree_bg_color'] || '#ffffff',
+                        icon: row['tree_icon'] ? row['tree_icon'] + '.png' : 'skills_ico.png',
+                        visible: String(row['tree_visible']).toUpperCase() !== 'FALSE',
+                        star_gem_visible: String(row['tree_star_gem_usable']).toUpperCase() === 'TRUE',
+                        skills: []
+                    };
+                    parsedTrees.push(treeMap[treeId]);
+                }
+
+                // Append skill to the tree
+                const rSkillId = (row['skill_id'] || '').trim().toLowerCase();
+                if (rSkillId) {
+                    let preReqSplit = (row['skill_prerequisite'] || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+                    
+                    treeMap[treeId].skills.push({
+                        id: rSkillId,
+                        name: row['skill_name'] || 'Unknown Skill',
+                        level: 0,
+                        star_gem_available: String(row['skill_star_gem_usable']).toUpperCase() === 'TRUE',
+                        star_gem_cost: parseInt(row['skill_star_gem_cost']) || 0,
+                        star_gem_level: parseInt(row['skill_star_gem_level']) || 1,
+                        star_gem_selected: false,
+                        x: parseInt(row['skill_x']) || 0,
+                        y: parseInt(row['skill_y']) || 0,
+                        prerequisites: preReqSplit
+                    });
+                }
+            });
+
+            // Make it global so format stays exactly the same as old hardcoded behavior
+            window.skillTrees = parsedTrees;
+            init();
+
+        }).catch(err => {
+            console.error("Failed to load skill sheet:", err);
+            if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;color:red;">Error downloading skill data. Make sure your Google Sheet ID is correct and the tab is available.</div>';
+        });
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', loadFromSheets);
     } else {
-        init();
+        loadFromSheets();
     }
 })();

@@ -1,5 +1,9 @@
 # ToramDB Skill Simulator Changelog
 
+### v0.65.0 (Latest)
+- **Data Source Migration**: The Skill Simulator data is no longer hardcoded into a 6,000+ line JS file. It now fetches the `SkillTrees` sheet from Google Sheets asynchronously, matching the rest of the ToramDB website architecture.
+- **Dynamic Tree Building**: The simulator script now groups the flat table sheet rows by `tree_id` and automatically reconstructs the nested JSON object required by the legacy UI renderer on the fly.
+- **Tree Background Colors**: Added support for reading `tree_bg_color` directly from the sheet `#ffffff` (white/light mode) or `#000000` (black/dark mode) per skill tree canvas.
 ### v0.64.1
 - **Monster Modal Infinite Loop**: Added a guard clause in `monster-modal.js` to prevent an infinite fetching loop when clicking a boss name on a Quest card that doesn't yet exist in the Monsters sheet. The browser will no longer freeze or crash out of memory.
 - **Monster Modal UI State**: Fixed an issue where opening a "Not Found" monster modal would incorrectly display the leftover image, stats, location, and drops from the previously opened monster. The modal correctly zeroes out old information when a monster is missing.
