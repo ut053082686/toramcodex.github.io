@@ -1,6 +1,13 @@
 # ToramDB Skill Simulator Changelog
 
-### v0.65.0 (Latest)
+### v0.66.0 (Latest)
+- **Featured Module Overhaul**: Transformed the Featured items' visual style on the homepage from a pill-based badge system to a professional, tabular list layout for better scannability.
+- **Smart Description (Map Icon)**: Implemented automatic detection of `map :` prefixes in the Description field, which are now rendered with a dedicated location symbol (📍) and special highlighting.
+- **Compact UI Refinement**: Reduced vertical padding and adjusted font weights across the Featured cards to ensure a sleek, high-density professional aesthetic.
+- **Crysta Icon Modernization**: Developed a rank-aware icon resolution system that automatically assigns `_base.png`, `_up.png`, or `_max.png` icons to Crystas based on their position in an enhancement path.
+- **Logic Syncing**: Synchronized rendering logic between the Homepage, Monster Modals, and Item Detail pages to ensure UI consistency across the entire database.
+
+### v0.65.0
 - **Data Source Migration**: The Skill Simulator data is no longer hardcoded into a 6,000+ line JS file. It now fetches the `SkillTrees` sheet from Google Sheets asynchronously, matching the rest of the ToramDB website architecture.
 - **Dynamic Tree Building**: The simulator script now groups the flat table sheet rows by `tree_id` and automatically reconstructs the nested JSON object required by the legacy UI renderer on the fly.
 - **Tree Background Colors**: Added support for reading `tree_bg_color` directly from the sheet `#ffffff` (white/light mode) or `#000000` (black/dark mode) per skill tree canvas.
