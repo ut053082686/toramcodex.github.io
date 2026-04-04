@@ -1,6 +1,12 @@
 # ToramDB Skill Simulator Changelog
 
-### v0.66.1 (Latest)
+### v0.66.2 (Latest)
+- **Ultra-Robust Visual Connectors**: Overhauled the branching tree CSS to use a child-relative layout. Horizontal lines now perfectly align with the center of each item card regardless of text length or quantity, ensuring a flawless professional look at any resolution.
+- **Modal Popup Expansion**: Integrated the branching enhancement logic into the Item Detail Modal. Users can now view complex, non-linear upgrade trees directly within the search result popups.
+- **Enhanced Data Normalization**: Upgraded the regex-based parser to handle various delimiter types (standard and full-width semicolons `；`) and bracket formats, making the database more resilient to spreadsheet formatting variations.
+- **Perfect Connectivity**: Eliminated vertical gaps between parent arrows and branching bars, creating a seamless architectural visual for Crysta paths.
+
+### v0.66.1
 - **Branching Enhancement Paths**: Added support for non-linear Crysta upgrade paths using the pipe symbol (`|`). Improvements include a tree-style layout that centers the common root and splits branches into professional side-by-side columns.
 - **Smart Tree Resolver**: The system now automatically identifies shared roots across multiple path strings to prevent redundant node rendering and ensure icon rank (`_base`, `_up`, `_max`) is calculated accurately for every branch.
 - **Responsive Tree UI**: Optimized the enhancement tree for mobile, allowing users to scroll horizontally through complex branches or view them in a stacked vertical layout.
