@@ -2112,34 +2112,43 @@ footer {
 /* Branching logic visual connection */
 @media (min-width: 768px) {
   .enhancement-tree > .enhancement-arrow {
-    margin-bottom: -1px;
+    margin-bottom: 0;
     position: relative;
     z-index: 2;
   }
 
   .enhancement-branches {
+    display: flex;
+    justify-content: center;
     position: relative;
-    padding-top: 1.5rem; /* Space for the branching lines */
-    margin-top: -0.5rem;
+    padding-top: 1rem;
+    margin-top: -0.25rem;
   }
 
-  /* The horizontal connector bar */
+  /* Central 'neck' connecting to the arrow from parent */
   .enhancement-branches::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 25%;
-    right: 25%;
-    height: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 1rem;
     background: #94a3b8;
     z-index: 1;
   }
   
-  /* The vertical 'neck' connecting to the arrow above */
-  .enhancement-branches::after {
+  .enhancement-branch {
+    position: relative;
+    flex: 1; /* Each branch takes equal space */
+    min-width: 140px;
+  }
+
+  /* Vertical hanger for each branch icon */
+  .enhancement-branch::before {
     content: '';
     position: absolute;
-    top: -1rem;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
@@ -2148,21 +2157,36 @@ footer {
     z-index: 1;
   }
 
-  /* The vertical 'hangers' for each branch */
-  .enhancement-branch {
-    position: relative;
-  }
-
-  .enhancement-branch::before {
+  /* Horizontal connecting lines that meet in the middle */
+  .enhancement-branch::after {
     content: '';
     position: absolute;
-    top: -1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 1.5rem;
+    top: 0;
+    height: 2px;
     background: #94a3b8;
     z-index: 1;
+    width: 50%;
+  }
+
+  /* First branch: line goes from middle to right */
+  .enhancement-branch:first-child::after {
+    left: 50%;
+  }
+
+  /* Last branch: line goes from middle to left */
+  .enhancement-branch:last-child::after {
+    right: 50%;
+  }
+
+  /* Middle branches (if any): line goes all the way across */
+  .enhancement-branch:not(:first-child):not(:last-child)::after {
+    left: 0;
+    width: 100%;
+  }
+
+  /* If only one branch exists (not common for branching), hide horizontal line */
+  .enhancement-branch:only-child::after {
+    display: none;
   }
 }
 
