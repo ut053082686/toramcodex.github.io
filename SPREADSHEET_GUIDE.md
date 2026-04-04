@@ -154,13 +154,16 @@ Iron Ore x3;Dragon Scale x1;Magic Crystal x2
 ```
 
 **Khusus Crysta (Enhancement Path)**:
-Untuk item bertipe **Crysta**, kolom Recipe berfungsi sebagai urutan upgrade.
-*   **Linear**: Gunakan pemisah `>` atau `;`.
+Untuk item bertipe **Crysta**, tampilan Recipe akan otomatis berubah menjadi *Enhancement Path* (Pohon Peningkatan).
+*   **Linear (Lurus)**: Gunakan pemisah `>` atau `;`.
     *   Contoh: `Ganglef > Tyrant Machina > Vulture`
-*   **Bercabang (Branching)**: Gunakan kurung siku `[ ]` untuk setiap jalur (Sangat direkomendasikan).
-    *   Contoh: `[Ganglef > Giant Moon Crab] [Ganglef > Tyrant Machina > Vulture]`
-    *   Sistem juga tetap mendukung pemisah `|`, namun kurung siku `[ ]` lebih stabil.
-    *   *Sistem akan otomatis menampilkan item pertama yang sama sebagai pusat di atas.*
+*   **Bercabang (Branching)**: Sangat direkomendasikan menggunakan kurung siku `[ ]` untuk memisahkan setiap jalur.
+    *   Contoh: `[Eerie Crystal > Tapir > Patissia] [Eerie Crystal > Mysterious Crystal]`
+    *   Sistem secara cerdas akan menggabungkan nama pertama yang sama sebagai "Akar" (Root) di posisi paling atas.
+*   **Fitur Super-Robust**:
+    *   Sistem mendukung berbagai pemisah: `;` , `>` , `|` , `｜` (pipa lebar), dan `；` (titik-koma lebar).
+    *   **Universal Support**: Jalur bercabang kini tampil indah di semua perangkat (Web & Mobile). Pada HP, pengguna bisa menggeser (*swipe*) pohon ke samping jika cabangnya banyak.
+    *   **Ikon Otomatis**: Sistem otomatis memberikan ikon rank (`_base` untuk akar, `_up` untuk tengah, `_max` untuk akhir jalur).
 
 ### Contoh Data
 

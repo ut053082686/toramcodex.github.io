@@ -57,6 +57,7 @@ Developed by **No! I'm Failing!**
 - ✅ **Detail modal untuk Pets** — klik baris pet untuk lihat detail lengkap (Normal Magic, Support, Act 1–5, Color Info)
 - ✅ **Monster grouping** — Monster dengan nama sama dikelompokkan secara otomatis, variant (Hard/Nightmare/Ultimate) di-toggle
 - ✅ **XSS protection** — Semua data dari Google Sheet di-sanitize sebelum render ke HTML
+- ✅ **Universal Branching Tree** — Tampilan pohon peningkatan (Crysta) bercabang yang otomatis menyesuaikan di Web & Mobile dengan dukungan horizontal scroll.
 - ✅ Aksesibilitas: ARIA labels, roles, `aria-expanded`, semantic HTML
 
 ## 📊 Google Sheets Setup
