@@ -71,12 +71,12 @@
       Obtain: 'Shop: Magic Guild (50,000 Spina)',
       Recipe: ''
     },
-    'Dragon Heart': {
-      Name: 'Dragon Heart', Icon: '❤️‍🔥', Type: 'Material', Level: '',
-      ImageURL: '', SellSpina: '12,000', SellOther: '',
-      Stats: '',
-      Obtain: 'Drop: Any Dragon-type Monster',
-      Recipe: ''
+    'Ganglef': {
+      Name: 'Ganglef', Icon: '🔴', Type: 'Weapon Crysta', Level: '',
+      ImageURL: '', SellSpina: '1', SellOther: '',
+      Stats: 'ATK:+3%;Aspd:+250',
+      Obtain: 'Drop: Ganglef',
+      Recipe: 'Ganglef > Giant Moon Crab | Ganglef > Tyrant Machina > Vulture > Bakuzan'
     },
     'Iron Ore': {
       Name: 'Iron Ore', Icon: '⛏️', Type: 'Material', Level: '',
@@ -228,17 +228,15 @@
     // Recipe / Used For
     var recEl = document.getElementById('recipeContent');
     if (isCrysta && rec) {
-      var steps = rec.split(';').map(function (s) { return s.trim(); }).filter(Boolean);
-      var pathHTML = '<div class="enhancement-path">';
       var iconBase = (function() {
         var path = window.location.pathname;
         if (path.indexOf('/pages/') !== -1) return '../img/icons/';
         return 'img/icons/';
       }());
 
-      steps.forEach(function (stepName, idx) {
-        var isCurrent = stepName.toLowerCase() === name.toLowerCase();
-        var currentClass = isCurrent ? ' enhancement-current' : '';
+      var renderNode = function(stepName, rank, curName) {
+        var isCurrent = stepName.toLowerCase() === curName.toLowerCase();
+        var currentClass = isCurrent ? ' active' : '';
         
         var tLow = type.toLowerCase();
         var category = "normal";
@@ -246,21 +244,61 @@
         else if (tLow.indexOf('armor') !== -1) category = 'armor';
         else if (tLow.indexOf('special') !== -1) category = 'special';
         else if (tLow.indexOf('additional') !== -1 || tLow.indexOf('ring') !== -1) category = 'add';
-
-        var rank = "up";
-        if (idx === 0) rank = "base";
-        else if (idx === steps.length - 1 && steps.length > 1) rank = "max";
         
         var stepIcon = iconBase + 'crysta_' + category + '_' + rank + '.png';
-        var errHandler = 'onerror="this.onerror=null;this.src=\'../img/icons/no_image.png\';"';
+        var errHandler = 'onerror="this.onerror=null;this.src=\'' + iconBase + 'no_image.png\';"';
 
-        pathHTML += '<div class="enhancement-step' + currentClass + '" onclick="window.location.href=\'detail.html?name=' + encodeURIComponent(stepName) + '\'" style="cursor:pointer">' +
+        return '<div class="enhancement-node' + currentClass + '" onclick="window.location.href=\'detail.html?name=' + encodeURIComponent(stepName) + '\'">' +
           '<div class="enhancement-icon"><img src="' + stepIcon + '" ' + errHandler + ' /></div>' +
           '<div class="enhancement-name">' + esc(stepName) + '</div>' +
           (isCurrent ? '<div class="enhancement-badge">Current</div>' : '') +
           '</div>';
-        if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
-      });
+      };
+
+      var rawPaths = rec.split('|').map(function (s) { return s.trim(); }).filter(Boolean);
+      var pathHTML = '<div class="enhancement-tree">';
+
+      if (rawPaths.length > 1) {
+        // BRANCHING LOGIC
+        var firstPathFull = rawPaths[0].split(/[>;]/).map(function(s){return s.trim();}).filter(Boolean);
+        var rootName = firstPathFull[0];
+
+        // 1. Root Node
+        pathHTML += renderNode(rootName, 'base', name);
+        pathHTML += '<div class="enhancement-arrow">↓</div>';
+
+        // 2. Branching Container
+        pathHTML += '<div class="enhancement-branches">';
+        rawPaths.forEach(function(rp) {
+          var steps = rp.split(/[>;]/).map(function(s){return s.trim();}).filter(Boolean);
+          // If this path starts with the common root, skip it for the branch display
+          if (steps.length > 0 && steps[0].toLowerCase() === rootName.toLowerCase()) {
+            steps.shift();
+          }
+          
+          if (steps.length > 0) {
+            pathHTML += '<div class="enhancement-branch">';
+            steps.forEach(function(sName, idx) {
+              var rank = (idx === steps.length - 1) ? 'max' : 'up';
+              pathHTML += renderNode(sName, rank, name);
+              if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
+            });
+            pathHTML += '</div>';
+          }
+        });
+        pathHTML += '</div>';
+      } else {
+        // LINEAR LOGIC (original, cleaned up)
+        var steps = rec.split(/[>;]/).map(function (s) { return s.trim(); }).filter(Boolean);
+        steps.forEach(function (stepName, idx) {
+          var rank = "up";
+          if (idx === 0) rank = "base";
+          else if (idx === steps.length - 1 && steps.length > 1) rank = "max";
+          
+          pathHTML += renderNode(stepName, rank, name);
+          if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
+        });
+      }
       recEl.innerHTML = pathHTML + '</div>';
     } else if (isMaterial) {
       var usedIn = findUsedIn(name);

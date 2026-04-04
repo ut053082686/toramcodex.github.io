@@ -2011,3 +2011,122 @@ footer {
   font-weight: 700;
   color: #334155;
 }
+
+/* Enhancement Path & Branching */
+.enhancement-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.enhancement-branches {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  position: relative;
+  min-width: max-content;
+}
+
+.enhancement-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0 10px;
+}
+
+.enhancement-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 110px;
+  text-align: center;
+  transition: all 0.2s;
+  padding: 10px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.enhancement-node:hover { 
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+.enhancement-node.active {
+  background: #fffbeb;
+  border-color: #fde68a;
+  box-shadow: 0 4px 12px rgba(184,134,11,0.1);
+  outline: 2px solid var(--accent);
+}
+
+.enhancement-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.enhancement-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.enhancement-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.enhancement-badge {
+  font-size: 0.65rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-top: 2px;
+}
+
+.enhancement-arrow {
+  font-size: 1rem;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+/* Branching logic visual connection */
+@media (min-width: 768px) {
+  .enhancement-branches::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 20%;
+    right: 20%;
+    height: 1rem;
+    border-top: 2px solid #e2e8f0;
+    border-left: 2px solid #e2e8f0;
+    border-right: 2px solid #e2e8f0;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+/* Mobile: handle split but keep scrollable */
+@media (max-width: 767px) {
+  .enhancement-branches {
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+}

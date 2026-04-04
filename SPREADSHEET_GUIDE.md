@@ -152,6 +152,15 @@ Bahan recipe akan menjadi **clickable** dan otomatis membuka popup detail item t
 ```
 Iron Ore x3;Dragon Scale x1;Magic Crystal x2
 ```
+
+**Khusus Crysta (Enhancement Path)**:
+Untuk item bertipe **Crysta**, kolom Recipe berfungsi sebagai urutan upgrade.
+*   **Linear**: Gunakan pemisah `>` atau `;`.
+    *   Contoh: `Ganglef > Tyrant Machina > Vulture`
+*   **Bercabang (Branching)**: Gunakan pemisah `|` untuk membagi jalur.
+    *   Contoh: `Ganglef > Giant Moon Crab | Ganglef > Tyrant Machina > Vulture`
+    *   *Sistem akan otomatis menampilkan Ganglef sebagai pusat di atas, lalu membelah menjadi dua jalur di bawahnya.*
+
 ### Contoh Data
 
 | Name                | Icon | Type           | Level | ImageURL | SellSpina | SellOther | Stats                                   | Obtain                              | Recipe                              |
