@@ -871,22 +871,41 @@ ul { list-style: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.45rem 0;
+  padding: 0.5rem 0;
   border-bottom: 1px solid rgba(0,0,0,0.03);
-  font-size: 0.88rem;
+  font-size: 0.875rem;
 }
 .f-stat-row:last-child {
   border-bottom: none;
 }
 .f-stat-label {
   color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 .f-stat-value {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 .f-stat-value.positive { color: var(--success); }
 .f-stat-value.negative { color: var(--danger); }
+
+/* Featured Smart Description: Map Info */
+.f-map-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #c29112; 
+  background: rgba(184,134,11,0.05);
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border: 1px solid rgba(184,134,11,0.1);
+}
+.f-map-info .icon {
+  font-size: 1rem;
+}
 
 /* Element tags */
 .tag.red,
