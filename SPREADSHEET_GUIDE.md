@@ -157,9 +157,10 @@ Iron Ore x3;Dragon Scale x1;Magic Crystal x2
 Untuk item bertipe **Crysta**, kolom Recipe berfungsi sebagai urutan upgrade.
 *   **Linear**: Gunakan pemisah `>` atau `;`.
     *   Contoh: `Ganglef > Tyrant Machina > Vulture`
-*   **Bercabang (Branching)**: Gunakan pemisah `|` untuk membagi jalur.
-    *   Contoh: `Ganglef > Giant Moon Crab | Ganglef > Tyrant Machina > Vulture`
-    *   *Sistem akan otomatis menampilkan Ganglef sebagai pusat di atas, lalu membelah menjadi dua jalur di bawahnya.*
+*   **Bercabang (Branching)**: Gunakan kurung siku `[ ]` untuk setiap jalur (Sangat direkomendasikan).
+    *   Contoh: `[Ganglef > Giant Moon Crab] [Ganglef > Tyrant Machina > Vulture]`
+    *   Sistem juga tetap mendukung pemisah `|`, namun kurung siku `[ ]` lebih stabil.
+    *   *Sistem akan otomatis menampilkan item pertama yang sama sebagai pusat di atas.*
 
 ### Contoh Data
 

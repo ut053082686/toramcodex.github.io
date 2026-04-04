@@ -76,7 +76,7 @@
       ImageURL: '', SellSpina: '1', SellOther: '',
       Stats: 'ATK:+3%;Aspd:+250',
       Obtain: 'Drop: Ganglef',
-      Recipe: 'Ganglef > Giant Moon Crab | Ganglef > Tyrant Machina > Vulture > Bakuzan'
+      Recipe: '[Ganglef > Giant Moon Crab] [Ganglef > Tyrant Machina > Vulture > Bakuzan]'
     },
     'Iron Ore': {
       Name: 'Iron Ore', Icon: '⛏️', Type: 'Material', Level: '',
@@ -255,31 +255,52 @@
           '</div>';
       };
 
-      var rawPaths = rec.split(/[|｜]/).map(function (s) { return s.trim(); }).filter(Boolean);
+      // DETECTION: Check for square brackets [Path 1] [Path 2] first, then fall back to pipes
+      var rawPaths = [];
+      var bracketMatches = rec.match(/\[([^\]]+)\]/g);
+      
+      if (bracketMatches && bracketMatches.length > 1) {
+        rawPaths = bracketMatches.map(function(m) {
+          return m.replace(/[\[\]]/g, '').trim();
+        }).filter(Boolean);
+      } else {
+        rawPaths = rec.split(/[|｜]/).map(function (s) { return s.trim(); }).filter(Boolean);
+      }
+
       var pathHTML = '<div class="enhancement-tree">';
 
       if (rawPaths.length > 1) {
         // BRANCHING LOGIC
-        var firstPathFull = rawPaths[0].split(/[>;]/).map(function(s){return s.trim();}).filter(Boolean);
-        var rootName = firstPathFull[0];
+        // 1. Parse all paths into arrays of steps
+        var processedPaths = rawPaths.map(function(p) {
+          return p.split(/[>;;]/).map(function(s) { return s.trim(); }).filter(Boolean);
+        });
 
-        // 1. Root Node
-        pathHTML += renderNode(rootName, 'base', name);
-        pathHTML += '<div class="enhancement-arrow">↓</div>';
+        // 2. Identify common root (assume first item of first path as root candidate)
+        var rootName = processedPaths[0][0];
+        var allShareRoot = processedPaths.every(function(p) { 
+          return p.length > 0 && p[0].toLowerCase() === rootName.toLowerCase(); 
+        });
 
-        // 2. Branching Container
-        pathHTML += '<div class="enhancement-branches">';
-        rawPaths.forEach(function(rp) {
-          var steps = rp.split(/[>;]/).map(function(s){return s.trim();}).filter(Boolean);
-          // If this path starts with the common root, skip it for the branch display
-          if (steps.length > 0 && steps[0].toLowerCase() === rootName.toLowerCase()) {
-            steps.shift();
-          }
+        if (allShareRoot) {
+          // Render Shared Root Node
+          pathHTML += renderNode(rootName, 'base', name);
+          pathHTML += '<div class="enhancement-arrow">↓</div>';
           
+          // Remove root from each path for branching display
+          processedPaths.forEach(function(p) { p.shift(); });
+        }
+
+        // 3. Render Branching Container
+        pathHTML += '<div class="enhancement-branches">';
+        processedPaths.forEach(function(steps) {
           if (steps.length > 0) {
             pathHTML += '<div class="enhancement-branch">';
             steps.forEach(function(sName, idx) {
               var rank = (idx === steps.length - 1) ? 'max' : 'up';
+              // If we didn't have a shared root, the first item of each branch might be 'base'
+              if (!allShareRoot && idx === 0) rank = 'base';
+
               pathHTML += renderNode(sName, rank, name);
               if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
             });
