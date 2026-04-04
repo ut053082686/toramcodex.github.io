@@ -1,6 +1,11 @@
 # ToramDB Skill Simulator Changelog
 
-### v0.66.0 (Latest)
+### v0.66.1 (Latest)
+- **Branching Enhancement Paths**: Added support for non-linear Crysta upgrade paths using the pipe symbol (`|`). Improvements include a tree-style layout that centers the common root and splits branches into professional side-by-side columns.
+- **Smart Tree Resolver**: The system now automatically identifies shared roots across multiple path strings to prevent redundant node rendering and ensure icon rank (`_base`, `_up`, `_max`) is calculated accurately for every branch.
+- **Responsive Tree UI**: Optimized the enhancement tree for mobile, allowing users to scroll horizontally through complex branches or view them in a stacked vertical layout.
+
+### v0.66.0
 - **Featured Module Overhaul**: Transformed the Featured items' visual style on the homepage from a pill-based badge system to a professional, tabular list layout for better scannability.
 - **Smart Description (Map Icon)**: Implemented automatic detection of `map :` prefixes in the Description field, which are now rendered with a dedicated location symbol (📍) and special highlighting.
 - **Compact UI Refinement**: Reduced vertical padding and adjusted font weights across the Featured cards to ensure a sleek, high-density professional aesthetic.
