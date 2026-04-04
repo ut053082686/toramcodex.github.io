@@ -446,45 +446,96 @@ window.ItemModal = (function () {
     }
 
     if (isCrysta && rec) {
-      // Enhancement Path: vertical flow with clickable crysta names
-      var steps = rec.split(';').map(function (s) { return s.trim(); }).filter(Boolean);
-      var pathHTML = '<div class="enhancement-path">';
+      // SUPER ROBUST DETECTION & NORMALIZATION (Branching support)
+      var cleanRec = rec.replace(/[｜｜]/g, '|')
+                        .replace(/[［［]/g, '[')
+                        .replace(/[］］]/g, ']')
+                        .replace(/&lbrack;/g, '[')
+                        .replace(/&rbrack;/g, ']')
+                        .replace(/&#91;/g, '[')
+                        .replace(/&#93;/g, ']');
 
-      steps.forEach(function (stepName, idx) {
-        var isCurrent = stepName.toLowerCase() === name.toLowerCase();
+      var rawPaths = [];
+      if (cleanRec.indexOf('[') !== -1 && cleanRec.indexOf(']') !== -1) {
+        rawPaths = cleanRec.split(/\]\s*\[/).map(function(p) {
+          return p.replace(/[\[\]]/g, '').trim(); 
+        }).filter(Boolean);
+      } 
+      
+      if (rawPaths.length <= 1) {
+        rawPaths = cleanRec.split(/[|｜]/).map(function (s) { 
+          return s.replace(/[\[\]]/g, '').trim(); 
+        }).filter(Boolean);
+      }
+
+      var pathHTML = '<div class="enhancement-tree">';
+
+      var renderNodeLocal = function(sName, rank, currentName) {
+        var isCurrent = sName.toLowerCase() === currentName.toLowerCase();
         var currentClass = isCurrent ? ' enhancement-current' : '';
-
-        // Resolve icon for this crysta step (Rank-based automation)
-        var stepIcon = '';
-        var tLow = type.toLowerCase();
+        
         var category = "normal";
-
+        var tLow = type.toLowerCase();
         if (tLow.indexOf('weapon') !== -1) category = 'weapon';
         else if (tLow.indexOf('armor') !== -1) category = 'armor';
         else if (tLow.indexOf('special') !== -1) category = 'special';
         else if (tLow.indexOf('additional') !== -1 || tLow.indexOf('ring') !== -1) category = 'add';
 
-        var rank = "up";
-        if (idx === 0) rank = "base";
-        else if (idx === steps.length - 1 && steps.length > 1) rank = "max";
-        
-        stepIcon = modalIconBase + 'crysta_' + category + '_' + rank + '.png';
+        var sIcon = modalIconBase + 'crysta_' + category + '_' + rank + '.png';
+        var imgHTML = '<img src="' + esc(sIcon) + '" alt="' + esc(sName) + '" ' + errHandler + ' />';
 
-        var iconHTML = '<img src="' + esc(stepIcon) + '" alt="' + esc(stepName) + '" ' + errHandler + ' />';
+        return '<div class="enhancement-step' + currentClass + '"' +
+               (isCurrent ? '' : ' data-enhance-name="' + esc(sName) + '"') +
+               ' style="cursor:' + (isCurrent ? 'default' : 'pointer') + '">' +
+               '<div class="enhancement-icon">' + imgHTML + '</div>' +
+               '<div class="enhancement-name">' + esc(sName) + '</div>' +
+               (isCurrent ? '<div class="enhancement-badge">Current</div>' : '') +
+               '</div>';
+      };
 
-        pathHTML += '<div class="enhancement-step' + currentClass + '"' +
-          (isCurrent ? '' : ' data-enhance-name="' + esc(stepName) + '"') +
-          ' style="cursor:' + (isCurrent ? 'default' : 'pointer') + '">' +
-          '<div class="enhancement-icon">' + iconHTML + '</div>' +
-          '<div class="enhancement-name">' + esc(stepName) + '</div>' +
-          (isCurrent ? '<div class="enhancement-badge">Current</div>' : '') +
-          '</div>';
+      if (rawPaths.length > 1) {
+        var processedPaths = rawPaths.map(function(p) {
+          return p.split(/[>;;]/).map(function(s) { 
+            return s.replace(/[\[\]]/g, '').trim(); 
+          }).filter(Boolean);
+        });
 
-        if (idx < steps.length - 1) {
-          pathHTML += '<div class="enhancement-arrow">↓</div>';
+        var rootName = (processedPaths[0] && processedPaths[0][0]) || '';
+        var allShareRoot = rootName && processedPaths.every(function(p) { 
+          return p.length > 0 && p[0].toLowerCase() === rootName.toLowerCase(); 
+        });
+
+        if (allShareRoot) {
+          pathHTML += renderNodeLocal(rootName, 'base', name);
+          pathHTML += '<div class="enhancement-arrow" style="margin-bottom:-0.2rem">↓</div>';
+          processedPaths.forEach(function(p) { p.shift(); });
         }
-      });
 
+        pathHTML += '<div class="enhancement-branches">';
+        processedPaths.forEach(function(pSteps) {
+          if (pSteps.length > 0) {
+            pathHTML += '<div class="enhancement-branch">';
+            pSteps.forEach(function(sName, idx) {
+              var rank = (idx === pSteps.length - 1) ? 'max' : 'up';
+              if (!allShareRoot && idx === 0) rank = 'base';
+              pathHTML += renderNodeLocal(sName, rank, name);
+              if (idx < pSteps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
+            });
+            pathHTML += '</div>';
+          }
+        });
+        pathHTML += '</div>';
+      } else {
+        // LINEAR LOGIC
+        var steps = cleanRec.split(/[>;|｜]/).map(function (s) { 
+          return s.replace(/[\[\]]/g, '').trim(); 
+        }).filter(Boolean);
+        steps.forEach(function (stepName, idx) {
+          var rank = (idx === 0) ? 'base' : (idx === steps.length - 1 && steps.length > 1) ? 'max' : 'up';
+          pathHTML += renderNodeLocal(stepName, rank, name);
+          if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
+        });
+      }
       pathHTML += '</div>';
       recEl.innerHTML = pathHTML;
 
@@ -670,8 +721,6 @@ window.ItemModal = (function () {
     // If a fetch is already in progress, just wait for it
     if (pendingItemDetailsFetch) {
       pendingItemDetailsFetch.then(cb).catch(function() {
-        // If it failed, we might still try our own retry logic if needed, 
-        // but easier to just let the main one handle it.
         cb(); 
       });
       return;
@@ -694,11 +743,6 @@ window.ItemModal = (function () {
         } else {
           cb();
         }
-      })
-      .catch(function (err) {
-        console.error('ItemModal Details Fetch Error:', err);
-        pendingItemDetailsFetch = null;
-        cb();
       });
   }
 
@@ -722,13 +766,11 @@ window.ItemModal = (function () {
       var recipe = item['Recipe'] || '';
       if (!recipe) continue;
 
-      // Split ingredients: Item A x5; Item B x2
       var ingredients = recipe.split(';');
       for (var j = 0; j < ingredients.length; j++) {
         var part = ingredients[j].trim();
         if (!part) continue;
         
-        // Extract name: "Iron Ore x15" -> "Iron Ore"
         var ingredientName = part.replace(/(\s+x\d+.*|:.*)$/i, '').trim();
         var amountMatched = part.match(/(?:x|:\s*)(\d+)/i);
         var amount = amountMatched ? amountMatched[1] : '???';

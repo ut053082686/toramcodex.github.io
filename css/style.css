@@ -2115,11 +2115,24 @@ footer {
     top: -0.5rem;
     left: 20%;
     right: 20%;
-    height: 1rem;
-    border-top: 2px solid #e2e8f0;
+    height: 1.5rem;
+    border-top: 2px solid #94a3b8;
     border-left: 2px solid #e2e8f0;
     border-right: 2px solid #e2e8f0;
     border-radius: 12px 12px 0 0;
+    z-index: 1;
+  }
+  
+  /* Vertical 'neck' to connect arrow to horizontal branch line */
+  .enhancement-branches::after {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 0.5rem;
+    background: #94a3b8;
   }
 }
 
