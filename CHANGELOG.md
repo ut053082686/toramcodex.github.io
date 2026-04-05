@@ -1,6 +1,11 @@
 # ToramDB Skill Simulator Changelog
 
-### v0.66.3 (Latest)
+### v0.66.4 (Latest)
+- **Skill Simulator Icon Modernization**: Replaced generic control buttons with premium custom icons (`reset_ico` and `collapse_ico`), specifically optimized for the Toram Online aesthetic.
+- **Precision Icon Mapping**: Enhanced the keyword detection engine with case-insensitive word boundaries. This fixes a visual bug where items with "Cores" in their name were incorrectly identified as "Ore".
+- **Localized Blacksmith Icon**: Moved the craft penmanship/anvil icon from global item cards solely to the **Obtain** tab in the detail modal. This restores the original equipment icons in the main list while providing accurate visual indicators in the popups.
+
+### v0.66.3
 - **Universal Branching Support**: Removed media query restrictions for enhancement paths. Mobile users can now see the same professional branching tree layout as desktop users, with built-in horizontal scrolling for wide paths.
 - **Mobile Usability Refinement**: Added smooth-scrolling containers for mobile trees, ensuring that complex connections remain neat and architectural without breaking the page layout on narrow screens.
 
