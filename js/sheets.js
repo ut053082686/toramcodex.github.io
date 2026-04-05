@@ -234,12 +234,25 @@ window.ToramSheets = (function () {
     // Monster types
     'boss':           'img/icons/monsters_ico.png',
     'mini-boss':      'img/icons/monsters_ico.png',
-    'mob':            'img/icons/monsters_ico.png'
+    'mob':            'img/icons/monsters_ico.png',
+    // Special
+    'blacksmith':     'img/icons/blacksmith_ico.png',
+    'ore':            'img/icons/ore_ico.png',
+    'reset':          'img/icons/reset_ico.png',
+    'collapse':       'img/icons/collapse_ico.png'
   };
 
-  // Resolve the best icon: ImageURL > Sheet Icon > type-based > fallback
-  function resolveIcon(type) {
+  // Resolve the best icon: ImageURL > Sheet Icon > Keyword-based > type-based > fallback
+  function resolveIcon(type, name, source) {
     var t = (type || '').toLowerCase().trim();
+    var n = (name || '').toLowerCase().trim();
+    var s = (source || '').toLowerCase().trim();
+
+    // 1. Keyword-based matching (Highest Priority)
+    if (s.indexOf('craft: blacksmith npc') !== -1 || s.indexOf('blacksmith npc') !== -1) return ICON_BASE + 'blacksmith_ico.png';
+    if (n.indexOf('ore') !== -1) return ICON_BASE + 'ore_ico.png';
+
+    // 2. Type-based matching
     var icon = TYPE_ICONS[t];
     
     // Fallback if type is not specifically in TYPE_ICONS
@@ -262,7 +275,7 @@ window.ToramSheets = (function () {
   //   - If imageURL is provided → <img> tag
   //   - If icon is provided → emoji/text from Sheet
   //   - Otherwise → auto-detect from TYPE_ICONS (supports emoji OR image URL)
-  function iconHTML(imageURL, icon, type, altText, fit) {
+  function iconHTML(imageURL, icon, type, altText, source, fit) {
     var fallbackImg = ICON_BASE + 'no_image.png';
     var errHandler = 'onerror="this.onerror=null;this.src=\'' + fallbackImg + '\';this.style.opacity=\'0.6\';"';
     var objectFit = fit || 'cover';
@@ -277,9 +290,9 @@ window.ToramSheets = (function () {
       }
       return esc(icon);
     }
-    var resolved = resolveIcon(type);
+    var resolved = resolveIcon(type, altText, source);
     // If the default icon is an image path or URL, render as <img>
-    if (resolved.indexOf('http') === 0 || resolved.indexOf('../img/') === 0 || resolved.indexOf('img/') === 0) {
+    if (resolved.indexOf('http') === 0 || resolved.indexOf('../img/') === 0 || resolved.indexOf('img/') === 0 || resolved.indexOf('img\\') === 0) {
       return '<img src="' + esc(resolved) + '" alt="' + esc(altText || type) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:' + objectFit + ';border-radius:inherit" />';
     }
     return esc(resolved);
@@ -411,7 +424,7 @@ window.ToramSheets = (function () {
 
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + iconHTML('', icon, type, name) + '</div>' +
+          '<div class="data-card-icon">' + iconHTML('', icon, type, name, source) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + type + lvl + '</div>' +
@@ -747,7 +760,7 @@ window.ToramSheets = (function () {
       var spawnAt = get('SpawnAt');
 
       // Use shared iconHTML helper for professional avatars
-      var avatarHTML = iconHTML(imgURL, icon, 'pet', name, 'contain');
+      var avatarHTML = iconHTML(imgURL, icon, 'pet', name, '', 'contain');
 
       var card = document.createElement('div');
       card.className = 'data-card';
@@ -976,13 +989,7 @@ window.ToramSheets = (function () {
               var fdesc   = esc(f['Description']   || '');
               var flink   = f['Link']              || 'pages/items.html';
 
-              var errHandler = 'onerror="this.onerror=null;this.src=\'' + (ICON_BASE + 'no_image.png') + '\';this.style.opacity=\'0.6\';"';
-              var spotIcon;
-              if (fimgURL) {
-                spotIcon = '<img src="' + esc(fimgURL) + '" alt="' + fname + '" ' + errHandler + ' />';
-              } else {
-                spotIcon = esc(ficon);
-              }
+              var spotIcon = iconHTML(fimgURL, ficon, ftype, fname, fstats);
 
               var frarityHTML = '';
               if (frarity) {
@@ -1157,14 +1164,7 @@ window.ToramSheets = (function () {
               var mhp    = esc(m['Source']       || '');  // Source col = HP
               var mdesc  = esc(m['Description']  || '');
 
-              var errHandler = 'onerror="this.onerror=null;this.src=\'' + (ICON_BASE + 'no_image.png') + '\';this.style.opacity=\'0.6\';"';
-              // Icon: ImageURL > Icon emoji > default
-              var monIconHTML;
-              if (mimgURL) {
-                monIconHTML = '<img src="' + esc(mimgURL) + '" alt="' + mname + '" ' + errHandler + ' style="width:40px;height:40px;object-fit:cover;border-radius:6px" />';
-              } else {
-                monIconHTML = esc(micon) || '<img src="img/icons/monsters_ico.png" alt="" ' + errHandler + ' style="width:40px;height:40px;object-fit:contain" />';
-              }
+              var monIconHTML = iconHTML(mimgURL, micon, mtype, mname, mhp);
 
               // Element tag color
               var elemLower = melem.toLowerCase();
